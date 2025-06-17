@@ -19,8 +19,8 @@
 
 #text-align(center)[
   Reach me
-  #link("tomail:glom@skillw.com")[Email]
+  #link("mailto:glom@skillw.com")[Email]
   #link("https://t.me/Glomzzz0")[Telegram]
-  #link("./qq.png")[QQ]
+  #link("https://glomzzz.com/about/qq.png")[QQ]
 ]
 
