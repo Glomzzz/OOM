@@ -5,7 +5,7 @@
 #import "@preview/frame-it:1.2.0": *
 #let (example, feature, variant, syntax) = frames(
   feature: ("", orange.darken(25%)),
-  variant: ("Variant",),
+  variant: ("",),
   example: ("", aqua.darken(25%)),
   syntax: ("Syntax",),
 )
