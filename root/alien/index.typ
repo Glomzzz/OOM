@@ -5,9 +5,8 @@
 #title[异智]
 #date[2022-11-30]
 #author[Glomzzz]
-#heading-numbering("none")
 #sidebar("only-embed")
-
+#heading-numbering("none")
 
 #let part(slug) = embed(slug,show-metadata: true, open: false, sidebar: "only-title")
 
