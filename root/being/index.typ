@@ -1,5 +1,5 @@
 
-#import "../lib.typ": *
+#import "/lib/lib.typ": *
 
 #show: schema.with("page")
 
@@ -14,3 +14,5 @@
 
 = #part("./new_ssg.typ")
 = #part("./religion.typ")
+
+

@@ -1,5 +1,5 @@
 
-#import "../../lib.typ": *
+#import "/lib/lib.typ": *
 
 #show: schema.with("page")
 
@@ -13,7 +13,7 @@
 - 一个是由完美的、永恒不变的*理型*（eidos 或 idea）构成的、只能由理智把握的“*可知世界*”（intelligible world）；
 - 另一个是我们通过感官所接触到的、由不完美的、短暂易变的*具体事物*构成的“*可见世界*”（visible world） 。
 
-#text-align(center)[
+#html.align(center)[
   *可见世界中的万事万物，不过是可知世界中完美理型的“影子”或“不完美的复制品”*
 ]
 
@@ -73,7 +73,7 @@
 
 综上所述，古希腊思想中一个根本性的意识形态运作, 便是建立了这么两套等式：
 
-#text-align(center)[
+#html.align(center)[
   形式 = 秩序 = 理性/灵魂 = 至善 = 统治的权利
   \
   质料 = 混乱 = 欲望/身体 = 低劣 = 被统治的需要

@@ -1,4 +1,4 @@
-#import "../lib.typ": *
+#import "/lib/lib.typ": *
 
 #show: schema.with("page")
 
@@ -7,7 +7,7 @@
 #author[Glomzzz]
 #sidebar("none")
 
-#text-align(center)[
+#html.align(center)[
   Know me
   \
   #link("https://github.com/Glomzzz")[Github]
@@ -17,7 +17,7 @@
 
 \
 
-#text-align(center)[
+#html.align(center)[
   Reach me
   #link("mailto:glom@skillw.com")[Email]
   #link("https://t.me/Glomzzz0")[Telegram]
