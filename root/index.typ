@@ -1,4 +1,4 @@
-#import "lib.typ": *
+#import "/lib/lib.typ": *
 
 #show: schema.with("page")
 
