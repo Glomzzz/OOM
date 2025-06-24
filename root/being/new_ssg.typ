@@ -1,6 +1,15 @@
 #import "/lib/lib.typ": *
 
-#show: schema.with("page")
+#show: schema.with("page",
+  head: [
+    #unique[
+      #html.tag(
+      "link",
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&amp;display=swap",
+    )[]
+    ]
+  ])
 
 #title[切换到#link("https://github.com/Glomzzz/typsite")[Typsite]]
 #page-title[切换到Typsite]
