@@ -56,9 +56,9 @@
 /// - name (str):
 ///     The name of the footnote reference.
 /// -> rewrite ~> HTML footnote reference element
-#let footnote-ref(name) = {
-  box(rewrite("footnote-ref", name: name)[])
-}
+// #let footnote-ref(name) = {
+//   box(rewrite("footnote-ref", name: name)[])
+// }
 
 /// Creates a citation rewrite in HTML.
 /// 

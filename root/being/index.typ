@@ -12,7 +12,8 @@
 
 #let part(slug) = embed(slug,show-metadata: true, open: false, sidebar: "only-title")
 
-= #part("./new_ssg.typ")
+= #part("./new-ssg.typ")
 = #part("./religion.typ")
+= #part("./typ-svg.typ")
 
 
