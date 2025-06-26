@@ -2,12 +2,12 @@
 //
 #import "rewrite.typ": *
 #import "html.typ" as html
-#import "@local/typsite:0.1.0" : to-str
+#import "@local/typsite:0.1.0": to-str
 
 #let default-code-highlight-theme = "forest"
 #let rule-raw(body) = {
   show raw: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html" {
       return it
     }
     let text = it.text
@@ -18,7 +18,7 @@
     } else {
       lang = to-str(lang)
     }
-    if lang == "typc"{
+    if lang == "typc" {
       return it
     }
     let theme = default-code-highlight-theme
@@ -40,7 +40,7 @@
   import "./site.typ": inline-math
 
   show math.equation: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     set text(weight: 500)
@@ -52,10 +52,10 @@
 // https://codeberg.org/akida/mathyml
 #let rule-equation-mathyml-try(body) = {
   import "@local/typsite:0.1.0": mathyml
-  import mathyml : try-to-mathml
+  import mathyml: try-to-mathml
 
   show math.equation: body => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return body
     }
     set text(weight: 500)
@@ -65,12 +65,12 @@
   body
 }
 
- // Will convert failed-to-mathml equations into inlined-svg
+// Will convert failed-to-mathml equations into inlined-svg
 #let rule-equation-mathyml-or-inline(body) = {
   import "./site.typ": mathml-or-inline
 
   show math.equation: inner => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return inner
     }
     mathml-or-inline(inner)
@@ -81,37 +81,38 @@
 
 #let rule-decorate(body) = {
   show emph: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     html.em(it.body)
   }
   show super: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
+    } else {
+      html.tag("sup", it.body)
     }
-    html.tag("sup", it.body)
   }
   show sub: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     html.tag("sub", it.body)
   }
   show overline: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     html.text-decoration("overline", it.body)
   }
   show underline: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     html.text-decoration("underline", it.body)
   }
   show highlight: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     html.mark(it.fill, it.body)
@@ -119,44 +120,38 @@
   body
 }
 
-// Use before `rule-ref-label`
-#let rule-ref-footnote(body) = context {
-  let footnotes = query(footnote).map(it => it.at("label", default: none)).filter(it => it != none)
+#let rule-ref(footnotes) = body => {
+  import "site.typ":footnote-ref
   show ref: it => context {
-    if inline-content.get() {
-      return it.supplement
+    if inline-content.get() or target() != "html"  {
+      return it
     }
     let target = it.target
-    if footnotes.contains(target) {
-      footnote-ref(str(target))
-    } else {
-      it
+    for (index, id) in footnotes.enumerate() {
+      if id == target {
+        return footnote-ref(index,id)
+      }
     }
-  }
-  body
-}
-#let rule-ref-label(body) = {
-  import "./site.typ": link-local-style
-  show ref: it => context {
-    if inline-content.get() {
-      return it.supplement
-    }
-    let target = it.target
     let supplement = it.supplement
-
     link-local-style(goto(target, supplement))
   }
   body
 }
 
-#let rule-footnote(body) = {
+#let rule-footnote(footnotes) = body => {
+  import "site.typ":footnote-ref
   show footnote: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     let body = it.body
     if type(body) == label {
-      return footnote-ref(str(body))
+      for (index, id) in footnotes.enumerate() {
+        if id == body {
+          return footnote-ref(index,id)
+        }
+      }
+      return it
     }
     if not it.has("label") {
       return footnote-def("!numbering", body)
@@ -170,7 +165,7 @@
 #let rule-link-common(body) = {
   import "./site.typ": link-external, link-local
   show link: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     let dest = it.dest
@@ -189,15 +184,16 @@
   body
 }
 #let rule-link-anchor(body) = {
+  import "./site.typ": link-local-style
   show link: it => context {
-    if inline-content.get() {
+    if inline-content.get() or target() != "html"  {
       return it
     }
     let dest = it.dest
     let dest_type = type(dest)
     // Label(anchor) link
     if dest_type == label {
-      anchor(str(dest))
+      link-local-style(goto(str(dest),it.body))
     } else {
       it
     }
@@ -227,7 +223,10 @@
     strike,
     terms,
     figure,
-  ): it => {
+  ): it => context {
+    if inline-content.get() or target() != "html"  {
+      return it
+    }
     let label = it.at("label", default: none)
     if label == none {
       return it

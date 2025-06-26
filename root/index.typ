@@ -2,7 +2,7 @@
 
 #show: schema.with("page")
 
-#title[开端]
+#title[Beginning]
 #date[2024-05-13]
 #author[Glomzzz]
 #heading-numbering("none")
@@ -13,6 +13,3 @@
 = #part("being/index.typ")
  
 = #part("alien/index.typ")
-
-
-

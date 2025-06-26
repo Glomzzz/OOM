@@ -1,5 +1,6 @@
 // Site lib, feel free to customize your own site
 #import "html.typ" as html
+#import "@local/typsite:0.1.0" : to-str
 
 
 #let link-local-style(content) = {
@@ -60,7 +61,7 @@
 }
 
 #let details(title, content) = context {
-  let content = [\[ #content \]]
+  let content = [\[#{content}\]]
   if target() != "html" {
     return content
   }
@@ -71,8 +72,22 @@
   details
 }
 
+
+#let details-block(open: true,title, content) = context {
+  if target() != "html" {
+    return content
+  }
+  let details = html.section(class: "block")[
+    #html.details(open: if open { "" } else { none })[
+      #html.summary(style: "font-size: 117%;", title)
+      #content
+    ]
+  ]
+  details
+}
+
 /// Generates a block quote with the specified content.
-/// 
+///
 /// - content (string): The content of the block quote.
 ///     The content to be displayed within the block quote.
 /// -> HTML with block quote styling
@@ -87,5 +102,12 @@
 ///     The content to be displayed within the note.
 /// -> HTML with note styling
 #let note(content) = {
-  html.text(fill: color.rgb("aaaaaa"),content)
+  html.text(fill: color.rgb("aaaaaa"), content)
+}
+
+
+#let footnote-ref = (index, id) => context {
+  html.tag("sup", class: "footnote-reference", id: str(id) + str("-back"))[
+    #html.a(href: "#" + str(id))[#{ index + 1 }]
+  ]
 }

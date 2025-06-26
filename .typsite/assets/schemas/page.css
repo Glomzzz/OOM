@@ -123,9 +123,15 @@ th {
   margin-right: 4px;
 }
 
+
 /* !forest */
 .footnote-reference:target {
   border: 1px solid var(--target-color);
+}
+
+.svg-footnote-reference:target .target-highlight {
+  stroke: var(--target-color);
+  stroke-width: 1;
 }
 
 .footnote-definition:target > .footnote-definition-label {
@@ -351,6 +357,12 @@ a.bullet:hover,
 .edit-button:hover,
 .link:hover {
   background-color: var(--hover-color-link);
+}
+
+.svg-link:hover {
+  filter: invert(100%);
+  fill: var(--hover-color-link);
+  fill-opacity: 1;
 }
 
 .link.external {
