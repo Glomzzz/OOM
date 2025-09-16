@@ -15,5 +15,6 @@
 = #part("./new-ssg.typ")
 = #part("./religion.typ")
 = #part("./typ-svg.typ")
+= #part("./fraud.typ")
 
 
