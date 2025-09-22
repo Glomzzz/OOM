@@ -16,5 +16,5 @@
 = #part("./religion.typ")
 = #part("./typ-svg.typ")
 = #part("./fraud.typ")
-
+= #part("./minestom/index.typ")
 
