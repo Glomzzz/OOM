@@ -6,6 +6,7 @@
 #date[1890-09-25]
 #author[Glomzzz]
 #sidebar("none")
+#parent("/index.typ")
 
 #html.align(center)[
   Know me
