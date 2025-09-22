@@ -42,16 +42,16 @@
 - Bukkit - #link("https://github.com/Skillw/ItemSystem")[ItemSystem]
   - 原生接口：#link("https://github.com/Skillw/ItemSystem/blob/master/src/main/kotlin/com/skillw/itemsystem/api/builder/BaseItemBuilder.kt")[BaseItemBuilder.kt] 与 #link("https://github.com/Skillw/ItemSystem/blob/master/src/main/kotlin/com/skillw/itemsystem/api/manager/ItemBuilderManager.kt")[ItemBuilderManager.kt]
   - 配置/脚本接口: #link("https://github.com/Skillw/ItemSystem/blob/master/src/main/kotlin/com/skillw/itemsystem/internal/core/builder/ItemBuilder.kt")[ItemBuilder.kt]
-    - 配置示例: #link("https://github.com/Skillw/ItemSystem/blob/master/src/main/resources/items/example.yml")[example.yml]
-      是的，这个物品的配置文件过分复杂，你需要在yaml中*无语法提示*地写 JavaScript, Asahi, 并在字符串中*无检查地*调用变量名
-      这是我原理念里最大的弊病，我感觉用户先学习 Javascript/Asahi，再熟悉"配置-脚本"的框架，甚至不如直接学习 Java/Kotlin 来得更快更容易...
+    - 配置示例: #link("https://github.com/Skillw/ItemSystem/blob/master/src/main/resources/items/example.yml")[example.yml] \
+      是的，这个物品的配置文件过分复杂，你需要在yaml中*无语法提示*地写 JavaScript, Asahi, 并在字符串中*无检查地*调用变量名 \
+      这是我原理念里最大的弊病，我感觉用户先学习 Javascript/Asahi，再熟悉"配置-脚本"的框架，甚至不如直接学习 Java/Kotlin 来得更快更容易... \
         - 当然，无论如何，用户们在学习过程中总会培养起来一种品性，这有助于他们在未来的编程学习中受益。
-      这也是我不想再在 Minestom 上重新搭建一套 "配置-脚本" 基础设施的原因，我不想重蹈覆辙
+      这也是我不想再在 Minestom 上重新搭建一套 "配置-脚本" 基础设施的原因，我不想重蹈覆辙 \
       配置文件系统可以*热重载*固然是一个优势，也许我未来会开发一套仅用作调试的*模块热重载系统*...
 
 - Minestom - Item 模块
   - 原生接口：仅提供基本的 ItemBuilder 接口 与 ItemBuilderManager 接口
-    - 具体的物品功能模块由开发者通过实现ItemBuilder接口，自行实现具体逻辑
+    - 具体的物品功能模块由开发者通过实现ItemBuilder接口，自行实现具体逻辑 \
       你可以拥有完整的语法提示&检查，相比于配置文件，无论是自由度还是安全性都更高
 
 == 新的根基
