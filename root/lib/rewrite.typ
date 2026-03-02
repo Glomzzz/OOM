@@ -55,10 +55,21 @@
 /// 
 /// - name (str):
 ///     The name of the footnote reference.
+/// - svg (bool):
+///     Wether in SVG.
 /// -> rewrite ~> HTML footnote reference element
-// #let footnote-ref(name) = {
-//   box(rewrite("footnote-ref", name: name)[])
-// }
+#let footnote-ref(name) = {
+  box(rewrite("footnote-ref", name: name)[])
+}
+
+/// Creates a footnote reference rewrite in SVG.
+/// 
+/// - name (str):
+///     The name of the footnote reference.
+/// -> rewrite ~> HTML footnote reference element
+#let footnote-ref-svg(name) = {
+  box(rewrite("footnote-ref-svg", name: name)[])
+}
 
 /// Creates a citation rewrite in HTML.
 /// 
