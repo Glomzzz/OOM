@@ -24,4 +24,3 @@
   #link("https://t.me/Glomzzz0")[Telegram]
   #link("https://glomzzz.com/about/qq.png")[QQ]
 ]
-

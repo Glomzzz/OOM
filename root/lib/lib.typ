@@ -89,5 +89,5 @@
 /// -> inline-scaled content ~> HTML svg (auto-sized)
 #let inline(fit-font: false, scale: 100%, content) = context  {
   import "@local/typsite:0.1.0": inline
-  inline(fit-font: fit-font,scale: scale, content,footnotes.get())
+  inline(fit-font: fit-font,scale: scale, content, footnotes.get())
 }

@@ -1,8 +1,11 @@
-#import "typsite.typ": rewrite, inline-content
+#import "typsite.typ": inline-content, rewrite
 #let inline-anchor(label, body) = link("#anchor:" + str(label))[#body]
-#let inline-goto(label, body) = link("#goto:" + str(label))[#underline(stroke: stroke(thickness: 1pt,dash:"densely-dotted"),body)]
-#let inline-footnote-ref(index,id) = context {
-  super(link("#footnote-ref:"+str(id))[#{index+1}])
+#let inline-goto(label, body) = link("#goto:" + str(label))[#underline(
+  stroke: stroke(thickness: 1pt, dash: "densely-dotted"),
+  body,
+)]
+#let inline-footnote-ref(index, id) = context {
+  super(link("#footnote-ref:" + str(id))[#{ index + 1 }])
 }
 
 
@@ -13,10 +16,17 @@
     let dest = it.dest
     let dest-type = type(dest)
     if dest-type == label {
-      inline-goto(dest, it.body)
+      underline(stroke: stroke(thickness: 1pt, dash: "densely-dotted"), inline-goto(dest, it.body))
     } else {
-      if it.body.func() != underline and (not it.dest.starts-with("#footnote-ref:")) {
-        underline(stroke:stroke(thickness: 1pt),it)
+      if (
+        it.body.func() != underline
+          and (
+            not (
+              it.dest.starts-with("#footnote-ref:") or it.dest.starts-with("#anchor:") or it.dest.starts-with("#goto:")
+            )
+          )
+      ) {
+        underline(stroke: stroke(thickness: 1pt), it)
       } else {
         it
       }
@@ -31,7 +41,7 @@
     let target = it.target
     for (index, id) in footnotes.enumerate() {
       if id == target {
-        return inline-footnote-ref(index,id)
+        return inline-footnote-ref(index, id)
       }
     }
     it

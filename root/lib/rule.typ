@@ -121,7 +121,6 @@
 }
 
 #let rule-ref(footnotes) = body => {
-  import "site.typ":footnote-ref
   show ref: it => context {
     if inline-content.get() or target() != "html"  {
       return it
@@ -129,7 +128,7 @@
     let target = it.target
     for (index, id) in footnotes.enumerate() {
       if id == target {
-        return footnote-ref(index,id)
+        return footnote-ref(str(id))
       }
     }
     let supplement = it.supplement
@@ -139,7 +138,6 @@
 }
 
 #let rule-footnote(footnotes) = body => {
-  import "site.typ":footnote-ref
   show footnote: it => context {
     if inline-content.get() or target() != "html"  {
       return it
@@ -148,7 +146,7 @@
     if type(body) == label {
       for (index, id) in footnotes.enumerate() {
         if id == body {
-          return footnote-ref(index,id)
+          return footnote-ref(str(id))
         }
       }
       return it
