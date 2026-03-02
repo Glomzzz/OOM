@@ -7,9 +7,10 @@
 #date[2025-06-26 12:45]
 #author[Glomzzz]
 
-花了 *1* 天时间，搞定了 typsite 的 *link in inline-svg*, 虽然最终效果还行，\
-但由于#details([*typst-svg 本身对HTML的适配依然有很大的进步空间*])[直接把 TAG 和 LINK #link("https://github.com/typst/typst/blob/257764181e52332a00079b9e3af03823fde1a15d/crates/typst-svg/src/lib.rs#L210")[跳过]了可还行]，我的实现手段也*非常的草台*，总之在这个站点用用得了，我不是很打算将这个功能推送到 typsite 的主分支上。
+#details-block(open:false,[#strike[0.1.6]])[花了 *1* 天时间，搞定了 typsite 的 *link in inline-svg*, 虽然最终效果还行，\
+但由于#details([*typst-svg 本身对HTML的适配依然有很大的进步空间*])[直接把 TAG 和 LINK #link("https://github.com/typst/typst/blob/257764181e52332a00079b9e3af03823fde1a15d/crates/typst-svg/src/lib.rs#L210")[跳过]了可还行]，我的实现手段也*非常的草台*，总之在这个站点用用得了，我不是很打算将这个功能推送到 typsite 的主分支上。]
 
+Typsite 0.1.7 的 SVG-features 迎来史诗级增强，SVG内可以正常使用 footnote & anchor & link 了，并且有自动*fit-font*功能(尺寸匹配字体)。
 
 = 效果预览
 
@@ -18,14 +19,20 @@
 #details-block(open:false,html.align(center)[效果展示])[
 
 #auto-filter[
-  #inline(scale: 200%)[
+  #inline(fit-font:1em)[
     #set text(font: "Inria Sans")
     test anchor goto in svg: #link(<anchor>)[goto!!!] \
-    test external link goto in svg: #link("https://github.com/Glomzzz/typsite")[Source of typsite]
+    test external link goto in svg: #link("https://github.com/Glomzzz/typsite")[Source of typsite] \
+    test anchor def in svg <anchor-svg> \
+    test footnote ref in svg: @footnote-test
   ]
 ]
 
-test anchor goto: #link(<anchor>)[goto!!!] \
+test footnote ref: @footnote-test
+
+#footnote[this is a footnote] <footnote-test>
+
+// test anchor goto: #link(<anchor>)[goto!!!] \
 test external link goto: #link("https://github.com/Glomzzz/typsite")[Source of typsite]
 
 
@@ -171,7 +178,7 @@ test external link goto: #link("https://github.com/Glomzzz/typsite")[Source of t
 }
 
 #html.align(center)[
-  #inline(block(fill: white)[#_process], scale: 200%)
+  #inline(block(fill: white)[#_process], scale: 150%)
 ]
 
 #footnote[Contains content of an article, will be used to generate the HTML page.] <pendings>
@@ -179,4 +186,3 @@ test external link goto: #link("https://github.com/Glomzzz/typsite")[Source of t
 this is where the `<anchor>` is <anchor>
 
 ]
-
