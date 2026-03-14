@@ -7,7 +7,7 @@
     "tinymist": {
       "initialization_options": {
         "exportPdf": "never",
-        "rootPath": "/home/glom/Desktop/OOM-git/root/",
+        "rootPath": "/home/glom/git/OOM/root/",
       },
     },
   },

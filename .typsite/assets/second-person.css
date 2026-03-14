@@ -1,0 +1,25 @@
+.am-embed__frame {
+  border: 0;
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  display: block;
+}
+
+.am-embed--light {
+  display: block;
+}
+
+.am-embed--dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .am-embed--light {
+    display: none;
+  }
+
+  .am-embed--dark {
+    display: block;
+  }
+}
