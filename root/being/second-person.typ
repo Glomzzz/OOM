@@ -15,7 +15,7 @@
     #html.tag(
       "link",
       rel: "stylesheet",
-      href: "/second-person.css",
+      href: "/apple-music-theme.css",
     )[]
     ]
 ])
@@ -28,29 +28,6 @@
 #author[Yorushika]
 
 #let album-url = "https://music.apple.com/my/album/second-person/1876728371"
-#let track-embed(url) = html.elem(
-  "div",
-  attrs: (class: "am-embed"),
-)[
-  #html.elem(
-    "iframe",
-    attrs: (
-      class: "am-embed__frame am-embed--light",
-      src: url,
-      allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
-      sandbox: "allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation",
-    ),
-  )[]
-  #html.elem(
-    "iframe",
-    attrs: (
-      class: "am-embed__frame am-embed--dark",
-      src: url + "&theme=dark",
-      allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
-      sandbox: "allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation",
-    ),
-  )[]
-]
 
 = Overview
 “To me, an album is a section of a river being held in a moment in time—a collection of leaves floating in place. It’s also a diary that records where I am as a musician right now.” So says Yorushika’s n-buna while speaking to Apple Music about second person, the band’s first album in nearly three years.
