@@ -11,5 +11,3 @@
 #let part(slug) = embed(slug,show-metadata: true, open: false, sidebar: "only-title")
 
 = #part("being/index.typ")
- 
-= #part("alien/index.typ")
