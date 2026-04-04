@@ -17,3 +17,5 @@
 = #part("./typ-svg.typ")
 = #part("./second-person.typ")
 = #part("./typsite-thinking.typ")
+= #part("./all-about-lily-chou-chou.typ")
+
