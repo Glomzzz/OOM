@@ -10,7 +10,7 @@
 #sidebar("only-embed")
 
 
-#let part(slug) = embed(slug,show-metadata: true, open: false, sidebar: "only-title")
+#let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
 = #part("./new-ssg.typ")
 = #part("./religion.typ")
@@ -18,4 +18,4 @@
 = #part("./second-person.typ")
 = #part("./typsite-thinking.typ")
 = #part("./all-about-lily-chou-chou.typ")
-
+= #part("./nick-land-peter-thiel-and-dark-enlightenment.typ")
