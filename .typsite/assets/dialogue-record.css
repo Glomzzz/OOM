@@ -1,0 +1,125 @@
+.dialogue-page {
+    margin-top: 0.25rem;
+}
+
+.dialogue-page h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.55rem;
+    padding-bottom: 0;
+    border-bottom: none;
+    letter-spacing: 0;
+}
+
+.dialogue-lede {
+    margin: 0 0 1.8rem 0;
+    color: var(--slug-color);
+    font-size: 0.96em;
+    line-height: 1.7;
+}
+
+.dialogue-turn {
+    margin: 0 0 1.35rem 0;
+    padding: 0.15rem 0 0.1rem 1rem;
+    border: none;
+    border-left: 0.34rem solid var(--turn-accent);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.speaker-line {
+    margin-bottom: 0.35rem;
+}
+
+.speaker-chip {
+    display: inline-block;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--turn-accent);
+    font-family: "Inria Sans", "Noto Sans SC", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.turn-body {
+    font-family: "LXGW WenKai TC", "Noto Sans SC", sans-serif;
+    font-size: 1rem;
+    line-height: 1.86;
+}
+
+.turn-body p:last-child,
+.dialogue-aside p:last-child,
+.highlight-block p:last-child {
+    margin-bottom: 0;
+}
+
+.turn-body ul,
+.turn-body ol {
+    margin-top: 0.3rem;
+    margin-bottom: 0.7rem;
+    padding-left: 1.4rem;
+}
+
+.turn-body li {
+    margin-bottom: 0.4rem;
+}
+
+.turn-body strong {
+    font-weight: 700;
+}
+
+.dialogue-aside {
+    margin: 0.9rem 0 0.9rem 0.6rem;
+    padding: 0.45rem 0.9rem;
+    border-left: 3px solid var(--slug-color);
+    border-radius: var(--radius);
+    background: var(--background-color-pre);
+    color: var(--text-color);
+    font-style: italic;
+}
+
+.highlight-block {
+    margin: 1rem 0;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius);
+    background: var(--background-color-pre);
+    color: var(--text-color);
+    font-family: monospace;
+    font-size: 0.93rem;
+    line-height: 1.75;
+    box-shadow: none;
+}
+
+.highlight-block p {
+    margin-bottom: 0.8rem;
+}
+
+.closing-block {
+    margin: 1.8rem 0 1rem 0;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--slug-color);
+    border-bottom: 1px solid var(--slug-color);
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.03rem;
+    font-style: italic;
+}
+
+.dialogue-coda {
+    margin-top: 0.8rem;
+    color: var(--slug-color);
+    font-style: italic;
+}
+
+@media (max-width: 720px) {
+    .dialogue-turn {
+        padding-left: 0.9rem;
+    }
+
+    .turn-body {
+        font-size: 0.99rem;
+        line-height: 1.84;
+    }
+}

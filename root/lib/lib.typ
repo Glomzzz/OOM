@@ -20,6 +20,18 @@
 
 #import "rewrite.typ": cite, cite-title
 
+#import "dialogue.typ": (
+  dialogue-head,
+  dialogue-page,
+  dialogue-turn,
+  dialogue-aside,
+  dialogue-highlight,
+  dialogue-closing,
+  dialogue-coda,
+  dialogue-tone,
+  dialogue-palette,
+)
+
 #let (example, feature, variant, syntax) = {
   import "@preview/frame-it:1.2.0": *
   frames(
