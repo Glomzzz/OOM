@@ -1,14 +1,16 @@
+
 #import "/lib/lib.typ": *
 
 #show: schema.with("page")
 
-#title[Beginning]
-#date[2024-05-13]
-#author[Glomzzz]
+#title[对话录]
+#date[2026-05-03]
+#author[Glomzzz et al.]
 #heading-numbering("none")
 #sidebar("only-embed")
+#parent("/index.typ")
+
 
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
-= #part("being/index.typ")
-= #part("talk/index.typ")
+= #part("./no-exit-keep-asking.typ")
