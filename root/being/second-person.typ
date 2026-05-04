@@ -24,7 +24,7 @@
 #show heading: set text(font: "Cormorant Garamond")
 
 #title[Second Person]
-#date[2025-03-14 09:33]
+#date[2026-03-14 09:33]
 #author[Yorushika]
 
 #let album-url = "https://music.apple.com/my/album/second-person/1876728371"
