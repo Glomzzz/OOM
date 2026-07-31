@@ -21,3 +21,4 @@
 = #part("./nick-land-peter-thiel-and-dark-enlightenment.typ")
 = #part("./on-sacred-mourning.typ")
 = #part("./anatomy-of-ressentiment.typ")
+= #part("./when-it-comes-to-odyssey.typ")
