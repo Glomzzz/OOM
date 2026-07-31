@@ -20,3 +20,4 @@
 = #part("./all-about-lily-chou-chou.typ")
 = #part("./nick-land-peter-thiel-and-dark-enlightenment.typ")
 = #part("./on-sacred-mourning.typ")
+= #part("./when-it-comes-to-odyssey.typ")
