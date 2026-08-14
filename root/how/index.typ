@@ -1,15 +1,16 @@
+
 #import "/lib/lib.typ": *
 
 #show: schema.with("page")
 
-#title[Beginning]
-#date[2024-05-13]
+#title[HOW]
+#date[2026-08-14]
 #author[Glomzzz]
 #heading-numbering("none")
 #sidebar("only-embed")
+#parent("/index.typ")
+
 
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
-= #part("being/index.typ")
-= #part("how/index.typ")
-= #part("talk/index.typ")
+= #part("./deepseek-harness.typ")
