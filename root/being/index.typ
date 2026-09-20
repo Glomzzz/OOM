@@ -22,3 +22,4 @@
 = #part("./on-sacred-mourning.typ")
 = #part("./anatomy-of-ressentiment.typ")
 = #part("./when-it-comes-to-odyssey.typ")
+= #part("./on-mushoku-tensei.typ")
