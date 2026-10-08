@@ -46,11 +46,17 @@
 
 body {
     font-family: "Inria Sans", "Noto Sans SC", sans-serif;
+    line-height: 1.75;
+    color: var(--text-color);
 }
 
 pre,
 code {
     font-family: monospace;
+}
+
+pre {
+    line-height: 1.55;
 }
 
 code {
@@ -68,6 +74,7 @@ h6 {
 
 nav {
     font-family: "Inria Sans", sans-serif;
+    line-height: 1.5;
 }
 
 thead {
@@ -81,7 +88,6 @@ body {
 }
 
 p {
-    line-height: 1.7;
     margin-bottom: 1em;
 }
 
@@ -101,6 +107,7 @@ ul + p {
 /* !forest */
 table {
     text-align: left;
+    line-height: 1.6;
 }
 
 /* !forest */
@@ -174,6 +181,7 @@ h4,
 h5,
 h6 {
     font-weight: 500;
+    line-height: 1.3;
 }
 
 h5,
@@ -186,6 +194,7 @@ details > summary {
     list-style-type: none;
     outline: none;
     margin-bottom: 0.25em;
+    line-height: 1.4;
 }
 
 details > summary > header {
@@ -279,6 +288,7 @@ figure {
 
 figcaption {
     font-style: italic;
+    line-height: 1.5;
     padding: 3px;
 }
 
@@ -323,6 +333,7 @@ footer h2 {
 
 .metadata {
     font-size: 80%;
+    line-height: 1.5;
 }
 
 .metadata ul {
@@ -380,7 +391,7 @@ a.slug {
 .doi,
 .orcid {
     color: var(--slug-color);
-    font-weight: 200;
+    font-weight: 400;
 }
 
 body > header {
