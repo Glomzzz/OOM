@@ -91,17 +91,27 @@ p {
     margin-bottom: 1em;
 }
 
-p + ul {
-    margin-top: -0.55em;
+ul,
+ol {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
-ul {
-    margin-top: 0em;
-    margin-bottom: 0em;
+/* Space content lists without expanding the sidebar or metadata. */
+article ul,
+article ol {
+    margin-bottom: 1em;
+    padding-inline-start: 1.5em;
 }
 
-ul + p {
-    margin-top: 0.15em;
+article li + li {
+    margin-top: 0.3em;
+}
+
+article li > ul,
+article li > ol {
+    margin-top: 0.3em;
+    margin-bottom: 0;
 }
 
 /* !forest */
@@ -169,23 +179,15 @@ blockquote {
 h1,
 h2,
 h3,
-h4 {
-    margin-top: 1.5em;
-    margin-bottom: 0.4em;
-}
-
-h1,
-h2,
-h3,
 h4,
 h5,
 h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
     font-weight: 500;
     line-height: 1.3;
 }
 
-h5,
-h6,
 p {
     margin-top: 0;
 }
@@ -337,8 +339,13 @@ footer h2 {
 }
 
 .metadata ul {
-    padding-left: 0;
+    margin: 0;
+    padding-inline-start: 0;
     display: inline;
+}
+
+.metadata li {
+    margin-top: 0;
 }
 
 .metadata li::after {
