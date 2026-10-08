@@ -11,4 +11,5 @@
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
 = #part("being/index.typ")
+= #part("how/index.typ")
 = #part("talk/index.typ")
