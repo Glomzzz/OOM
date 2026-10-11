@@ -29,8 +29,7 @@ taxon-based colours. Statements are shared site-wide under `root/statements/`,
 classified by kind with full lowercase hyphenated filenames. Each file owns
 its title, metadata, statement and proof; no separate catalogue is required.
 References show the kind and title, not a local number.
-See [statement authoring](root/statements/README.md) and
-[article structure and verification](root/how/plt/formal/README.md).
+See [statement authoring](root/statements/README.md).
 
 ## Github Workflows
 
