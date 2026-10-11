@@ -169,7 +169,36 @@
             const referenceId = hash.replace(/^(?:\d+-)+(?=(?:fm|pl)-)/, "");
             target = nearest(byReferenceId.get(referenceId), pageRoot || article);
         }
-        if (target) openTarget(target);
+        // Back/forward to an entry that remembers a clicked link: leave the
+        // scroll position to restoreReturn() instead of jumping to the hash.
+        if (target) openTarget(target, !history.state?.ret);
+    }
+
+    // Same-page links push a history entry. Remember which link was clicked and
+    // where it sat in the viewport, so Back can put that link back in place even
+    // when opening the target expanded content above it.
+    const allLinks = () => Array.from(document.querySelectorAll("a[href]"));
+
+    function rememberLink(link) {
+        const index = allLinks().indexOf(link);
+        if (index < 0) return;
+        const ret = { index, top: link.getBoundingClientRect().top };
+        history.replaceState({ ...(history.state || {}), ret }, "");
+        history.scrollRestoration = "manual";
+    }
+
+    function restoreReturn() {
+        const ret = history.state?.ret;
+        history.scrollRestoration = ret ? "manual" : "auto";
+        if (!ret) return;
+        const link = allLinks()[ret.index];
+        if (!link) return;
+        for (let node = link; node; node = node.parentElement) {
+            if (node instanceof HTMLDetailsElement) node.open = true;
+        }
+        const align = () => window.scrollBy(0, link.getBoundingClientRect().top - ret.top);
+        align();
+        requestAnimationFrame(align);
     }
 
     // Hashchange does not fire when a reader clicks the current hash again.
@@ -183,7 +212,9 @@
         let id;
         try { id = decodeURIComponent(url.hash.slice(1)); } catch { return; }
         const target = document.getElementById(id) || nearest(byReferenceId.get(id), link);
-        if (target) openTarget(target);
+        if (!target) return;
+        if (url.hash !== location.hash) rememberLink(link);
+        openTarget(target);
     });
 
     // The table of contents is an overlay drawer: close it after picking an
@@ -204,7 +235,13 @@
         });
     }
 
-    window.addEventListener("hashchange", followHash);
+    window.addEventListener("popstate", restoreReturn);
+    window.addEventListener("hashchange", () => {
+        // New entries inherit "manual" from the page we left; reset them.
+        if (!history.state?.ret) history.scrollRestoration = "auto";
+        followHash();
+    });
     window.addEventListener("pageshow", followHash);
     followHash();
+    restoreReturn();
 })();
