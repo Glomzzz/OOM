@@ -1,0 +1,146 @@
+/* 定理环境（root/lib/thm.typ） */
+:root {
+    --thm-definition: #2563eb;
+    --thm-theorem: #c2410c;
+    --thm-lemma: #0f766e;
+    --thm-corollary: #b45309;
+    --thm-example: #15803d;
+    --thm-convention: #64748b;
+    --thm-remark: #6b7280;
+    --thm-philosophy: #7c3aed;
+    --thm-bg: rgba(0, 0, 0, 0.025);
+    --thm-philosophy-bg: rgba(124, 58, 237, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --thm-definition: #7aa7ff;
+        --thm-theorem: #fb923c;
+        --thm-lemma: #5eead4;
+        --thm-corollary: #fbbf24;
+        --thm-example: #86efac;
+        --thm-convention: #a8b3c4;
+        --thm-remark: #b0b4bb;
+        --thm-philosophy: #c4b5fd;
+        --thm-bg: rgba(255, 255, 255, 0.035);
+        --thm-philosophy-bg: rgba(196, 181, 253, 0.07);
+    }
+}
+
+.thm {
+    --thm-color: var(--thm-remark);
+    margin: 1.2em 0;
+    padding: 0.6em 1em 0.2em;
+    border-left: 4px solid var(--thm-color);
+    border-radius: 0 5px 5px 0;
+    background: var(--thm-bg);
+    overflow-x: auto;
+}
+
+/* anchor(id) 会生成一个只含空 span 的 <p>，把它压扁，避免顶部空白 */
+.thm > p:first-child {
+    margin: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.thm-definition {
+    --thm-color: var(--thm-definition);
+}
+.thm-theorem {
+    --thm-color: var(--thm-theorem);
+}
+.thm-lemma {
+    --thm-color: var(--thm-lemma);
+}
+.thm-corollary {
+    --thm-color: var(--thm-corollary);
+}
+.thm-example {
+    --thm-color: var(--thm-example);
+}
+.thm-convention {
+    --thm-color: var(--thm-convention);
+}
+.thm-remark {
+    --thm-color: var(--thm-remark);
+}
+
+.thm-philosophy {
+    --thm-color: var(--thm-philosophy);
+    background: var(--thm-philosophy-bg);
+    border-left-style: double;
+    border-left-width: 6px;
+}
+
+.thm-ref .thm-ref-label {
+    font-weight: 400;
+    color: var(--span-taxon-color, #444);
+}
+
+.thm-head {
+    font-weight: 700;
+    color: var(--thm-color);
+    margin-bottom: 0.3em;
+}
+
+.thm-body > p:last-child {
+    margin-bottom: 0.6em;
+}
+
+.thm-details > .thm-head,
+.exercise-group > .exercise-group-head {
+    margin-bottom: 0.4em;
+}
+
+.thm-details[open] > .thm-head,
+.exercise-group[open] > .exercise-group-head {
+    margin-bottom: 0.3em;
+}
+
+/* page.css 隐藏原生 marker；为可折叠的补充内容显示状态指示。 */
+.thm-details > .thm-head::before,
+.exercise-group > .exercise-group-head::before {
+    content: "▸";
+    display: inline-block;
+    width: 1em;
+}
+
+.thm-details[open] > .thm-head::before,
+.exercise-group[open] > .exercise-group-head::before {
+    content: "▾";
+}
+
+.exercise-group {
+    margin: 0.8em 0 1.2em;
+    padding: 0.6em 1em 0.2em;
+    border-left: 3px solid var(--slug-color, gray);
+    border-radius: 0 5px 5px 0;
+    background: var(--thm-bg);
+}
+
+.exercise-group-head {
+    font-weight: 600;
+}
+
+.exercise-group-body {
+    padding-top: 0.3em;
+}
+
+.proof {
+    margin: 0.8em 0 1.4em;
+    padding-left: 1em;
+    border-left: 1px dashed var(--slug-color, gray);
+}
+
+.proof-head {
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.3em;
+}
+
+.proof .qed {
+    text-align: right;
+    line-height: 1;
+}

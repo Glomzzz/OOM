@@ -1,0 +1,7 @@
+[package]
+name = "plt-arith"
+version = "0.1.0"
+edition = "2021"
+description = "Typed arithmetic expressions (TAPL ch. 3 & 8): small-step semantics, type checker, metatheory as tests"
+
+[dependencies]
