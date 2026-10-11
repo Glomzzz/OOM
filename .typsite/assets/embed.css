@@ -116,6 +116,24 @@ article .embed > details > summary {
     }
 }
 
+/* Plain collapsible blocks (details-block, numbered sections) get the same
+ * title-row wash as embeds, so every fold in an article reacts the same way.
+ * Embeds and the page root are handled above / excluded. The bottom padding
+ * is offset against page.css's 0.35em summary margin, so layout never shifts.
+ */
+article .block:not(.embed, .page-root) > details > summary {
+    padding: 0.2em 0.4em;
+    margin: -0.2em -0.4em calc(0.35em - 0.2em);
+    border-radius: 6px;
+    transition: background-color 0.18s ease-out;
+}
+@media (hover: hover) {
+    article .block:not(.embed, .page-root) > details > summary:hover {
+        background-color: rgba(127, 127, 127, 0.1);
+        transition-duration: 0s;
+    }
+}
+
 article :is(.embed, .page-root):hover:not(:has(.block:hover)) {
     border-left-color: var(--embed-border-color);
 }
@@ -269,6 +287,7 @@ article .embed > details[open] > summary {
 
 @media (prefers-reduced-motion: reduce) {
     .embed > details > summary,
+    article .block:not(.embed, .page-root) > details > summary,
     .embed > details > summary::before,
     .embed > details > summary .slug {
         transition: none;
