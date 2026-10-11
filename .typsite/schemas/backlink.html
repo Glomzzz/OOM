@@ -9,8 +9,10 @@ Inline var could be used:
 
 <body>
   <p class="backlink">
-    <span class="taxon" data-taxon="{taxon}">[{taxon}]</span>
-    <span class="link local"><a href="{slug}" title="{page-title}">{title}</a></span>
-    <a class="slug" href="{slug}">[{slug-display}]</a>
+    <a class="backlink-link" href="{slug}" title="{page-title} [{slug-display}]">
+      <span class="taxon" data-taxon="{taxon}">[{taxon}]</span>
+      <span class="backlink-title">{title}</span>
+      <span class="backlink-slug">[{slug-display}]</span>
+    </a>
   </p>
 </body>
