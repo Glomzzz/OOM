@@ -55,6 +55,8 @@ jobs:
         if: steps.compile_3.outcome == 'failure'
         run: |
           ./$TYPSITE_BIN_NAME c --p packages
+      - name: Add content hashes to asset URLs
+        run: python3 .github/scripts/cache-bust.py publish
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
