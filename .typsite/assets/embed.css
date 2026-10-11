@@ -6,11 +6,21 @@
     --embed-color: var(--thm-convention);
     --embed-border-color: transparent;
     --embed-bg: transparent;
+    --embed-ring: transparent;
 }
 
 :is(.embed, .page-root)[data-taxon]:not([data-taxon=""]) {
     --embed-border-color: var(--embed-color);
     --embed-bg: var(--thm-bg);
+    --embed-ring: var(--hover-bar-color);
+}
+
+/* Tint the card and hairline from the taxon colour where supported. */
+@supports (color: color-mix(in srgb, red, blue)) {
+    :is(.embed, .page-root)[data-taxon]:not([data-taxon=""]) {
+        --embed-bg: color-mix(in srgb, var(--embed-color) 5%, transparent);
+        --embed-ring: color-mix(in srgb, var(--embed-color) 20%, transparent);
+    }
 }
 
 :is(.embed, .page-root)[data-taxon="定义"] {
@@ -42,14 +52,68 @@
  * the same layout with a transparent border and background, including on hover.
  */
 article .embed {
+    --embed-gap: 0.3em;
+    position: relative;
     box-sizing: border-box;
     width: 100%;
-    margin: 1em 0;
-    padding: 0.6em 1em 0.2em;
+    margin: var(--embed-gap) 0;
+    padding: 0.45em 1em;
     border-left: 4px solid var(--embed-border-color);
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 8px 8px 0;
     background: var(--embed-bg);
+    box-shadow: inset 0 0 0 1px var(--embed-ring);
     min-width: 0;
+}
+
+/* The outer box is identical open or closed. Page.css adds a bigger
+ * bottom margin to open blocks; cancel it so toggling never shifts the layout.
+ */
+article section.block.embed > details,
+article section.block.embed > details[open] {
+    margin-bottom: 0;
+}
+
+/* Metadata sits on its own line under the title, muted so the title leads. */
+article .embed > details > summary > header > .metadata {
+    margin-top: 0.1em;
+    color: var(--slug-color);
+    font-size: 0.8em;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Hairline between neighbouring default embeds, open or closed. It is a pseudo-element so
+ * it ignores the rounded corners and the left accent border.
+ */
+article .embed[data-taxon=""] + .embed[data-taxon=""]::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--embed-gap) / -2);
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--hover-bar-color);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Title row: same box open or closed. The padding is cancelled by the
+ * negative margin, so it only gives the hover wash room to breathe. Hover
+ * feedback never touches the body text, only this row, as a faint neutral
+ * wash with unchanged text colour. Skipped on touch to avoid sticky hover.
+ */
+article .embed > details > summary {
+    padding: 0.2em 0.5em;
+    margin: -0.2em -0.5em 0;
+    border-radius: 6px;
+    /* Fade out slowly, but light up instantly so it follows the pointer. */
+    transition: background-color 0.18s ease-out;
+}
+@media (hover: hover) {
+    article .embed > details > summary:hover {
+        background-color: rgba(127, 127, 127, 0.1);
+        transition-duration: 0s;
+    }
 }
 
 article :is(.embed, .page-root):hover:not(:has(.block:hover)) {
@@ -70,18 +134,31 @@ article .page-root[data-taxon="注记"] {
 .embed > details > summary {
     font-size: 1.05em;
     font-weight: 600;
-    color: var(--embed-color);
+    line-height: 1.45;
+    color: var(--text-color);
+    border-radius: 4px;
+}
+
+/* A hairline separates the header from the body only for tinted embeds
+ * (the ring is transparent for default taxons).
+ */
+article .embed > details[open] > summary {
+    margin-bottom: 0.3em;
+    border-bottom: 1px solid var(--embed-ring);
+    border-radius: 6px 6px 0 0;
 }
 
 .embed:not([data-taxon=""]) > details > summary > header > .taxon,
 .page-root[data-taxon]:not([data-taxon=""]) > details > summary > header > h1 > .taxon {
     color: var(--embed-color);
     font-size: inherit;
+    font-weight: 700;
     display: inline;
     padding: 0;
 }
 
 .embed > details > summary > header > .heading-numbering {
+    color: var(--slug-color);
     font-variant-numeric: tabular-nums;
     font-weight: 400;
 }
@@ -91,18 +168,37 @@ article .page-root[data-taxon="注记"] {
     display: none;
 }
 
+/* CSS chevron: rotates instead of swapping glyphs, so it animates. */
 .embed > details > summary::before {
-    content: "▸";
+    content: "";
     display: inline-block;
-    width: 1em;
+    box-sizing: content-box;
+    width: 0.35em;
+    height: 0.35em;
+    margin: 0 0.7em 0 0.2em;
+    border-right: 2px solid var(--embed-color);
+    border-bottom: 2px solid var(--embed-color);
+    opacity: 0.75;
+    transform: translateY(-0.1em) rotate(-45deg);
+    transition: transform 0.15s ease, opacity 0.15s ease;
 }
 .embed > details[open] > summary::before {
-    content: "▾";
+    transform: translateY(-0.2em) rotate(45deg);
+}
+.embed > details > summary:hover::before {
+    opacity: 1;
 }
 
 .embed > details > summary .slug {
+    margin-left: 0.4em;
     font-size: 0.75em;
     font-weight: 400;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+}
+.embed > details > summary:hover .slug,
+.embed > details > summary .slug:focus-visible {
+    opacity: 1;
 }
 
 .embed > details > summary .metadata {
@@ -168,5 +264,13 @@ article .page-root[data-taxon="注记"] {
     article .embed {
         padding-left: 0.65em;
         padding-right: 0.45em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .embed > details > summary,
+    .embed > details > summary::before,
+    .embed > details > summary .slug {
+        transition: none;
     }
 }
