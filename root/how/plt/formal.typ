@@ -1,7 +1,14 @@
 #import "/lib/lib.typ": *
 #import "/lib/thm.typ": *
 
-#show: schema.with("page", head: thm-head())
+#show: schema.with("page", head: [
+  #thm-head()
+  #unique(html.tag(
+    "link",
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap",
+  )[])
+])
 
 #title[形式化入门：把语言写成数学对象]
 #date[2026-10-10]

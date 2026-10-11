@@ -24,6 +24,8 @@
             pkgs.typst
             typsite.packages.${system}.default
           ];
+          # Also expose the project fonts to direct `typst` invocations.
+          TYPST_FONT_PATHS = toString ./.typsite/assets/fonts;
         };
       }
     );
