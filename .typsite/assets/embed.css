@@ -52,12 +52,12 @@
  * the same layout with a transparent border and background, including on hover.
  */
 article .embed {
-    --embed-gap: 0.3em;
+    --embed-gap: 0.45em;
     position: relative;
     box-sizing: border-box;
     width: 100%;
     margin: var(--embed-gap) 0;
-    padding: 0.45em 1em;
+    padding: 0.75em 1.15em;
     border-left: 4px solid var(--embed-border-color);
     border-radius: 0 8px 8px 0;
     background: var(--embed-bg);
@@ -280,8 +280,7 @@ article .embed > details[open] > summary {
  */
 @media (max-width: 500px) {
     article .embed {
-        padding-left: 0.65em;
-        padding-right: 0.45em;
+        padding: 0.6em 0.65em 0.6em 0.75em;
     }
 }
 
