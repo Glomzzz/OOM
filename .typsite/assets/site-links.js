@@ -186,6 +186,24 @@
         if (target) openTarget(target);
     });
 
+    // The table of contents is an overlay drawer: close it after picking an
+    // entry, on Escape, or when the reader clicks the article behind it.
+    const tocToggle = document.getElementById("toc-toggle");
+    if (tocToggle) {
+        const closeToc = () => { tocToggle.checked = false; };
+        document.addEventListener("click", event => {
+            if (!tocToggle.checked) return;
+            const target = event.target;
+            if (target.closest?.("#toc a") || target.closest?.("#grid-wrapper > article")) closeToc();
+        });
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape" && tocToggle.checked) {
+                closeToc();
+                tocToggle.focus();
+            }
+        });
+    }
+
     window.addEventListener("hashchange", followHash);
     window.addEventListener("pageshow", followHash);
     followHash();

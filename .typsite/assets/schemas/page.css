@@ -481,19 +481,112 @@ body > header {
     overflow-x: auto;
 }
 
-#grid-wrapper[sidebar="false"] > nav {
+/* Table of contents: an overlay drawer, so opening it never narrows the
+ * article. The drawer is as wide as its longest line (no wrapping); only if
+ * that exceeds the viewport does it scroll horizontally instead.
+ * Open state is the #toc-toggle checkbox, so it works without JavaScript.
+ */
+#grid-wrapper[sidebar="false"] > :is(nav, .toc-toggle, .toc-button) {
     display: none;
 }
 
+.toc-toggle {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0;
+    opacity: 0;
+    z-index: 11;
+    cursor: pointer;
+}
+
+.toc-button {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 1px solid var(--hover-bar-color);
+    border-radius: var(--radius);
+    background: var(--background-color);
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1;
+    pointer-events: none;
+    transition: background-color 0.15s ease;
+}
+
+.toc-button::before {
+    content: "\2630";
+}
+
+.toc-toggle:checked ~ .toc-button::before {
+    content: "\2715";
+}
+
+@media (hover: hover) {
+    .toc-toggle:hover + .toc-button {
+        background-color: var(--hover-color-link);
+    }
+}
+
+.toc-toggle:focus-visible + .toc-button {
+    outline: 2px solid var(--target-color);
+    outline-offset: 2px;
+}
+
 #grid-wrapper > nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    box-sizing: border-box;
+    width: max-content;
+    max-width: 100vw;
+    padding: 3.5rem 1.25rem 1.5rem 1.25rem;
+    overflow: auto;
+    background: var(--background-color);
+    border-left: 1px solid var(--hover-bar-color);
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
     font-size: clamp(72%, calc(0.5rem + 0.8vw), 85%);
-    overflow-x: hidden;
-    overflow-y: auto;
-    align-self: start;
-    position: sticky;
-    top: 2em;
-    max-height: calc(100vh - 4em);
-    min-width: 0;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0s linear 0.2s;
+}
+
+#grid-wrapper > .toc-toggle:checked ~ nav {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.2s ease, visibility 0s;
+}
+
+/* Every TOC row stays on one line; the global anywhere-wrapping is for prose. */
+#grid-wrapper > nav * {
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toc-button,
+    #grid-wrapper > nav,
+    #grid-wrapper > .toc-toggle:checked ~ nav {
+        transition: none;
+    }
+}
+
+@media print {
+    .toc-toggle,
+    .toc-button,
+    #grid-wrapper > nav {
+        display: none;
+    }
 }
 
 header[parent="false"] {
@@ -512,10 +605,6 @@ header[parent="false"] {
         max-width: 100%;
     }
 
-    #grid-wrapper > nav {
-        display: none;
-        transition: ease all 0.2s;
-    }
 }
 
 @media only screen and (min-width: 500px) {
@@ -524,12 +613,5 @@ header[parent="false"] {
         margin-left: 2em;
         margin-right: 2em;
         transition: ease all 0.2s;
-    }
-
-    #grid-wrapper {
-        display: grid;
-        grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
-        gap: clamp(0.5em, 2vw, 2em);
-        align-items: start;
     }
 }

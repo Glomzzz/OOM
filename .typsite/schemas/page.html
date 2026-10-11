@@ -83,6 +83,15 @@
                     <a class="link external" href="https://github.com/Glomzzz/typsite/">Typsite</a>
                 </footer>
             </article>
+            <!-- The checkbox must stay before the button and the sidebar: CSS uses sibling selectors. -->
+            <input
+                type="checkbox"
+                id="toc-toggle"
+                class="toc-toggle"
+                aria-label="Toggle table of contents"
+                aria-controls="toc"
+            />
+            <span class="toc-button" aria-hidden="true"></span>
             <sidebar />
             <!-- Where to put sidebar -->
         </div>
