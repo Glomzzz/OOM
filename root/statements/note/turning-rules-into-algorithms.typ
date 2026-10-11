@@ -5,7 +5,7 @@
   title: [不是所有规则都能直接照抄成算法],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/08-rules-and-algorithms.typ",
+  parent: "/how/plt/formal/rules-and-algorithms.typ",
   legacy-id: "fm-rm-guess",
 )
 

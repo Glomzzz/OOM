@@ -5,7 +5,7 @@
   title: [语法与语义，证明与真],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/08-rules-and-algorithms.typ",
+  parent: "/how/plt/formal/rules-and-algorithms.typ",
   legacy-id: "fm-ph-soundness",
 )
 

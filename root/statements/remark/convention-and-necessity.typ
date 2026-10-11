@@ -5,7 +5,7 @@
   title: [约定与必然],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/07-type-safety.typ",
+  parent: "/how/plt/formal/type-safety.typ",
   legacy-id: "fm-ph-analytic",
 )
 

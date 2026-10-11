@@ -5,7 +5,7 @@
   title: [归纳假设不只限于直接子项],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/02-syntax.typ",
+  parent: "/how/plt/formal/syntax.typ",
   legacy-id: "fm-rm-ih-scope",
 )
 

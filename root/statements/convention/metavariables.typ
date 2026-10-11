@@ -5,7 +5,7 @@
   title: [元变量],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/03-evaluation.typ",
+  parent: "/how/plt/formal/evaluation.typ",
   legacy-id: "fm-conv-metavar",
 )
 

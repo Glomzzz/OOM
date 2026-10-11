@@ -122,7 +122,7 @@ M-Refl 说“零步归约”永远成立（自反），M-Step 说在一步后面
 ]
 
 #html.nav(class: "chapter-nav", aria-label: "文章导航")[
-  #cite("/how/plt/formal/04-determinism.typ")[← 确定性：从推导归纳到求值器]
+  #cite("/how/plt/formal/determinism.typ")[← 确定性：从推导归纳到求值器]
   #cite("/how/plt/formal/index.typ")[回到形式化入门]
-  #cite("/how/plt/formal/06-typing.typ")[类型：语法导向、反演与唯一性 →]
+  #cite("/how/plt/formal/typing.typ")[类型：语法导向、反演与唯一性 →]
 ]

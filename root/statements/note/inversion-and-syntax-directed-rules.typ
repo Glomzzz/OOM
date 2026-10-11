@@ -5,7 +5,7 @@
   title: [反演依赖语法导向],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/06-typing.typ",
+  parent: "/how/plt/formal/typing.typ",
   legacy-id: "fm-rm-inv-premise",
 )
 

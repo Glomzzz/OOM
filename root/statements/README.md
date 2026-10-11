@@ -43,7 +43,7 @@
   title: [进展],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/07-type-safety.typ",
+  parent: "/how/plt/formal/type-safety.typ",
 )
 
 #show: statement-page.with("theorem/progress", entry)

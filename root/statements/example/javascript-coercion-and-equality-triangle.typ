@@ -5,7 +5,7 @@
   title: [JavaScript 隐式转换与相等三角图],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/03-evaluation.typ",
+  parent: "/how/plt/formal/evaluation.typ",
   legacy-id: "fm-ex-js-triangle",
 )
 

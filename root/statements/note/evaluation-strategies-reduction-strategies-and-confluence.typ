@@ -5,7 +5,7 @@
   title: [求值策略、归约策略与合流性],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/04-determinism.typ",
+  parent: "/how/plt/formal/determinism.typ",
   legacy-id: "fm-rm-strategy",
 )
 

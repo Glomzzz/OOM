@@ -5,7 +5,7 @@
   title: [意义即使用],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/03-evaluation.typ",
+  parent: "/how/plt/formal/evaluation.typ",
   legacy-id: "fm-ph-use",
 )
 

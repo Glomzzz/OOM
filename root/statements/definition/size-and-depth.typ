@@ -5,7 +5,7 @@
   title: [大小与深度],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/02-syntax.typ",
+  parent: "/how/plt/formal/syntax.typ",
   legacy-id: "fm-def-size",
 )
 

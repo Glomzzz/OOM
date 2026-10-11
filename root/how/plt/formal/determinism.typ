@@ -85,7 +85,7 @@ pub fn step(t: &Term) -> Option<Term> {
 #statement("note/proofs-behind-pattern-matching-order")
 
 #html.nav(class: "chapter-nav", aria-label: "文章导航")[
-  #cite("/how/plt/formal/03-evaluation.typ")[← 求值：用推导规则定义运行]
+  #cite("/how/plt/formal/evaluation.typ")[← 求值：用推导规则定义运行]
   #cite("/how/plt/formal/index.typ")[回到形式化入门]
-  #cite("/how/plt/formal/05-normal-forms.typ")[范式、受阻与多步归约 →]
+  #cite("/how/plt/formal/normal-forms.typ")[范式、受阻与多步归约 →]
 ]

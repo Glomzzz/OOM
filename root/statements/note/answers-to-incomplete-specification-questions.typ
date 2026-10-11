@@ -5,7 +5,7 @@
   title: [不完整规格中的类型检查问题],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/06-typing.typ",
+  parent: "/how/plt/formal/typing.typ",
   legacy-id: "fm-rm-answers",
 )
 

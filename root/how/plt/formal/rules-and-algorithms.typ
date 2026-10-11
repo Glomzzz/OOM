@@ -159,7 +159,7 @@ pub fn type_of(t: &Term) -> Option<Type> {
 ]
 
 #html.nav(class: "chapter-nav", aria-label: "文章导航")[
-  #cite("/how/plt/formal/07-type-safety.typ")[← 类型安全：典范形式、进展与保型]
+  #cite("/how/plt/formal/type-safety.typ")[← 类型安全：典范形式、进展与保型]
   #cite("/how/plt/formal/index.typ")[回到形式化入门]
-  #cite("/how/plt/formal/09-test-and-proof.typ")[用测试对照证明 →]
+  #cite("/how/plt/formal/test-and-proof.typ")[用测试对照证明 →]
 ]

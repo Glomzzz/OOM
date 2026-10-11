@@ -4,16 +4,16 @@
 
 | 文件 | 主题 |
 | --- | --- |
-| `01-natural-and-formal.typ` | 自然语言的局限、对象语言与元语言 |
-| `02-syntax.typ` | BNF、项的最小集合、结构归纳 |
-| `03-evaluation.typ` | 值、一步归约、计算规则与同余规则 |
-| `04-determinism.typ` | 推导归纳、确定性、Rust 求值器 |
-| `05-normal-forms.typ` | 范式、受阻、多步归约 |
-| `06-typing.typ` | 类型规则、反演、类型唯一 |
-| `07-type-safety.typ` | 典范形式、进展、保型、类型安全 |
-| `08-rules-and-algorithms.typ` | 检查算法的可靠性与完备性 |
-| `09-test-and-proof.typ` | 用测试对照证明 |
-| `10-summary.typ` | 总结与延伸阅读 |
+| `natural-and-formal.typ` | 自然语言的局限、对象语言与元语言 |
+| `syntax.typ` | BNF、项的最小集合、结构归纳 |
+| `evaluation.typ` | 值、一步归约、计算规则与同余规则 |
+| `determinism.typ` | 推导归纳、确定性、Rust 求值器 |
+| `normal-forms.typ` | 范式、受阻、多步归约 |
+| `typing.typ` | 类型规则、反演、类型唯一 |
+| `type-safety.typ` | 典范形式、进展、保型、类型安全 |
+| `rules-and-algorithms.typ` | 检查算法的可靠性与完备性 |
+| `test-and-proof.typ` | 用测试对照证明 |
+| `summary.typ` | 总结与延伸阅读 |
 
 七组练习沿用原题号。75 个正文条目统一放在 [`root/statements/`](../../../statements/)，
 按 definition、theorem、lemma 等八类分目录，文件名是完整英文名称。

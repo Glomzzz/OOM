@@ -5,13 +5,13 @@
   title: [测试不是证明],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/09-test-and-proof.typ",
+  parent: "/how/plt/formal/test-and-proof.typ",
   legacy-id: "fm-rm-test-not-proof",
 )
 
 #show: statement-page.with("note/testing-is-not-proof", entry)
 
-测试只能检查有限个样本，证明覆盖命题量词范围内的所有对象。例如，#cite("/how/plt/formal/09-test-and-proof.typ")[用测试对照证明] 的测试样本来自 #refer("definition/set-of-terms") 的项集合，深度按 #refer("definition/size-and-depth") 计算；深度 3 的项已经多到没法穷举。测试过了，也只说明在这些样本上没找到反例。两者的分工是：证明负责“为什么对”，测试负责发现“证明和代码说的是不是同一件事”。测试失败，说明证明或代码有一处错了；证明写不下去，往往说明测试还没碰到反例。
+测试只能检查有限个样本，证明覆盖命题量词范围内的所有对象。例如，#cite("/how/plt/formal/test-and-proof.typ")[用测试对照证明] 的测试样本来自 #refer("definition/set-of-terms") 的项集合，深度按 #refer("definition/size-and-depth") 计算；深度 3 的项已经多到没法穷举。测试过了，也只说明在这些样本上没找到反例。两者的分工是：证明负责“为什么对”，测试负责发现“证明和代码说的是不是同一件事”。测试失败，说明证明或代码有一处错了；证明写不下去，往往说明测试还没碰到反例。
 
 这个差距在真实软件里大得惊人。MikanAffine 的#link("https://zhuanlan.zhihu.com/p/1967137031315514576")[《为什么 sqlite 可以被重写》]以 SQLite 为例：它用约 9000 万行测试覆盖约 20 万行源码，仍然不断被报告出漏洞。原因是程序每经过一个 `if` 就分裂出两条执行路径，要覆盖的路径数随分支数*指数*增长，测试的增长永远追不上。
 

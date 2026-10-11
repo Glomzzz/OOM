@@ -5,7 +5,7 @@
   title: [多步归约],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/05-normal-forms.typ",
+  parent: "/how/plt/formal/normal-forms.typ",
   legacy-id: "fm-def-multistep",
 )
 

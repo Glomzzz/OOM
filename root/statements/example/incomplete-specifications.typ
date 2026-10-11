@@ -5,7 +5,7 @@
   title: [不完整的规格],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/01-natural-and-formal.typ",
+  parent: "/how/plt/formal/natural-and-formal.typ",
   legacy-id: "fm-ex-incomplete",
 )
 

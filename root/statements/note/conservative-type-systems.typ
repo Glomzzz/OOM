@@ -5,7 +5,7 @@
   title: [类型系统是保守的],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/06-typing.typ",
+  parent: "/how/plt/formal/typing.typ",
   legacy-id: "fm-rm-conservative",
 )
 

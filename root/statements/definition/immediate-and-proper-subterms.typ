@@ -5,7 +5,7 @@
   title: [直接子项与真子项],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/02-syntax.typ",
+  parent: "/how/plt/formal/syntax.typ",
   legacy-id: "fm-def-subterm",
 )
 

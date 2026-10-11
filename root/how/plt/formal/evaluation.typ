@@ -109,7 +109,7 @@ $ frac("前提"_1 quad dots.c quad "前提"_n, "结论") $
 #statement("remark/meaning-as-use")
 
 #html.nav(class: "chapter-nav", aria-label: "文章导航")[
-  #cite("/how/plt/formal/02-syntax.typ")[← 语法：BNF、最小集合与结构归纳]
+  #cite("/how/plt/formal/syntax.typ")[← 语法：BNF、最小集合与结构归纳]
   #cite("/how/plt/formal/index.typ")[回到形式化入门]
-  #cite("/how/plt/formal/04-determinism.typ")[确定性：从推导归纳到求值器 →]
+  #cite("/how/plt/formal/determinism.typ")[确定性：从推导归纳到求值器 →]
 ]

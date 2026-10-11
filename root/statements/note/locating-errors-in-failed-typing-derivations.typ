@@ -5,7 +5,7 @@
   title: [从失败的推导里读出错误位置],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/06-typing.typ",
+  parent: "/how/plt/formal/typing.typ",
   legacy-id: "fm-rm-blame",
 )
 
@@ -19,4 +19,4 @@
 
 以 $"if" "true" "then" 0 "else" ("iszero" 0)$ 为例。最外层选 T-If；第一个前提 $"true" : tB$ 由 T-True 搭上；第二个前提要求 $0 : T$，T-Zero 给出 $T = tN$；第三个前提于是要求 $"iszero" 0 : tN$，但 T-IsZero 的结论类型是 $tB$。断点因此是：*T-If 的第三个前提，子项 $"iszero" 0$，期望 $tN$，实际 $tB$*。编译器的报错信息“expected `Nat`, found `Bool`”，内容就是这三样东西。
 
-#cite("/how/plt/formal/08-rules-and-algorithms.typ")[Rust 检查器 `type_of`] 在失败时只返回 `None`，把这些信息丢掉了。要保留它们，只需把返回类型从 `Option<Type>` 换成 `Result<Type, Error>`，在每个 `?` 和比较失败处记下当时的规则、子项和两个类型。
+#cite("/how/plt/formal/rules-and-algorithms.typ")[Rust 检查器 `type_of`] 在失败时只返回 `None`，把这些信息丢掉了。要保留它们，只需把返回类型从 `Option<Type>` 换成 `Result<Type, Error>`，在每个 `?` 和比较失败处记下当时的规则、子项和两个类型。

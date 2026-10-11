@@ -5,7 +5,7 @@
   title: [项的集合],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/02-syntax.typ",
+  parent: "/how/plt/formal/syntax.typ",
   legacy-id: "fm-def-terms",
 )
 

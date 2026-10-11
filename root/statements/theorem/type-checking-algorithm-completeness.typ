@@ -5,13 +5,13 @@
   title: [算法完备性],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/08-rules-and-algorithms.typ",
+  parent: "/how/plt/formal/rules-and-algorithms.typ",
   legacy-id: "fm-thm-alg-complete",
 )
 
 #show: statement-page.with("theorem/type-checking-algorithm-completeness", entry)
 
-取 #cite("/how/plt/formal/08-rules-and-algorithms.typ")[Rust 类型检查算法 `type_of`]，类型关系采用 #refer("definition/types-and-typing-judgments")。Rust 的 `Bool`、`Nat` 分别对应 $tB$、$tN$。对任意项 $t$ 和类型 $T$：若 $t : T$，则 `type_of(t) = Some(T)`。
+取 #cite("/how/plt/formal/rules-and-algorithms.typ")[Rust 类型检查算法 `type_of`]，类型关系采用 #refer("definition/types-and-typing-judgments")。Rust 的 `Bool`、`Nat` 分别对应 $tB$、$tN$。对任意项 $t$ 和类型 $T$：若 $t : T$，则 `type_of(t) = Some(T)`。
 
 #proof[
   对 $t : T$ 的推导归纳，按最后一步的规则分情形。

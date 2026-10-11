@@ -5,7 +5,7 @@
   title: [对推导归纳],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/04-determinism.typ",
+  parent: "/how/plt/formal/determinism.typ",
   legacy-id: "fm-thm-rule-ind",
 )
 

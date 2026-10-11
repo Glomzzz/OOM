@@ -23,6 +23,6 @@
 - Robert Harper. #link("https://www.cs.cmu.edu/~rwh/pfpl/")[Practical Foundations for Programming Languages]。第 1、2 章对“抽象语法”和“归纳定义”的处理比 TAPL 更细致。
 
 #html.nav(class: "chapter-nav", aria-label: "文章导航")[
-  #cite("/how/plt/formal/09-test-and-proof.typ")[← 用测试对照证明]
+  #cite("/how/plt/formal/test-and-proof.typ")[← 用测试对照证明]
   #cite("/how/plt/formal/index.typ")[回到形式化入门]
 ]

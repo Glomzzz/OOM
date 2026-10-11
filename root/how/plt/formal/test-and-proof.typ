@@ -113,7 +113,7 @@ fn safety() {
 ]
 
 #html.nav(class: "chapter-nav", aria-label: "文章导航")[
-  #cite("/how/plt/formal/08-rules-and-algorithms.typ")[← 规则与算法：可靠性与完备性]
+  #cite("/how/plt/formal/rules-and-algorithms.typ")[← 规则与算法：可靠性与完备性]
   #cite("/how/plt/formal/index.typ")[回到形式化入门]
-  #cite("/how/plt/formal/10-summary.typ")[回头看与延伸阅读 →]
+  #cite("/how/plt/formal/summary.typ")[回头看与延伸阅读 →]
 ]

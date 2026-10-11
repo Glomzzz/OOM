@@ -5,7 +5,7 @@
   title: [算术语言形式化的未展开前提],
   date: "2026-10-10",
   author: "Glomzzz",
-  parent: "/how/plt/formal/10-summary.typ",
+  parent: "/how/plt/formal/summary.typ",
   legacy-id: "fm-rm-not-covered",
 )
 
