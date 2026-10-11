@@ -2,6 +2,8 @@
 # you can add any default metadata you want here
 title = "Untitled"
 taxon = ""
+reference-id = ""
+legacy-reference-id = ""
 date = "Unknown Date"
 author = "Unknown Author"
 sidebar = "true"

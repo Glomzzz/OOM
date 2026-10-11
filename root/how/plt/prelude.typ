@@ -1,7 +1,7 @@
 #import "/lib/lib.typ": *
-#import "/lib/thm.typ": *
+#import "/lib/statements.typ": *
 
-#show: schema.with("page", head: thm-head())
+#show: schema.with("page")
 
 #title[序章：怎样读这个系列]
 #date[2026-10-11]
@@ -12,43 +12,25 @@
 
 = 定理环境
 
-每种方框各自从 1 开始编号：“定义3”和“定理3”是两个不同的方框，种类名与编号之间不留空格。正文引用写成“\[种类编号\] 标题”，例如 #refer("pl-def")；方括号内的编号使用深灰色，标题说明具体引用了什么，整段都可以点击跳转。
+#cite("/how/plt/formal/index.typ")[形式化入门]把每个定义、定理等写成独立页面，正文通过 embed 嵌入。嵌入的标题由 typsite 按层级编号，前面的“\[种类\]”和方框颜色说明用途；同一条目在不同父页面中可以有不同编号。正文引用只写“\[种类\] 标题”，不带会随嵌入位置改变的编号。引用目标已在当前页里时就地展开，否则打开它的独立页面。
 
-#definition(title: [定义（Definition）], id: "pl-def")[
-  引入一个新概念，并精确规定它的含义。定义只是约定，不需要证明；但之后每次使用这个词，都以这里写的为准，不以日常含义为准。定义里第一次出现的术语用*粗体*，后面括号里给出英文原名。
-]
+下面的方框也来自 `root/statements/` 的独立条目，例如 #refer("definition/definition-environment")；陈述、标题和证明都在条目文件本身中，本页只负责嵌入。
 
-#theorem(title: [定理（Theorem）], id: "pl-thm")[
-  一个需要证明、而且本身就是论证目标的命题。紧跟着它的是证明。
-]
+#statement("definition/definition-environment")
 
-#proof[
-  证明写全所有情形，每一步都说明用了哪条定义、哪条规则或哪个前文结果。证明以 ∎ 结尾。第一次读可以跳过证明，只看定理说了什么。
-]
+#statement("theorem/theorem-environment")
 
-#lemma(title: [引理（Lemma）], id: "pl-lem")[
-  也需要证明，但它主要是为了给某个定理铺路，单独看可能不太起眼。
-]
+#statement("lemma/lemma-environment")
 
-#corollary(title: [推论（Corollary）], id: "pl-cor")[
-  由前面的定理几乎直接得到的结论，证明通常只有一两行。
-]
+#statement("corollary/corollary-environment")
 
-#example(title: [例（Example）], id: "pl-ex")[
-  具体的实例，用来说明一个定义怎么用，或者一个定理在具体情形下说了什么。例子不承担论证，但很多误解是看例子时才暴露的。
-]
+#statement("example/example-environment")
 
-#convention(title: [约定（Convention）], id: "pl-conv")[
-  关于写法和读法的规定，例如某个符号怎么念、某类证明的省略写法。它不引入新的数学对象，只规定“下文这样写的时候是什么意思”。
-]
+#statement("convention/convention-environment")
 
-#remark(title: [附注（Note）], id: "pl-rm")[
-  技术上的补充：容易忽略的前提、常见的误解、和实现有关的细节。附注参与理解，但不参与主线论证。网页中默认折叠，点击标题展开。
-]
+#statement("note/note-environment")
 
-#philosophy(title: [注记（Remark）], id: "pl-ph")[
-  把文中的概念和哲学、逻辑史上的相关讨论联系起来。注记不参与论证，跳过不影响后文；它的用处是说明这些看似技术性的做法从哪里来、为什么有人认为值得这样做。网页中默认折叠，点击标题展开。
-]
+#statement("remark/remark-environment")
 
 = 行文风格
 

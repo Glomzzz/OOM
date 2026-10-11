@@ -1,0 +1,172 @@
+/* Native typsite embeds use the same palette as the legacy theorem boxes.
+ * Only the current block's own header is tinted: nested embeds never inherit
+ * an ancestor's taxon or overwrite its border on hover.
+ */
+:is(.embed, .page-root) {
+    --embed-color: var(--thm-convention);
+    --embed-border-color: transparent;
+    --embed-bg: transparent;
+}
+
+:is(.embed, .page-root)[data-taxon]:not([data-taxon=""]) {
+    --embed-border-color: var(--embed-color);
+    --embed-bg: var(--thm-bg);
+}
+
+:is(.embed, .page-root)[data-taxon="定义"] {
+    --embed-color: var(--thm-definition);
+}
+:is(.embed, .page-root)[data-taxon="定理"] {
+    --embed-color: var(--thm-theorem);
+}
+:is(.embed, .page-root)[data-taxon="引理"] {
+    --embed-color: var(--thm-lemma);
+}
+:is(.embed, .page-root)[data-taxon="推论"] {
+    --embed-color: var(--thm-corollary);
+}
+:is(.embed, .page-root)[data-taxon="例"] {
+    --embed-color: var(--thm-example);
+}
+:is(.embed, .page-root)[data-taxon="约定"] {
+    --embed-color: var(--thm-convention);
+}
+:is(.embed, .page-root)[data-taxon="附注"] {
+    --embed-color: var(--thm-remark);
+}
+:is(.embed, .page-root)[data-taxon="注记"] {
+    --embed-color: var(--thm-philosophy);
+}
+
+/* Only explicit taxons have a coloured edge; empty/default taxons keep
+ * the same layout with a transparent border and background, including on hover.
+ */
+article .embed {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 1em 0;
+    padding: 0.6em 1em 0.2em;
+    border-left: 4px solid var(--embed-border-color);
+    border-radius: 0 5px 5px 0;
+    background: var(--embed-bg);
+    min-width: 0;
+}
+
+article :is(.embed, .page-root):hover:not(:has(.block:hover)) {
+    border-left-color: var(--embed-border-color);
+}
+
+article .page-root[data-taxon]:not([data-taxon=""]) {
+    border-left: 4px solid var(--embed-color);
+}
+
+article .embed[data-taxon="注记"],
+article .page-root[data-taxon="注记"] {
+    background: var(--thm-philosophy-bg);
+    border-left-style: double;
+    border-left-width: 6px;
+}
+
+.embed > details > summary {
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--embed-color);
+}
+
+.embed:not([data-taxon=""]) > details > summary > header > .taxon,
+.page-root[data-taxon]:not([data-taxon=""]) > details > summary > header > h1 > .taxon {
+    color: var(--embed-color);
+    font-size: inherit;
+    display: inline;
+    padding: 0;
+}
+
+.embed > details > summary > header > .heading-numbering {
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+}
+
+/* Empty taxons must not leave a stray pair of brackets. */
+.taxon[data-taxon=""] {
+    display: none;
+}
+
+.embed > details > summary::before {
+    content: "▸";
+    display: inline-block;
+    width: 1em;
+}
+.embed > details[open] > summary::before {
+    content: "▾";
+}
+
+.embed > details > summary .slug {
+    font-size: 0.75em;
+    font-weight: 400;
+}
+
+.embed > details > summary .metadata {
+    color: var(--slug-color);
+    font-weight: 400;
+}
+
+/* anchor() is wrapped separately: its empty paragraph must not create a
+ * paragraph-sized gap between a statement's heading and its first line.
+ */
+.statement-anchor,
+.statement-anchor > p {
+    margin: 0;
+    padding: 0;
+    height: 0;
+    line-height: 0;
+}
+
+.embed > details > p:last-child {
+    margin-bottom: 0.6em;
+}
+
+/* Static references contain taxon + title, never a page-local number. */
+.statement-ref .statement-ref-taxon {
+    color: var(--span-taxon-color);
+    font-weight: 400;
+}
+
+.embed:target,
+.page-root:target {
+    outline: 2px solid var(--target-color);
+    outline-offset: 2px;
+}
+
+:is(.embed, .page-root, .heading-numbering, [data-reference-id]) {
+    scroll-margin-top: 1.5rem;
+}
+
+.backlink {
+    margin: 0.4em 0;
+    font-size: 0.9em;
+}
+
+.chapter-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.6em 1.2em;
+    margin-top: 1.8em;
+    padding-top: 0.8em;
+    border-top: 1px solid var(--hover-bar-color);
+    font-size: 0.9em;
+}
+
+.chapter-nav .link {
+    min-width: 0;
+}
+
+/* Breakable prose stays on-screen; equations and code scroll within the
+ * article rather than forcing the whole page wider on phones.
+ */
+@media (max-width: 500px) {
+    article .embed {
+        padding-left: 0.65em;
+        padding-right: 0.45em;
+    }
+}

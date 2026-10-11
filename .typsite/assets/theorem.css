@@ -1,4 +1,4 @@
-/* 定理环境（root/lib/thm.typ） */
+/* root/statements/ 的 taxon 配色，以及共用的证明／练习排版。 */
 :root {
     --thm-definition: #2563eb;
     --thm-theorem: #c2410c;
@@ -27,87 +27,21 @@
     }
 }
 
-.thm {
-    --thm-color: var(--thm-remark);
-    margin: 1.2em 0;
-    padding: 0.6em 1em 0.2em;
-    border-left: 4px solid var(--thm-color);
-    border-radius: 0 5px 5px 0;
-    background: var(--thm-bg);
-    overflow-x: auto;
-}
-
-/* anchor(id) 会生成一个只含空 span 的 <p>，把它压扁，避免顶部空白 */
-.thm > p:first-child {
-    margin: 0;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-}
-
-.thm-definition {
-    --thm-color: var(--thm-definition);
-}
-.thm-theorem {
-    --thm-color: var(--thm-theorem);
-}
-.thm-lemma {
-    --thm-color: var(--thm-lemma);
-}
-.thm-corollary {
-    --thm-color: var(--thm-corollary);
-}
-.thm-example {
-    --thm-color: var(--thm-example);
-}
-.thm-convention {
-    --thm-color: var(--thm-convention);
-}
-.thm-remark {
-    --thm-color: var(--thm-remark);
-}
-
-.thm-philosophy {
-    --thm-color: var(--thm-philosophy);
-    background: var(--thm-philosophy-bg);
-    border-left-style: double;
-    border-left-width: 6px;
-}
-
-.thm-ref .thm-ref-label {
-    font-weight: 400;
-    color: var(--span-taxon-color, #444);
-}
-
-.thm-head {
-    font-weight: 700;
-    color: var(--thm-color);
-    margin-bottom: 0.3em;
-}
-
-.thm-body > p:last-child {
-    margin-bottom: 0.6em;
-}
-
-.thm-details > .thm-head,
 .exercise-group > .exercise-group-head {
     margin-bottom: 0.4em;
 }
 
-.thm-details[open] > .thm-head,
 .exercise-group[open] > .exercise-group-head {
     margin-bottom: 0.3em;
 }
 
 /* page.css 隐藏原生 marker；为可折叠的补充内容显示状态指示。 */
-.thm-details > .thm-head::before,
 .exercise-group > .exercise-group-head::before {
     content: "▸";
     display: inline-block;
     width: 1em;
 }
 
-.thm-details[open] > .thm-head::before,
 .exercise-group[open] > .exercise-group-head::before {
     content: "▾";
 }

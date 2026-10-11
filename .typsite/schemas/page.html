@@ -9,13 +9,16 @@
         <link rel="stylesheet" href="../assets/math-inline.css" />
         <link rel="stylesheet" href="../assets/mathyml.css" />
         <link rel="stylesheet" href="../assets/inline-fold.css" />
+        <link rel="stylesheet" href="../assets/theorem.css" />
+        <link rel="stylesheet" href="../assets/embed.css" />
+        <script defer src="../assets/site-links.js"></script>
         <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
             crossorigin="true"
         />
         <link
-            href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&amp;display=swap"
             rel="stylesheet"
         />
         <!-- Noto Sans SC is the web family for the Noto Sans CJK SC used by Typst. -->
@@ -39,7 +42,7 @@
         </header>
         <div id="grid-wrapper" sidebar="{sidebar}">
             <article>
-                <section class="block" id="{slug@anchor}">
+                <section class="block page-root" id="{slug@anchor}" data-slug="{slug}" data-taxon="{taxon}" data-reference-id="{reference-id}" data-legacy-reference-id="{legacy-reference-id}">
                     <details open>
                         <summary>
                             <header
@@ -47,6 +50,7 @@
                                 show-metadata="{show-metadata}"
                             >
                                 <h1>
+                                    <span class="taxon" data-taxon="{taxon}">[{taxon}]</span>
                                     <metadata get="title" />
                                 </h1>
                                 <div class="metadata">

@@ -23,4 +23,4 @@
 
 = #part("./prelude.typ")
 = #part("./intro.typ")
-= #part("./formal.typ")
+= #part("./formal/index.typ")
