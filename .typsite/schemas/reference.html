@@ -2,11 +2,16 @@
 </head>
 <!--
 Inline var could be used:
-- {backlinks} - backlinks of the article
-- {references} - references of the article
-- Any meta contents.
+- {slug} - The slug of the referenced article.
+- Any meta contents of this referenced article.
 -->
 
 <body>
-
+  <p class="reference">
+    <a class="reference-link" href="{slug}" title="{page-title} [{slug-display}]">
+      <span class="taxon" data-taxon="{taxon}">[{taxon}]</span>
+      <span class="reference-title">{title}</span>
+      <span class="reference-slug">[{slug-display}]</span>
+    </a>
+  </p>
 </body>

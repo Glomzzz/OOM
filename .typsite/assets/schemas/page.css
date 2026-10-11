@@ -455,6 +455,37 @@ a.slug {
     text-decoration-thickness: 1px;
 }
 
+/* Backlinks and references: title and slug share one link, so the dotted underline is continuous. */
+p.backlink,
+p.reference {
+    margin-bottom: 0.3em;
+}
+
+a.backlink-link,
+a.reference-link {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+a.backlink-link:hover,
+a.reference-link:hover {
+    background-color: var(--hover-color-link);
+}
+
+a.backlink-link .backlink-slug,
+a.reference-link .reference-slug {
+    color: var(--slug-color);
+    font-weight: 400;
+}
+
+/* Pages without a taxon would otherwise show an empty "[]". */
+a.backlink-link .taxon[data-taxon=""],
+a.reference-link .taxon[data-taxon=""] {
+    display: none;
+}
+
 .slug,
 .doi,
 .orcid {
