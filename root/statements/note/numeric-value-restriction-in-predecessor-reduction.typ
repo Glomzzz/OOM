@@ -4,7 +4,7 @@
 #let entry = (
   title: [为什么 E-PredSucc 要求 $#nv$],
   // 数学标题另给纯文字版本，浏览器标题不解析 nv 的数学结构。
-  page-title: "附注：为什么 E-PredSucc 要求 nv",
+  page-title: "Note. 为什么 E-PredSucc 要求 nv",
   date: "2026-10-10",
   author: "Glomzzz",
   parent: "/how/plt/formal/determinism.typ",

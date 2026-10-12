@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{page-title}</title>
+        <link rel="stylesheet" href="../assets/fonts.css" />
         <link rel="stylesheet" href="../assets/schemas/page.css" />
         <link rel="stylesheet" href="../assets/math-block.css" />
         <link rel="stylesheet" href="../assets/math-inline.css" />
@@ -19,31 +20,28 @@
             href="https://fonts.gstatic.com"
             crossorigin="true"
         />
+        <!-- Latin faces are served locally; Chinese prose uses a Song-style serif. -->
         <link
-            href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&amp;display=swap"
-            rel="stylesheet"
-        />
-        <!-- Noto Sans SC is the web family for the Noto Sans CJK SC used by Typst. -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&amp;display=swap"
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&amp;display=swap"
             rel="stylesheet"
         />
     </head>
 
     <body>
-        <header class="header" parent="{has-parent}">
+        <header class="header" parent="{has-parent}" lang="zh-CN">
             <nav class="nav">
                 <div class="logo">
-                    <span
-                        onclick="window.location.href = '{slug@parent}'"
+                    <a
+                        href="{slug@parent}"
                         title="{title@parent} [{slug@parent}]"
-                        >« {title@parent}</span
+                        >« {title@parent}</a
                     >
                 </div>
             </nav>
         </header>
         <div id="grid-wrapper" sidebar="{sidebar}">
-            <article>
+            <!-- Typsite 0.1.7 regenerates the outer html tag; mark the content too. -->
+            <article lang="zh-CN">
                 <section class="block page-root" id="{slug@anchor}" data-slug="{slug}" data-taxon="{taxon}" data-reference-id="{reference-id}" data-legacy-reference-id="{legacy-reference-id}">
                     <details open>
                         <summary>
@@ -52,7 +50,7 @@
                                 show-metadata="{show-metadata}"
                             >
                                 <h1>
-                                    <span class="taxon" data-taxon="{taxon}">[{taxon}]</span>
+                                    <span class="taxon" data-taxon="{taxon}" lang="en">{taxon}.</span>
                                     <metadata get="title" />
                                 </h1>
                                 <div class="metadata">
@@ -67,7 +65,7 @@
                                             <span class="link local"
                                                 ><a
                                                     href="/about/"
-                                                    title="Aboout [/about/]"
+                                                    title="About [/about/]"
                                                     >About</a
                                                 ></span
                                             >
@@ -80,10 +78,13 @@
                         <!-- Where to put Content-->
                     </details>
                 </section>
-                <footer>
-                    Based on
-                    <a class="link external" href="https://github.com/Glomzzz/typsite/">Typsite</a>
-                </footer>
+                <div class="page-footer">
+                    <footer />
+                    <p class="colophon" lang="en">
+                        Built with
+                        <a class="link external" href="https://github.com/Glomzzz/typsite/">Typsite</a>.
+                    </p>
+                </div>
             </article>
             <!-- The checkbox must stay before the button and the sidebar: CSS uses sibling selectors. -->
             <input

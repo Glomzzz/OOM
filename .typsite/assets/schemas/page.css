@@ -1,92 +1,81 @@
 :root {
     color-scheme: light dark;
     --content-gap: 15px;
-    --radius: 5px;
+    --radius: 3px;
+    --article-max-width: 48rem;
+    --page-gutter: clamp(0.75rem, 3vw, 2rem);
+    --text-font-family: "Libertinus Serif", "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+    --ui-font-family: "Inria Sans", "Noto Sans SC", "Noto Sans CJK SC", sans-serif;
+    --code-font-family: "Iosevka", "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
 
-    --text-color: #222;
-    --background-color: #fdfdfc;
-
-    --background-color-pre: rgba(0, 100, 100, 0.04);
-    --background-color-code: rgba(0, 100, 100, 0.04);
-
-    --hover-bar-color: rgba(0, 0, 0, 0.18);
-    --hover-color-link: rgba(0, 100, 255, 0.1);
-    --target-color: rgb(67, 92, 255);
-
-    --link-color: #222;
-    --slug-color: gray;
-    --logo-color: #666;
-    --logo-hover-color: #aaa;
-    --span-taxon-color: #444;
-    --article-taxon-color: #888;
-    --mark-color: rgb(255, 255, 151);
+    --text-color: #292925;
+    --background-color: #fdfcf9;
+    --background-color-pre: rgba(60, 60, 50, 0.04);
+    --background-color-code: rgba(60, 60, 50, 0.045);
+    --rule-color: rgba(60, 60, 50, 0.16);
+    --hover-bar-color: rgba(60, 60, 50, 0.2);
+    --hover-color-link: rgba(60, 85, 115, 0.07);
+    --target-color: #526b8e;
+    --link-color: #292925;
+    --slug-color: #75756e;
+    --logo-color: #63635d;
+    --logo-hover-color: #292925;
+    --span-taxon-color: #575750;
+    --article-taxon-color: #75756e;
+    --mark-color: #f2e8b7;
     --auto-filter: none;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --text-color: #e4e4e4;
-        --background-color: #2a2a2a;
-
-        --background-color-pre: rgba(100, 100, 100, 0.2);
-        --background-color-code: rgba(150, 150, 150, 0.2);
-
-        --hover-bar-color: rgba(255, 255, 255, 0.25);
-        --hover-color-link: rgba(100, 162, 255, 0.2);
-        --target-color: rgb(255, 255, 151);
-
-        --link-color: #e4e4e4;
-        --slug-color: #aeaeae;
-        --logo-color: #999;
-        --logo-hover-color: #eee;
-        --span-taxon-color: #bbb;
+        --text-color: #e0dfd8;
+        --background-color: #242523;
+        --background-color-pre: rgba(200, 200, 180, 0.055);
+        --background-color-code: rgba(200, 200, 180, 0.07);
+        --rule-color: rgba(220, 220, 200, 0.17);
+        --hover-bar-color: rgba(220, 220, 200, 0.24);
+        --hover-color-link: rgba(150, 175, 200, 0.12);
+        --target-color: #a8bfdc;
+        --link-color: #e0dfd8;
+        --slug-color: #aaa99f;
+        --logo-color: #aaa99f;
+        --logo-hover-color: #e0dfd8;
+        --span-taxon-color: #c1c0b7;
+        --article-taxon-color: #aaa99f;
+        --mark-color: #655b2b;
         --auto-filter: invert(100%);
     }
 }
 
+html {
+    font-size: 18px;
+}
+
 body {
-    font-family: "Inria Sans", "Noto Sans SC", sans-serif;
-    line-height: 1.75;
+    box-sizing: border-box;
+    width: calc(100% - 2 * var(--page-gutter));
+    max-width: var(--article-max-width);
+    margin: clamp(1.25rem, 4vw, 3rem) auto 4rem;
+    background-color: var(--background-color);
     color: var(--text-color);
+    font-family: var(--text-font-family);
+    font-optical-sizing: auto;
+    line-height: 1.82;
+    hyphens: manual;
+    overflow-wrap: anywhere;
+    word-break: normal;
     -webkit-text-size-adjust: 100%;
 }
 
-pre,
-code {
-    font-family: monospace;
-    hyphens: none;
+#grid-wrapper > article {
+    min-width: 0;
+    max-width: 100%;
+    font-size: clamp(1rem, calc(0.96rem + 0.2vw), 1.08rem);
 }
 
-pre {
-    line-height: 1.55;
-}
-
-code {
-    font-size: 0.9em;
-}
-
-/*
- * Embedded code: monospace glyphs are wider than the body font, so render them
- * slightly smaller than body text. Inline code and code blocks share one size,
- * and code inside <pre> must not shrink a second time.
- */
-article code {
-    font-size: 0.88em;
-}
-
-article pre {
-    font-size: 0.88em;
-    line-height: 1.6;
-    padding: 0.7em 1em;
-    margin-bottom: 1em;
-    /* Wrapping drops indentation; scroll horizontally instead. */
-    white-space: pre;
-    overflow-x: auto;
-    tab-size: 4;
-}
-
-article pre code {
-    font-size: inherit;
+p {
+    margin: 0 0 1em;
+    text-wrap: pretty;
 }
 
 h1,
@@ -95,42 +84,92 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Inria Sans", sans-serif;
+    margin: 1.5em 0 0.55em;
+    font-family: var(--text-font-family);
+    font-weight: 600;
+    line-height: 1.45;
+    text-wrap: balance;
 }
 
-nav {
-    font-family: "Inria Sans", sans-serif;
-    line-height: 1.5;
-}
+h1 { font-size: 1.7em; }
+h2 { font-size: 1.35em; }
+h3 { font-size: 1.18em; }
+h4,
+h5,
+h6 { font-size: 1em; }
 
-thead {
-    font-family: "Inria Sans", sans-serif;
-}
-
-body {
+pre,
+code {
+    font-family: var(--code-font-family);
     font-optical-sizing: auto;
-    /* Mixed CJK/Latin text: auto hyphenation splits words like ker-nel. */
-    hyphens: manual;
-    background-color: var(--background-color);
+    hyphens: none;
 }
 
-p {
-    margin-bottom: 1.1em;
-    text-wrap: pretty;
+article code {
+    font-size: 0.82em;
 }
 
-/* Mathyml display equations need the same trailing space as paragraphs. */
+article pre {
+    box-sizing: border-box;
+    max-width: 100%;
+    margin: 0 0 1em;
+    padding: 0.8em 1em;
+    border: 1px solid var(--rule-color);
+    border-radius: var(--radius);
+    background-color: var(--background-color-pre);
+    font-size: 0.82em;
+    line-height: 1.65;
+    white-space: pre;
+    overflow-x: auto;
+    overflow-wrap: normal;
+    tab-size: 4;
+}
+
+article pre code {
+    font-size: inherit;
+}
+
+/* An indivisible inline formula may be wider than a phone. Scroll its
+ * wrapper, never the paragraph or the whole reading column.
+ */
+article span:has(> math:not([display="block"])) {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+    vertical-align: middle;
+}
+
+/* Non-math inline SVG demos also keep their own scroll area. Mathematical
+ * SVGs and figures already have purpose-specific wrappers.
+ */
+article .auto-sized-svg:not(.math-visual *, .formal-figure *) {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+article .auto-filter:has(> .auto-sized-svg):not(.math-visual *, .formal-figure *) {
+    max-width: 100%;
+}
+
+.formal-figure {
+    max-width: 100%;
+    margin: 1.4em 0;
+    overflow-x: auto;
+    text-align: center;
+}
+
 article math[display="block"] {
-    margin-bottom: 1.1em;
+    margin: 1em 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 ul,
 ol {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0;
 }
 
-/* Space content lists without expanding the sidebar or metadata. */
 article ul,
 article ol {
     margin-bottom: 1em;
@@ -147,40 +186,56 @@ article li > ol {
     margin-bottom: 0;
 }
 
-/* !forest */
 table {
+    display: block;
+    max-width: 100%;
+    margin: 1em 0 1.4em;
+    border-collapse: collapse;
+    overflow-x: auto;
     text-align: left;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
-/* !forest */
+th,
+td {
+    padding: 0.4em 0.8em;
+    border-bottom: 1px solid var(--rule-color);
+    vertical-align: top;
+}
+
 th {
-    font-weight: normal;
-    padding: 0 1rem;
+    font-weight: 600;
+}
+
+thead {
+    border-top: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
 }
 
 .auto-filter svg {
     filter: var(--auto-filter);
 }
 
-/* !forest */
+.footnote-definition {
+    font-size: 0.88em;
+    line-height: 1.65;
+}
+
 .footnote-definition:last-child {
     margin-bottom: 1em;
 }
 
-/* !forest */
 .footnote-definition > p {
     display: inline;
 }
 
-/* !forest */
 .footnote-definition-label {
-    margin-right: 4px;
+    margin-right: 0.3em;
 }
 
-/* !forest */
-.footnote-reference:target {
-    border: 1px solid var(--target-color);
+.footnote-reference:target,
+.footnote-definition:target > .footnote-definition-label {
+    outline: 1px solid var(--target-color);
 }
 
 .svg-footnote-reference:target .target-highlight {
@@ -188,57 +243,37 @@ th {
     stroke-width: 1;
 }
 
-.footnote-definition:target > .footnote-definition-label {
-    border: 1px solid var(--target-color);
-}
-
 .display-none {
     display: none;
 }
 
-/* Italic hurts CJK legibility; rely on the left bar instead. */
+/* Upright CJK quotations keep their letterforms, with a quiet marginal rule. */
 blockquote {
+    margin: 1.2em 0 1.2em 0.8em;
+    padding: 0.1em 0 0.1em 1em;
+    border-left: 2px solid var(--rule-color);
+    color: var(--text-color);
+    font-size: 0.96em;
     font-style: normal;
-    color: var(--slug-color);
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 1.5rem;
-    margin-inline-end: 1.5rem;
-    padding-left: 1rem;
-    border-left: 3px solid var(--slug-color);
-    border-radius: 0;
     unicode-bidi: isolate;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    font-weight: 500;
-    line-height: 1.3;
-    text-wrap: balance;
-}
-
-p {
-    margin-top: 0;
+blockquote > p:last-child {
+    margin-bottom: 0;
 }
 
 details > summary {
-    list-style-type: none;
+    position: relative;
+    margin-bottom: 0.45em;
     outline: none;
-    margin-bottom: 0.35em;
-    line-height: 1.4;
+    list-style: none;
+    line-height: 1.55;
     cursor: pointer;
 }
 
 details > summary:focus-visible {
     outline: 2px solid var(--target-color);
-    outline-offset: 2px;
+    outline-offset: 3px;
     border-radius: var(--radius);
 }
 
@@ -246,19 +281,42 @@ details > summary > header {
     display: inline;
 }
 
-/* no effect */
 details > summary::marker,
 details > summary::-webkit-details-marker {
     display: none;
 }
 
 details h1 {
-    font-size: 1.2em;
     display: inline;
+    font-size: 1.15em;
 }
 
-details > summary {
-    list-style-type: none;
+.section-heading {
+    font-size: 1.12em;
+    font-weight: 600;
+}
+
+/* Punctuation is visual only: JS continues to read native numeric counters. */
+.heading-numbering:not(:empty) {
+    font-variant-numeric: lining-nums tabular-nums;
+    white-space: nowrap;
+}
+
+.heading-numbering:not(:empty)::after {
+    content: ".";
+}
+
+.heading-numbering:empty {
+    display: none;
+}
+
+span.taxon {
+    color: var(--span-taxon-color);
+    font-weight: 600;
+}
+
+.taxon[data-taxon=""] {
+    display: none;
 }
 
 header .metadata {
@@ -269,132 +327,124 @@ header[show-metadata="true"] .metadata {
     display: block;
 }
 
-span.taxon {
-    color: var(--span-taxon-color);
-    font-weight: 500;
-}
-
-section .block[data-taxon] details > summary > header > h1 {
-    font-size: 15pt;
-}
-
-article > section > details > summary > header > h1 {
-    font-size: 1.5em;
-}
-
-article > section > details > summary > header {
+.page-root > details > summary > .top-header {
     display: block;
-    margin-bottom: 0.5em;
+    margin-bottom: 1.15em;
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid var(--rule-color);
 }
 
-article > section > details > summary > header > h1 > .taxon {
-    display: block;
-    font-size: 0.9em;
+.top-header > h1 {
+    font-size: clamp(1.5em, 3vw, 1.8em);
+}
+
+.top-header > h1 > .taxon {
     color: var(--article-taxon-color);
-    padding-bottom: 5pt;
 }
 
 section.block > details {
-    margin-bottom: 0.4em;
+    margin-bottom: 0.45em;
 }
 
 section.block > details[open] {
-    margin-bottom: 1em;
+    margin-bottom: 1.1em;
 }
 
 .link-list > section.block > details {
-    margin-bottom: 0.25em;
+    margin-bottom: 0.3em;
 }
 
 .block {
-    padding-left: 8px;
-    padding-right: 10px;
-    padding-bottom: 2px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 0.35em 0.1em 0.65em;
     border-left: 2px solid transparent;
     transition: border-color 0.15s ease;
+    min-width: 0;
 }
 
-.block {
-    width: 98%;
+.page-root {
+    padding: 0;
+    border-left: 0;
 }
 
-/*
- * Hover: one thin neutral bar on the left edge of the innermost hovered block
- * instead of a tinted background, so text contrast never changes.
- */
-.block:hover:not(:has(.block:hover)) {
-    border-left-color: var(--hover-bar-color);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .block {
-        transition: none;
+@media (hover: hover) {
+    .block:hover:not(.page-root, :has(.block:hover)) {
+        border-left-color: var(--hover-bar-color);
     }
 }
 
 img {
     object-fit: cover;
     max-width: 100%;
+    height: auto;
 }
 
 figure {
+    max-width: 100%;
+    margin: 1.4em 0;
+    overflow-x: auto;
     text-align: center;
 }
 
 figcaption {
-    font-style: italic;
-    line-height: 1.5;
-    padding: 3px;
+    padding: 0.4em 0;
+    color: var(--slug-color);
+    font-size: 0.88em;
+    line-height: 1.6;
 }
 
 mark {
     background-color: var(--mark-color);
+    color: inherit;
 }
 
 hr {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    background-color: gray;
-    border: 0 none;
     width: 100%;
-    height: 1pt;
+    height: 1px;
+    margin: 1.5em 0;
+    border: 0;
+    background-color: var(--rule-color);
 }
 
-.logo > span {
+body > .header {
+    margin-bottom: 1.2rem;
+    padding-inline-end: 3rem;
+}
+
+.logo {
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.logo > a {
     color: var(--logo-color);
     text-decoration: none;
 }
 
-.logo > span:hover {
+.logo > a:hover {
     color: var(--logo-hover-color);
-}
-
-.logo {
-    font-weight: 600;
-    font-size: 24px;
-}
-
-footer > section {
-    margin-bottom: 1em;
-}
-
-footer h2 {
-    font-size: 14pt;
-}
-
-.top-header .metadata {
-    font-size: 90%;
+    text-decoration: underline;
 }
 
 .metadata {
-    font-size: 80%;
-    line-height: 1.5;
+    color: var(--slug-color);
+    font-size: 0.78em;
+    font-weight: 400;
+    line-height: 1.6;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+.top-header .metadata {
+    margin-top: 0.6em;
+    font-size: 0.82em;
 }
 
 .metadata ul {
+    display: inline;
     margin: 0;
     padding-inline-start: 0;
-    display: inline;
 }
 
 .metadata li {
@@ -420,13 +470,23 @@ footer h2 {
 a {
     color: var(--link-color);
     text-decoration: inherit;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
 }
 
-a.slug:hover,
-a.bullet:hover,
-.edit-button:hover,
-.link:hover {
-    background-color: var(--hover-color-link);
+a:focus-visible {
+    outline: 2px solid var(--target-color);
+    outline-offset: 2px;
+}
+
+@media (hover: hover) {
+    a.slug:hover,
+    .edit-button:hover,
+    .link:hover,
+    a.backlink-link:hover,
+    a.reference-link:hover {
+        background-color: var(--hover-color-link);
+    }
 }
 
 .svg-link:hover {
@@ -441,51 +501,23 @@ a.bullet:hover,
 
 span.link.local,
 .link.local span,
-a.slug {
+a.slug,
+a.backlink-link,
+a.reference-link {
     box-shadow: none;
     text-decoration-line: underline;
     text-decoration-style: dotted;
-}
-
-.link.external,
-span.link.local,
-.link.local span,
-a.slug {
     text-underline-offset: 0.2em;
     text-decoration-thickness: 1px;
 }
 
-/* Backlinks and references: title and slug share one link, so the dotted underline is continuous. */
 p.backlink,
 p.reference {
-    margin-bottom: 0.3em;
-}
-
-a.backlink-link,
-a.reference-link {
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
-}
-
-a.backlink-link:hover,
-a.reference-link:hover {
-    background-color: var(--hover-color-link);
+    margin-bottom: 0.4em;
 }
 
 a.backlink-link .backlink-slug,
-a.reference-link .reference-slug {
-    color: var(--slug-color);
-    font-weight: 400;
-}
-
-/* Pages without a taxon would otherwise show an empty "[]". */
-a.backlink-link .taxon[data-taxon=""],
-a.reference-link .taxon[data-taxon=""] {
-    display: none;
-}
-
+a.reference-link .reference-slug,
 .slug,
 .doi,
 .orcid {
@@ -493,60 +525,54 @@ a.reference-link .taxon[data-taxon=""] {
     font-weight: 400;
 }
 
-body > header {
-    margin-bottom: 0.5em;
+.page-footer {
+    margin-top: 2.2em;
+    padding-top: 1em;
+    border-top: 1px solid var(--rule-color);
+    font-size: 0.88em;
 }
 
-* {
-    overflow-wrap: anywhere;
-    word-break: normal;
+.page-footer > section {
+    margin-bottom: 1em;
 }
 
-#grid-wrapper[sidebar="false"] > article {
-    max-width: 100%;
+.colophon {
+    margin-top: 1.5em;
+    color: var(--slug-color);
+    font-size: 0.88em;
 }
 
-#grid-wrapper > article {
-    min-width: 0;
-    font-size: clamp(100%, calc(0.8rem + 1vw), 118%);
-    overflow-x: auto;
-}
-
-/* Table of contents: an overlay drawer, so opening it never narrows the
- * article. The drawer is as wide as its longest line (no wrapping); only if
- * that exceeds the viewport does it scroll horizontally instead.
- * Open state is the #toc-toggle checkbox, so it works without JavaScript.
- */
+/* Keep the existing CSS-only TOC drawer: opening it never narrows the prose. */
 #grid-wrapper[sidebar="false"] > :is(nav, .toc-toggle, .toc-button) {
     display: none;
 }
 
-.toc-toggle {
-    position: fixed;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 2.2rem;
-    height: 2.2rem;
-    margin: 0;
-    opacity: 0;
-    z-index: 11;
-    cursor: pointer;
-}
-
+.toc-toggle,
 .toc-button {
     position: fixed;
     top: 0.75rem;
     right: 0.75rem;
-    z-index: 10;
-    display: grid;
-    place-items: center;
     box-sizing: border-box;
     width: 2.2rem;
     height: 2.2rem;
-    border: 1px solid var(--hover-bar-color);
+    margin: 0;
+}
+
+.toc-toggle {
+    z-index: 11;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.toc-button {
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--rule-color);
     border-radius: var(--radius);
     background: var(--background-color);
     color: var(--text-color);
+    font-family: var(--ui-font-family);
     font-size: 1.1rem;
     line-height: 1;
     pointer-events: none;
@@ -581,12 +607,13 @@ body > header {
     box-sizing: border-box;
     width: max-content;
     max-width: 100vw;
-    padding: 3.5rem 1.25rem 1.5rem 1.25rem;
+    padding: 3.5rem 1.25rem 1.5rem;
     overflow: auto;
     background: var(--background-color);
-    border-left: 1px solid var(--hover-bar-color);
-    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
-    font-size: clamp(72%, calc(0.5rem + 0.8vw), 85%);
+    border-left: 1px solid var(--rule-color);
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.08);
+    font-size: 0.88rem;
+    line-height: 1.65;
     transform: translateX(100%);
     visibility: hidden;
     transition: transform 0.2s ease, visibility 0s linear 0.2s;
@@ -598,13 +625,24 @@ body > header {
     transition: transform 0.2s ease, visibility 0s;
 }
 
-/* Every TOC row stays on one line; the global anywhere-wrapping is for prose. */
 #grid-wrapper > nav * {
     white-space: nowrap;
     overflow-wrap: normal;
 }
 
+header[parent="false"] {
+    display: none;
+}
+
+@media (max-width: 500px) {
+    html { font-size: 16px; }
+    body { margin-top: 1.25rem; }
+    .block { padding-inline: 0.45em 0.15em; }
+    .page-root { padding: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+    .block,
     .toc-button,
     #grid-wrapper > nav,
     #grid-wrapper > .toc-toggle:checked ~ nav {
@@ -613,36 +651,29 @@ body > header {
 }
 
 @media print {
+    :root {
+        color-scheme: light;
+        --text-color: #000;
+        --link-color: #000;
+        --background-color: #fff;
+        --slug-color: #555;
+        --rule-color: #ccc;
+        --auto-filter: none;
+    }
+    html { font-size: 11pt; }
+    body { width: 100%; max-width: none; margin: 0; }
+    #grid-wrapper > article { font-size: 1rem; }
     .toc-toggle,
     .toc-button,
-    #grid-wrapper > nav {
-        display: none;
-    }
-}
-
-header[parent="false"] {
-    display: none;
-}
-
-@media only screen and (max-width: 500px) {
-    body {
-        margin-top: 1em;
-        margin-left: 0.5em;
-        margin-right: 0.5em;
-        transition: ease all 0.2s;
-    }
-
-    #grid-wrapper > article {
-        max-width: 100%;
-    }
-
-}
-
-@media only screen and (min-width: 500px) {
-    body {
-        margin-top: 2em;
-        margin-left: 2em;
-        margin-right: 2em;
-        transition: ease all 0.2s;
-    }
+    #grid-wrapper > nav,
+    .colophon { display: none; }
+    .block { transition: none; }
+    /* Always print the light code variant, even from a dark-mode browser. */
+    article pre[color-scheme="light"] { display: block; }
+    article code[color-scheme="light"] { display: inline; }
+    article :is(pre, code)[color-scheme="dark"] { display: none; }
+    p { orphans: 3; widows: 3; }
+    summary { break-after: avoid; }
+    pre,
+    figure { break-inside: avoid; }
 }

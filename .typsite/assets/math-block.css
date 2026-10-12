@@ -10,8 +10,7 @@
   display: inline-flex;
   position: relative;
   padding: var(--math-padding);
-  border-radius: 6px;
-  transition: transform 0.2s ease;
+  border-radius: var(--radius);
   box-sizing: border-box;
   max-width: 100%;
 }
@@ -44,16 +43,6 @@
   stroke-linejoin: round;
 }
 
-.math-block:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px -4px rgba(0, 32, 128, 0.12);
-}
-
-.math-block:active {
-  transition-duration: 0.08s;
-  transform: translateY(0);
-}
-
 @media (max-width: 640px) {
   .math-container {
     padding: 1rem 0
@@ -74,17 +63,6 @@
   bottom: calc(-1 * var(--math-padding));
   border: 1px solid transparent;
   pointer-events: none;
-}
-
-@media (max-width: 640px) {
-  .math-block {
-    transform: scale(0.98);
-    transform-origin: center;
-  }
-
-  .math-block:hover {
-    transform: scale(1);
-  }
 }
 
 ul + pre {

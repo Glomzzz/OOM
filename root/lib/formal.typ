@@ -1,7 +1,7 @@
 // 形式化入门的公共工具。正文、定理等都是 typsite 的独立页面：
 //   #show: formal-page.with(title: [语法])
 //   #statement("definition/set-of-terms")   // 原生 embed，原生层级编号
-//   #refer("definition/set-of-terms")       // 元数据引用：[定义] 项的集合
+//   #refer("definition/set-of-terms")       // 元数据引用：Definition. 项的集合
 //
 // 独立条目、标题、证明与元数据统一放在 /statements/；本库只负责文章
 // 页面、练习与数学记号，不维护另一份条目目录表。
@@ -49,25 +49,25 @@
     body
   } else {
     html.details(class: "exercise-group")[
-      #html.summary(class: "exercise-group-head", "本节练习（" + str(count) + "题）")
+      #html.summary(class: "exercise-group-head", "Exercises (" + str(count) + ")")
       #html.div(class: "exercise-group-body", body)
     ]
   }
 }
 
 #let exercise(number, title, hint: [], answer: [], body) = context {
-  let head = [*练习#number：#title*]
+  let head = [*#("Exercise " + str(number) + ".") #title*]
   if target() != "html" {
     block[
       #head
 
       #body
 
-      *提示*
+      *Hint*
 
       #hint
 
-      *参考答案*
+      *Solution*
 
       #answer
     ]
@@ -75,8 +75,8 @@
     html.div(class: "exercise")[
       #html.p(head)
       #body
-      #details-block(open: false, [提示], hint)
-      #details-block(open: false, [参考答案], answer)
+      #details-block(open: false, [Hint], hint)
+      #details-block(open: false, [Solution], answer)
     ]
   }
 }

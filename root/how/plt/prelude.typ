@@ -12,7 +12,9 @@
 
 = 定理环境
 
-#cite("/how/plt/formal/index.typ")[形式化入门]把每个定义、定理等写成独立页面，正文通过 embed 嵌入。嵌入的标题由 typsite 按层级编号，前面的“\[种类\]”和方框颜色说明用途；同一条目在不同父页面中可以有不同编号。正文引用只写“\[种类\] 标题”，不带会随嵌入位置改变的编号。引用目标已在当前页里时就地展开，否则打开它的独立页面。
+#cite("/how/plt/formal/index.typ")[形式化入门]把每个定义、定理等写成独立页面，正文通过 embed 嵌入。嵌入的标题按“英文环境名 → 层级编号 → 标题”排列，例如 “Theorem 1.2. 陈述与证明”；编号由 typsite 生成，环境名和方框颜色说明用途。同一条目在不同父页面中可以有不同编号。正文引用只写“英文环境名. 标题”，不带会随嵌入位置改变的编号。引用目标已在当前页里时就地展开，否则打开它的独立页面。
+
+环境名统一用 Definition、Theorem、Lemma、Corollary、Example、Convention、Note 与 Remark；中文正文保留相应的解释。证明以 “Proof.” 起头，以 ∎ 结束。
 
 下面的方框也来自 `root/statements/` 的独立条目，例如 #refer("definition/definition-environment")；陈述、标题和证明都在条目文件本身中，本页只负责嵌入。
 

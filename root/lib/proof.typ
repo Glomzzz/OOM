@@ -2,14 +2,14 @@
 #import "html.typ" as html
 
 #let proof(title: none, body) = context {
-  let head = if title == none [证明] else [证明（#title）]
+  let head = if title == none [Proof.] else [Proof (#title).]
   if target() != "html" {
-    block[_#head._ #body #h(1fr) $square$]
+    block[#emph(head) #body #h(1fr) $square$]
   } else {
     html.div(class: "proof", {
-      html.div(class: "proof-head", head)
+      html.div(class: "proof-head", lang: "en", head)
       body
-      html.div(class: "qed", title: "证毕", "∎")
+      html.div(class: "qed", title: "Q.E.D.", "∎")
     })
   }
 }

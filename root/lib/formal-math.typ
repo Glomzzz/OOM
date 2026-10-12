@@ -69,7 +69,7 @@
   if target() != "html" {
     align(center, figure)
   } else {
-    html.align(center)[#auto-filter(inline(scale: 140%, figure))]
+    html.div(class: "formal-figure")[#auto-filter(inline(scale: 140%, figure))]
   }
 }
 

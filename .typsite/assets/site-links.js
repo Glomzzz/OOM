@@ -124,6 +124,17 @@
             const numbering = target.matches(".heading-numbering") ? target : nativeNumbering(target);
             const label = link.querySelector(".heading-numbering");
             if (numbering && label) label.textContent = numbering.textContent;
+            // Copy the target's own English taxon before the native counter,
+            // never an ancestor's taxon or a page-local number in a citation.
+            const taxon = target.matches(".embed, .page-root")
+                ? target.querySelector(":scope > details > summary > header > .taxon, :scope > details > summary > header > h1 > .taxon")
+                : null;
+            if (taxon?.dataset.taxon) {
+                const prefix = taxon.cloneNode(true);
+                prefix.classList.add("toc-taxon");
+                prefix.textContent = taxon.dataset.taxon;
+                link.prepend(prefix, document.createTextNode(" "));
+            }
         }
     }
 

@@ -2,20 +2,20 @@
 //   #statement("definition/induction-hypothesis")
 //   #refer("theorem/progress")
 // 每个条目文件导出自己的 entry 元数据，并把陈述、证明放在同一份正文。
-#import "lib.typ": schema, metacontent, page-title, parent, unique, cite
+#import "lib.typ": schema, metacontent, page-title, parent, cite
 #import "proof.typ": proof
 #import "formal-html.typ" as html
 #import "@local/typsite:0.1.0": rewrite, anchor, to-str
 
 #let statement-kinds = (
-  definition: "定义",
-  theorem: "定理",
-  lemma: "引理",
-  corollary: "推论",
-  example: "例",
-  convention: "约定",
-  note: "附注",
-  remark: "注记",
+  definition: "Definition",
+  theorem: "Theorem",
+  lemma: "Lemma",
+  corollary: "Corollary",
+  example: "Example",
+  convention: "Convention",
+  note: "Note",
+  remark: "Remark",
 )
 
 #let statement-kind(key) = {
@@ -34,17 +34,14 @@
   "/statements/" + key + ".typ"
 }
 
-#let statement-head() = unique(html.tag(
-  "link",
-  rel: "stylesheet",
-  href: "https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap",
-)[])
+// 字体统一由全站 page schema 加载；保留接口供文章复用。
+#let statement-head() = []
 
 #let statement-page(key, entry, body) = context {
   let kind = statement-kind(key)
   if target() != "html" {
     return block(width: 100%, inset: (left: 0.8em, y: 0.4em), stroke: (left: 2pt + gray))[
-      *\[#kind\] #entry.title*
+      *#(kind + ".") #entry.title*
 
       #metadata((title: entry.title, taxon: kind))#label(key)
       #body
@@ -52,7 +49,7 @@
   }
   schema("page", head: statement-head(), {
     metacontent("title", entry.title)
-    page-title(if "page-title" in entry { entry.page-title } else { kind + "：" + to-str(entry.title) })
+    page-title(if "page-title" in entry { entry.page-title } else { kind + ". " + to-str(entry.title) })
     metacontent("taxon", kind)
     metacontent("reference-id", key)
     let legacy-id = entry.at("legacy-id", default: "")
@@ -99,7 +96,7 @@
   let kind = statement-kind(key)
   site-embed(
     statement-slug(key),
-    open: if open == auto { kind not in ("附注", "注记") } else { open },
+    open: if open == auto { kind not in ("Note", "Remark") } else { open },
     sidebar: sidebar,
   )
 }
@@ -114,11 +111,11 @@
     let found = query(label(key))
     if found.len() > 0 {
       let el = found.first()
-      link(el.location(), [\[#el.value.taxon\] #el.value.title])
+      link(el.location(), [#(el.value.taxon + ".") #el.value.title])
     } else {
       // 独立 PDF 未包含目标时，只取目标文件导出的 entry，不渲染正文。
       import slug as destination
-      [\[#statement-kind(key)\] #destination.entry.title]
+      [#(statement-kind(key) + ".") #destination.entry.title]
     }
   }
 }

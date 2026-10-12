@@ -3,7 +3,7 @@
 
 #let entry = (
   title: [Rust 的 `?` 运算符],
-  page-title: "附注：Rust 的 `?` 运算符",
+  page-title: "Note. Rust 的 `?` 运算符",
   date: "2026-10-10",
   author: "Glomzzz",
   parent: "/how/plt/formal/determinism.typ",

@@ -3,7 +3,7 @@
 
 #let entry = (
   title: [为什么要“对 $T$ 一般化”],
-  page-title: "附注：为什么要“对 T 一般化”",
+  page-title: "Note. 为什么要“对 T 一般化”",
   date: "2026-10-10",
   author: "Glomzzz",
   parent: "/how/plt/formal/type-safety.typ",

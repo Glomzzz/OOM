@@ -1,0 +1,59 @@
+/* Local Latin faces keep titles, theorem labels and prose consistent even
+ * when an external font service is unavailable. Paths are relative to this
+ * stylesheet, so they also work when the site is hosted below a URL prefix.
+ */
+@font-face {
+    font-family: "Libertinus Serif";
+    src: url("fonts/libertinus/LibertinusSerif-Regular.otf") format("opentype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Libertinus Serif";
+    src: url("fonts/libertinus/LibertinusSerif-Italic.otf") format("opentype");
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Libertinus Serif";
+    src: url("fonts/libertinus/LibertinusSerif-Semibold.otf") format("opentype");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Libertinus Serif";
+    src: url("fonts/libertinus/LibertinusSerif-SemiboldItalic.otf") format("opentype");
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Libertinus Serif";
+    src: url("fonts/libertinus/LibertinusSerif-Bold.otf") format("opentype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Libertinus Serif";
+    src: url("fonts/libertinus/LibertinusSerif-BoldItalic.otf") format("opentype");
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Inria Sans";
+    src: url("fonts/Inria Sans.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}

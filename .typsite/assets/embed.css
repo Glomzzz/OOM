@@ -1,6 +1,5 @@
-/* Native typsite embeds use the same palette as the legacy theorem boxes.
- * Only the current block's own header is tinted: nested embeds never inherit
- * an ancestor's taxon or overwrite its border on hover.
+/* Each card owns its accent. Descendant statements must never inherit a
+ * parent's taxon colour or change the parent's border when hovered.
  */
 :is(.embed, .page-root) {
     --embed-color: var(--thm-convention);
@@ -12,79 +11,49 @@
 :is(.embed, .page-root)[data-taxon]:not([data-taxon=""]) {
     --embed-border-color: var(--embed-color);
     --embed-bg: var(--thm-bg);
-    --embed-ring: var(--hover-bar-color);
+    --embed-ring: var(--rule-color);
 }
 
-/* Tint the card and hairline from the taxon colour where supported. */
 @supports (color: color-mix(in srgb, red, blue)) {
     :is(.embed, .page-root)[data-taxon]:not([data-taxon=""]) {
-        --embed-bg: color-mix(in srgb, var(--embed-color) 5%, transparent);
-        --embed-ring: color-mix(in srgb, var(--embed-color) 20%, transparent);
+        --embed-bg: color-mix(in srgb, var(--embed-color) 4%, transparent);
+        --embed-ring: color-mix(in srgb, var(--embed-color) 18%, transparent);
     }
 }
 
-:is(.embed, .page-root)[data-taxon="定义"] {
-    --embed-color: var(--thm-definition);
-}
-:is(.embed, .page-root)[data-taxon="定理"] {
-    --embed-color: var(--thm-theorem);
-}
-:is(.embed, .page-root)[data-taxon="引理"] {
-    --embed-color: var(--thm-lemma);
-}
-:is(.embed, .page-root)[data-taxon="推论"] {
-    --embed-color: var(--thm-corollary);
-}
-:is(.embed, .page-root)[data-taxon="例"] {
-    --embed-color: var(--thm-example);
-}
-:is(.embed, .page-root)[data-taxon="约定"] {
-    --embed-color: var(--thm-convention);
-}
-:is(.embed, .page-root)[data-taxon="附注"] {
-    --embed-color: var(--thm-remark);
-}
-:is(.embed, .page-root)[data-taxon="注记"] {
-    --embed-color: var(--thm-philosophy);
-}
+:is(.embed, .page-root)[data-taxon="Definition"] { --embed-color: var(--thm-definition); }
+:is(.embed, .page-root)[data-taxon="Theorem"] { --embed-color: var(--thm-theorem); }
+:is(.embed, .page-root)[data-taxon="Lemma"] { --embed-color: var(--thm-lemma); }
+:is(.embed, .page-root)[data-taxon="Corollary"] { --embed-color: var(--thm-corollary); }
+:is(.embed, .page-root)[data-taxon="Example"] { --embed-color: var(--thm-example); }
+:is(.embed, .page-root)[data-taxon="Convention"] { --embed-color: var(--thm-convention); }
+:is(.embed, .page-root)[data-taxon="Note"] { --embed-color: var(--thm-remark); }
+:is(.embed, .page-root)[data-taxon="Remark"] { --embed-color: var(--thm-philosophy); }
 
-/* Only explicit taxons have a coloured edge; empty/default taxons keep
- * the same layout with a transparent border and background, including on hover.
- */
 article .embed {
-    --embed-gap: 0.45em;
+    --embed-gap: 0.8em;
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    min-width: 0;
     margin: var(--embed-gap) 0;
-    padding: 0.75em 1.15em;
-    border-left: 4px solid var(--embed-border-color);
-    border-radius: 0 8px 8px 0;
+    padding: 0.8em 1em;
+    border-left: 3px solid var(--embed-border-color);
+    border-radius: 0 var(--radius) var(--radius) 0;
     background: var(--embed-bg);
     box-shadow: inset 0 0 0 1px var(--embed-ring);
-    min-width: 0;
 }
 
-/* The outer box is identical open or closed. Page.css adds a bigger
- * bottom margin to open blocks; cancel it so toggling never shifts the layout.
- */
+/* Opening a fold changes its content, never its outer padding or border. */
 article section.block.embed > details,
 article section.block.embed > details[open] {
     margin-bottom: 0;
 }
 
-/* Metadata sits on its own line under the title, muted so the title leads. */
 article .embed > details > summary > header > .metadata {
-    margin-top: 0.1em;
-    color: var(--slug-color);
-    font-size: 0.8em;
-    font-weight: 400;
-    font-variant-numeric: tabular-nums;
+    margin-top: 0.3em;
 }
 
-/* Hairline between neighbouring default embeds, open or closed. It is a pseudo-element so
- * it ignores the rounded corners and the left accent border.
- */
 article .embed[data-taxon=""] + .embed[data-taxon=""]::before {
     content: "";
     position: absolute;
@@ -92,45 +61,39 @@ article .embed[data-taxon=""] + .embed[data-taxon=""]::before {
     left: 0;
     right: 0;
     height: 1px;
-    background: var(--hover-bar-color);
-    opacity: 0.5;
+    background: var(--rule-color);
     pointer-events: none;
 }
 
-/* Title row: same box open or closed. The padding is cancelled by the
- * negative margin, so it only gives the hover wash room to breathe. Hover
- * feedback never touches the body text, only this row, as a faint neutral
- * wash with unchanged text colour. Skipped on touch to avoid sticky hover.
- */
 article .embed > details > summary {
-    padding: 0.2em 0.5em;
-    margin: -0.2em -0.5em 0;
-    border-radius: 6px;
-    /* Fade out slowly, but light up instantly so it follows the pointer. */
-    transition: background-color 0.18s ease-out;
-}
-@media (hover: hover) {
-    article .embed > details > summary:hover {
-        background-color: rgba(127, 127, 127, 0.1);
-        transition-duration: 0s;
-    }
+    margin: -0.15em -0.3em 0;
+    padding: 0.15em 0.3em 0.15em 1.2em;
+    border-radius: var(--radius);
+    font-size: 1.05em;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--text-color);
+    transition: background-color 0.15s ease-out;
 }
 
-/* Plain collapsible blocks (details-block, numbered sections) get the same
- * title-row wash as embeds, so every fold in an article reacts the same way.
- * Embeds and the page root are handled above / excluded. The bottom padding
- * is offset against page.css's 0.35em summary margin, so layout never shifts.
- */
-article .block:not(.embed, .page-root) > details > summary {
-    padding: 0.2em 0.4em;
-    margin: -0.2em -0.4em calc(0.35em - 0.2em);
-    border-radius: 6px;
-    transition: background-color 0.18s ease-out;
+article .embed > details[open] > summary {
+    margin-bottom: 0.65em;
+    padding-bottom: 0.45em;
+    border-bottom: 1px solid var(--embed-ring);
+    border-radius: var(--radius) var(--radius) 0 0;
 }
+
+article .block:not(.embed, .page-root) > details > summary {
+    padding: 0.15em 0.3em;
+    margin: -0.15em -0.3em 0.45em;
+    border-radius: var(--radius);
+    transition: background-color 0.15s ease-out;
+}
+
 @media (hover: hover) {
+    article .embed > details > summary:hover,
     article .block:not(.embed, .page-root) > details > summary:hover {
-        background-color: rgba(127, 127, 127, 0.1);
-        transition-duration: 0s;
+        background-color: var(--hover-color-link);
     }
 }
 
@@ -139,97 +102,76 @@ article :is(.embed, .page-root):hover:not(:has(.block:hover)) {
 }
 
 article .page-root[data-taxon]:not([data-taxon=""]) {
-    border-left: 4px solid var(--embed-color);
+    padding: 1em 1.2em;
+    border-left: 3px solid var(--embed-color);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: var(--embed-bg);
+    box-shadow: inset 0 0 0 1px var(--embed-ring);
 }
 
-article .embed[data-taxon="注记"],
-article .page-root[data-taxon="注记"] {
-    background: var(--thm-philosophy-bg);
+article .embed[data-taxon="Remark"],
+article .page-root[data-taxon="Remark"] {
     border-left-style: double;
-    border-left-width: 6px;
+    border-left-width: 4px;
 }
 
-.embed > details > summary {
-    font-size: 1.05em;
-    font-weight: 600;
-    line-height: 1.45;
-    color: var(--text-color);
-    border-radius: 4px;
-}
-
-/* A hairline separates the header from the body only for tinted embeds
- * (the ring is transparent for default taxons).
- */
-article .embed > details[open] > summary {
-    margin-bottom: 0.3em;
-    border-bottom: 1px solid var(--embed-ring);
-    border-radius: 6px 6px 0 0;
-}
-
-.embed:not([data-taxon=""]) > details > summary > header > .taxon,
-.page-root[data-taxon]:not([data-taxon=""]) > details > summary > header > h1 > .taxon {
+.embed > details > summary > header > .taxon,
+.page-root > details > summary > header > h1 > .taxon {
     color: var(--embed-color);
-    font-size: inherit;
-    font-weight: 700;
-    display: inline;
-    padding: 0;
+    font-weight: 600;
+}
+
+/* A numbered header reads "Theorem 2.1. Title"; an unnumbered one reads
+ * "Theorem. Title". Empty taxons produce neither brackets nor punctuation.
+ */
+.embed > details > summary > header > .taxon:has(+ .heading-numbering:empty)::after {
+    content: ".";
 }
 
 .embed > details > summary > header > .heading-numbering {
     color: var(--slug-color);
-    font-variant-numeric: tabular-nums;
     font-weight: 400;
 }
 
-/* Empty taxons must not leave a stray pair of brackets. */
-.taxon[data-taxon=""] {
-    display: none;
+.embed:not([data-taxon=""]) > details > summary > header > .heading-numbering {
+    color: var(--embed-color);
+    font-weight: 600;
 }
 
-/* CSS chevron: rotates instead of swapping glyphs, so it animates. */
+.embed > details > summary > header > .embed-title {
+    font-weight: 500;
+}
+
+/* Small marginal chevron: a fold control, not part of the theorem label. */
 .embed > details > summary::before {
     content: "";
-    display: inline-block;
-    box-sizing: content-box;
-    width: 0.35em;
-    height: 0.35em;
-    margin: 0 0.7em 0 0.2em;
-    border-right: 2px solid var(--embed-color);
-    border-bottom: 2px solid var(--embed-color);
+    position: absolute;
+    top: 0.7em;
+    left: 0.25em;
+    width: 0.3em;
+    height: 0.3em;
+    border-right: 1px solid var(--embed-color);
+    border-bottom: 1px solid var(--embed-color);
     opacity: 0.75;
-    transform: translateY(-0.1em) rotate(-45deg);
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transform: rotate(-45deg);
+    transition: transform 0.15s ease;
 }
+
 .embed > details[open] > summary::before {
-    transform: translateY(-0.2em) rotate(45deg);
-}
-.embed > details > summary:hover::before {
-    opacity: 1;
+    top: 0.6em;
+    transform: rotate(45deg);
 }
 
-/* The slug sits at the right end of the title row. */
-.embed > details > summary .slug {
-    float: right;
-    margin-left: 1em;
-    padding-top: 0.2em;
-    font-size: 0.75em;
-    font-weight: 400;
-    opacity: 0.7;
-    transition: opacity 0.15s ease;
-}
-.embed > details > summary:hover .slug,
-.embed > details > summary .slug:focus-visible {
-    opacity: 1;
-}
-
-.embed > details > summary .metadata {
-    color: var(--slug-color);
-    font-weight: 400;
-}
-
-/* anchor() is wrapped separately: its empty paragraph must not create a
- * paragraph-sized gap between a statement's heading and its first line.
+/* Like a bibliographic identifier, the independent-page link follows the
+ * title inline. Long names wrap rather than taking over a floated column.
  */
+.embed > details > summary .slug {
+    margin-left: 0.55em;
+    font-size: 0.7em;
+    font-weight: 400;
+    vertical-align: baseline;
+}
+
 .statement-anchor,
 .statement-anchor > p {
     margin: 0;
@@ -239,19 +181,18 @@ article .embed > details[open] > summary {
 }
 
 .embed > details > p:last-child {
-    margin-bottom: 0.6em;
+    margin-bottom: 0.2em;
 }
 
-/* Static references contain taxon + title, never a page-local number. */
 .statement-ref .statement-ref-taxon {
     color: var(--span-taxon-color);
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .embed:target,
 .page-root:target {
     outline: 2px solid var(--target-color);
-    outline-offset: 2px;
+    outline-offset: 3px;
 }
 
 :is(.embed, .page-root, .heading-numbering, [data-reference-id]) {
@@ -260,7 +201,6 @@ article .embed > details[open] > summary {
 
 .backlink {
     margin: 0.4em 0;
-    font-size: 0.9em;
 }
 
 .chapter-nav {
@@ -268,9 +208,9 @@ article .embed > details[open] > summary {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0.6em 1.2em;
-    margin-top: 1.8em;
+    margin-top: 2em;
     padding-top: 0.8em;
-    border-top: 1px solid var(--hover-bar-color);
+    border-top: 1px solid var(--rule-color);
     font-size: 0.9em;
 }
 
@@ -278,20 +218,27 @@ article .embed > details[open] > summary {
     min-width: 0;
 }
 
-/* Breakable prose stays on-screen; equations and code scroll within the
- * article rather than forcing the whole page wider on phones.
- */
 @media (max-width: 500px) {
     article .embed {
-        padding: 0.6em 0.65em 0.6em 0.75em;
+        padding: 0.65em 0.65em 0.65em 0.75em;
+    }
+    article .page-root[data-taxon]:not([data-taxon=""]) {
+        padding: 0.8em;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .embed > details > summary,
+    article .embed > details > summary,
     article .block:not(.embed, .page-root) > details > summary,
-    .embed > details > summary::before,
-    .embed > details > summary .slug {
+    .embed > details > summary::before {
         transition: none;
+    }
+}
+
+@media print {
+    article .embed,
+    article .page-root[data-taxon]:not([data-taxon=""]) {
+        background: transparent;
+        box-shadow: none;
     }
 }

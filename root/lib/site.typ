@@ -84,7 +84,7 @@
   }
   let details = html.section(class: "block")[
     #html.details(open: if open { "" } else { none })[
-      #html.summary(style: "font-size: 117%;", title)
+      #html.summary(class: "section-heading", title)
       #content
     ]
   ]

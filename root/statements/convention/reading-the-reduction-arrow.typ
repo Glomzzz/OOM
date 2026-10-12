@@ -3,7 +3,7 @@
 
 #let entry = (
   title: [箭头 $stp$ 的读法与用法],
-  page-title: "约定：箭头 ⟶ 的读法与用法",
+  page-title: "Convention. 箭头 ⟶ 的读法与用法",
   date: "2026-10-10",
   author: "Glomzzz",
   parent: "/how/plt/formal/evaluation.typ",

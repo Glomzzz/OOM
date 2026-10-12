@@ -4,7 +4,7 @@
 
 #title[没有出路，但请继续追问]
 #page-title[没有出路，但请继续追问]
-#taxon[对话录]
+#taxon[Dialogue]
 #date[2026-05-03]
 #author[L / G / LLM]
 #heading-numbering("none")

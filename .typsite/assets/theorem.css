@@ -1,56 +1,39 @@
-/* root/statements/ 的 taxon 配色，以及共用的证明／练习排版。 */
+/* Shared statement accents: coloured cards remain, but use an ink-like
+ * palette rather than saturated UI colours. Body text always stays neutral.
+ */
 :root {
-    --thm-definition: #2563eb;
-    --thm-theorem: #c2410c;
-    --thm-lemma: #0f766e;
-    --thm-corollary: #b45309;
-    --thm-example: #15803d;
-    --thm-convention: #64748b;
-    --thm-remark: #6b7280;
-    --thm-philosophy: #7c3aed;
-    --thm-bg: rgba(0, 0, 0, 0.025);
-    --thm-philosophy-bg: rgba(124, 58, 237, 0.05);
+    --thm-definition: #3c6089;
+    --thm-theorem: #99553f;
+    --thm-lemma: #32786b;
+    --thm-corollary: #8c642c;
+    --thm-example: #50734d;
+    --thm-convention: #637080;
+    --thm-remark: #6b6b68;
+    --thm-philosophy: #705c89;
+    --thm-bg: rgba(60, 60, 50, 0.025);
+    --thm-philosophy-bg: rgba(112, 92, 137, 0.04);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --thm-definition: #7aa7ff;
-        --thm-theorem: #fb923c;
-        --thm-lemma: #5eead4;
-        --thm-corollary: #fbbf24;
-        --thm-example: #86efac;
-        --thm-convention: #a8b3c4;
-        --thm-remark: #b0b4bb;
-        --thm-philosophy: #c4b5fd;
-        --thm-bg: rgba(255, 255, 255, 0.035);
-        --thm-philosophy-bg: rgba(196, 181, 253, 0.07);
+        --thm-definition: #9cbce1;
+        --thm-theorem: #deb09b;
+        --thm-lemma: #91c8b8;
+        --thm-corollary: #d5be89;
+        --thm-example: #a7c69a;
+        --thm-convention: #acb8c7;
+        --thm-remark: #b9b9b0;
+        --thm-philosophy: #c2b0d6;
+        --thm-bg: rgba(220, 220, 200, 0.035);
+        --thm-philosophy-bg: rgba(194, 176, 214, 0.05);
     }
 }
 
-.exercise-group > .exercise-group-head {
-    margin-bottom: 0.4em;
-}
-
-.exercise-group[open] > .exercise-group-head {
-    margin-bottom: 0.3em;
-}
-
-/* page.css 隐藏原生 marker；为可折叠的补充内容显示状态指示。 */
-.exercise-group > .exercise-group-head::before {
-    content: "▸";
-    display: inline-block;
-    width: 1em;
-}
-
-.exercise-group[open] > .exercise-group-head::before {
-    content: "▾";
-}
-
 .exercise-group {
-    margin: 0.8em 0 1.2em;
-    padding: 0.6em 1em 0.2em;
-    border-left: 3px solid var(--slug-color, gray);
-    border-radius: 0 5px 5px 0;
+    margin: 1em 0 1.4em;
+    padding: 0.7em 1em 0.2em;
+    border-left: 2px solid var(--rule-color);
+    border-radius: 0 var(--radius) var(--radius) 0;
     background: var(--thm-bg);
 }
 
@@ -58,23 +41,62 @@
     font-weight: 600;
 }
 
+.exercise-group > .exercise-group-head::before {
+    content: "▸";
+    display: inline-block;
+    width: 1em;
+    color: var(--slug-color);
+}
+
+.exercise-group[open] > .exercise-group-head::before {
+    content: "▾";
+}
+
 .exercise-group-body {
-    padding-top: 0.3em;
+    padding-top: 0.4em;
+}
+
+.exercise + .exercise {
+    margin-top: 1.5em;
+    padding-top: 0.8em;
+    border-top: 1px solid var(--rule-color);
+}
+
+.exercise .section-heading {
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 400;
 }
 
 .proof {
-    margin: 0.8em 0 1.4em;
+    margin: 1em 0 0.8em;
     padding-left: 1em;
-    border-left: 1px dashed var(--slug-color, gray);
+    border-left: 1px solid var(--rule-color);
 }
 
 .proof-head {
-    font-weight: 700;
+    margin-bottom: 0.4em;
+    font-size: 1em;
+    font-weight: 400;
     font-style: italic;
-    margin-bottom: 0.3em;
 }
 
 .proof .qed {
     text-align: right;
     line-height: 1;
+}
+
+@media print {
+    :root {
+        --thm-definition: #3c6089;
+        --thm-theorem: #99553f;
+        --thm-lemma: #32786b;
+        --thm-corollary: #8c642c;
+        --thm-example: #50734d;
+        --thm-convention: #637080;
+        --thm-remark: #6b6b68;
+        --thm-philosophy: #705c89;
+        --thm-bg: transparent;
+        --thm-philosophy-bg: transparent;
+    }
 }
