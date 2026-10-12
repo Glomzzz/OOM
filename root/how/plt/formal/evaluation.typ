@@ -1,8 +1,10 @@
 #import "/lib/formal.typ": *
 
-#show: formal-page.with(title: [求值：用推导规则定义运行])
+#show: formal-page.with(title: [求值：用推理规则定义运行])
 
-上一节回答的是项*是什么*（What）：它由哪些符号、按什么结构搭成。这一节回答项*怎么运行*（How）：一个项会一步一步变成什么。前者叫*语法*（syntax），后者叫*语义*（semantics）。这里给出语义的方式是直接描述程序运行的每一步，称为*操作语义*（operational semantics）。#refer("example/incomplete-specifications") 里“先算哪边”那类问题，在这一节都要有确定的答案。
+上一节定义词项的*语法*（syntax）：它由哪些构造子、按什么结构组成。这一节定义词项的*语义*（semantics），也就是在给定模型中的意义。*程序语言语义学*（programming language semantics）研究怎样赋予程序精确的数学意义。
+
+本文采用*操作语义*（operational semantics）：通过执行状态及其执行关系描述程序行为。具体采用的是*小步操作语义*（small-step operational semantics），每次转移描述一个执行步骤。在这门语言中，执行状态就是词项，不需要另加存储或环境。#refer("example/incomplete-specifications") 里“先算哪边”的问题，将由转移规则规定；规则是否保证下一步唯一，还须另行证明。
 
 #statement("remark/being-and-becoming")
 
@@ -18,25 +20,29 @@
 - $"succ" "true"$ 是项，但不是值：$"succ"$ 后面必须是数值，而 $"true"$ 不是；
 - $"pred" 0$ 也不是值，值的定义里根本没有 $"pred"$。直观上，它还能再算。
 
-= 推导规则怎么读
+= 推理规则怎么读
 
-先说“归约”这个词。*归约*（reduction）指把一个项改写成另一个更接近结果的项，就像中学代数里把 $(1 + 2) times 3$ 改写成 $3 times 3$，再改写成 $9$。每次改写只动一处，叫*一步归约*（one-step reduction）；连续改写若干次，叫*多步归约*（multi-step reduction）。程序“运行”，在这里就是指一步接一步地归约，直到不能再归约为止。
+*归约*（reduction）是依据规则把一个词项改写为另一个词项，例如把 $(1 + 2) times 3$ 改写为 $3 times 3$，再改写为 $9$。一次改写称为*一步归约*（one-step reduction），连续零次或有限多次改写称为*多步归约*（multi-step reduction）。归约不天然保证词项更小或更接近终点；本文的终止性要由大小严格下降另行证明。
+
+在本模型中，$stp$ 同时是词项之间的*转移关系*（transition relation）：$t stp t'$ 描述从状态 $t$ 到状态 $t'$ 的一次*转移*（transition）。程序执行就是依次进行这样的转移。
 
 #statement("convention/reading-the-reduction-arrow")
 
-数学上，$stp$ 是一个*二元关系*（binary relation）：它是由一些 $(t, t')$ 对组成的集合，$t stp t'$ 就是 $(t, t') in #h(0.2em) stp$ 的简写。我们用*推导规则*（inference rule）来定义它。一条规则长这样：
+数学上，$stp$ 是一个*二元关系*（binary relation）：它是由一些 $(t, t')$ 对组成的集合，$t stp t'$ 就是 $(t, t') in #h(0.2em) stp$ 的简写。我们用*推理规则*（inference rule）来定义它。一条规则长这样：
 
 $ frac("前提"_1 quad dots.c quad "前提"_n, "结论") $
 
-读作：如果横线上的前提（premise）全都成立，那么横线下的结论（conclusion）成立。没有前提的规则叫*公理*（axiom），它的结论无条件成立。
+读作：如果横线上的*前提*（premise）全都成立，那么横线下的*结论*（conclusion）成立。没有前提的规则称为*公理*（axiom）；它是推理规则的特例，不需要先证明其他判断就能使用。
 
 横线右边可以标上规则的名字来方便引用。
 
 #statement("convention/metavariables")
 
+元变量的取值范围也是规则的一部分。例如 $#nv$ 只能表示数值，不能用任意词项代换。文献还常把额外限制显式写成*附加条件*（side condition），放在横线旁或前提中；它们必须满足，才能应用规则，不能靠读者自行补全。
+
 #statement("definition/one-step-reduction")
 
-这里的“最小”和 #refer("definition/set-of-terms") 里的“最小”是同一个意思：$t stp t'$ 成立，*当且仅当*能用这十条规则的实例搭出一棵以它为根的有限树。这棵树叫*推导*（derivation）。
+这里的“最小”和 #refer("definition/set-of-terms") 里的“最小”是同一个意思：$t stp t'$ 成立，*当且仅当*能用这十条规则的实例搭出一棵以它为根的有限树。这棵树称为*推导树*（derivation tree），也称一棵*推导*（derivation）。推理规则是通用的规则模式，推导则是把规则实例组合起来、证明一个具体判断的有限结构。
 
 规则没有提到的情形，例如 $"succ" "true"$ 该归约到哪里，那就是没有定义。“没有定义”在这里有精确的含义：十条规则里没有一条的结论能匹配 $"succ" "true" stp dots$（E-Succ 的结论的形状对得上，但它的前提却要求 $"true"$ 能归约，而没有规则能做到），所以不存在任何 $t'$ 使 $"succ" "true" stp t'$。
 
@@ -56,22 +62,24 @@ $ frac("前提"_1 quad dots.c quad "前提"_n, "结论") $
 
 #statement("example/reduction-derivation")
 
-= 计算规则与同余规则
+= 归约规则与结构规则
 
-来讲讲上面那十条规则，它们分成两类，作用完全不同。
+这十条规则分成两类：一类规定基本运算怎样执行，另一类规定基本步骤可发生在哪些位置。
 
-*计算规则*（computation rule）真正改写项：E-IfTrue、E-IfFalse、E-PredZero、E-PredSucc、E-IsZeroZero、E-IsZeroSucc。它们都没有关于 $stp$ 的前提，左边是一个具体的“可以计算”的形状，右边是算完的结果。例如：
+*归约规则*（reduction rule），也称*收缩规则*（contraction rule），直接规定基本运算的结果：E-IfTrue、E-IfFalse、E-PredZero、E-PredSucc、E-IsZeroZero、E-IsZeroSucc。这类规则也常称为计算规则（computation rule）。能直接匹配这类规则的词项，称为*可归约表达式*（reducible expression），简称*可归约项*（redex）。这里的六条基本归约规则没有关于 $stp$ 的前提；这个特征不是所有语言的归约规则都必须满足的。例如：
 
 - $"if" "true" "then" "succ" 0 "else" 0 stp "succ" 0$（E-IfTrue，取 $t_2 = "succ" 0$，$t_3 = 0$）；
 - $"pred" ("succ" ("succ" 0)) stp "succ" 0$（E-PredSucc，取 $#nv = "succ" 0$）；
 - $"iszero" ("succ" 0) stp "false"$（E-IsZeroSucc，取 $#nv = 0$）。
 
-*同余规则*（congruence rule）不执行基本运算，而是负责*找位置*、把子项的归约带到整体：E-If、E-Succ、E-Pred、E-IsZero。它们的前提是“某个子项能归约”，结论是“整个项在那个位置归约”。“同余”这个名字的意思是：关系 $stp$ 和项的构造子（constructor）相容，子项归约了，包着它的项也跟着归约。（这和数论里的同余没有关系。）例如：
+*结构规则*（structural rule），也称*同余规则*（congruence rule），把子项的归约提升到*指定的求值位置*：E-If 允许归约条件，E-Succ、E-Pred、E-IsZero 允许归约各自的参数。前提说那个位置的子项能归约，结论说整体能在该位置转移一步。这不允许改写任意子项，例如不能直接在尚未选中的 $"if"$ 分支里计算。例如：
 
 - 因为 $"pred" 0 stp 0$（E-PredZero），所以 $"succ" ("pred" 0) stp "succ" 0$（E-Succ）；
 - 因为 $"iszero" 0 stp "true"$（E-IsZeroZero），所以 $"if" ("iszero" 0) "then" 0 "else" "succ" 0 stp "if" "true" "then" 0 "else" "succ" 0$（E-If）。
 
-每一步归约的推导都是同样的结构：底下若干次同余规则，一路往里找到要算的地方，最顶上恰好一次计算规则，在那里真正改写。#refer("example/reduction-derivation") 就是两次同余（E-Pred、E-If）加一次计算（E-IsZeroZero）。
+这里的“同余”强调归约与特定构造相容，不表示一步归约是同余等价关系：$stp$ 有方向，而且只对规则许可的位置封闭。把许可位置另写成带一个空位的*求值语境*（evaluation context），再规定怎样在空位处执行基本归约，就得到*语境语义*（contextual semantics，也称“归约语义”，reduction semantics）的写法。参见 Hutton 译文第 6 节，以及 #link("https://home.ttic.edu/~dreyer/course/papers/harper-tspl.pdf")[Harper §1.3.1]。
+
+这套小步语义中，每棵一步推导都由零次或多次结构规则与顶端的一次基本归约规则组成。从结论向上读，结构规则定位正在求值的子项，基本归约规则执行其中的运算。#refer("example/reduction-derivation") 就是两次结构规则（E-Pred、E-If）加一次基本归约（E-IsZeroZero）。
 
 #fig({
   import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
@@ -99,17 +107,17 @@ $ frac("前提"_1 quad dots.c quad "前提"_n, "结论") $
   )
 })
 
-上图中`pred`和`if`节点是同余规则经过的路径，`iszero 0`节点是计算规则改写的位置，虚线连着的分支不参与这一步。
+上图中 `pred` 和 `if` 节点是结构规则经过的路径，`iszero 0` 是基本归约发生的位置；虚线连接的分支不参与这一步。
 
 规则的细节里藏着设计决定，读的时候要留意：
 
 - E-If 只允许在*条件*里归约，没有规则允许在分支里归约。所以先求条件，再选择一个分支，不会提前计算未选中的分支。下文 #refer("note/evaluation-strategies-reduction-strategies-and-confluence") 会把这样的顺序规定称为求值策略，并与一般的归约策略区分。
-- 计算规则要求正在检查的操作数*已经是合适的值*，但不要求未选中的分支是值。例如 E-PredSucc 的左边是 $"pred" ("succ" #nv)$，只有 $"succ"$ 里面已经是数值时才能用；否则就只能先用同余规则把里面算完。这保证了“先算里面，再算外面”的顺序，下面的 #refer("note/numeric-value-restriction-in-predecessor-reduction") 会说明为什么这一点很重要。
+- 基本归约规则要求正在检查的操作数*已经是合适的值*，但不要求未选中的分支是值。例如 E-PredSucc 的左边是 $"pred" ("succ" #nv)$，只有 $"succ"$ 里面已经是数值时才能用；否则就只能先用结构规则把里面算完。这保证了“先算里面，再算外面”的顺序，下面的 #refer("note/numeric-value-restriction-in-predecessor-reduction") 会说明为什么这一点很重要。
 
 #statement("remark/meaning-as-use")
 
 #html.nav(class: "chapter-nav", aria-label: "文章导航")[
   #cite("/how/plt/formal/syntax.typ")[← 语法：BNF、最小集合与结构归纳]
   #cite("/how/plt/formal/index.typ")[回到形式化入门]
-  #cite("/how/plt/formal/determinism.typ")[确定性：从推导归纳到求值器 →]
+  #cite("/how/plt/formal/determinism.typ")[确定性：从规则归纳到求值器 →]
 ]

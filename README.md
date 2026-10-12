@@ -24,12 +24,24 @@ The font directories include their OFL licenses.
 ## Formalization series
 
 The entrypoint is `root/how/plt/formal/index.typ`. It embeds ten articles and
-75 independently linkable statements, using typsite's native numbering and
+80 independently linkable statements, using typsite's native numbering and
 taxon-based colours. Statements are shared site-wide under `root/statements/`,
 classified by kind with full lowercase hyphenated filenames. Each file owns
 its title, metadata, statement and proof; no separate catalogue is required.
 References show the kind and title, not a local number.
 See [statement authoring](root/statements/README.md).
+
+MathML is used where supported. SVG equation fallbacks keep their layout and
+include static text alternatives for assistive technology and text extraction.
+The fixed 𝑓 button beside the top-right sidebar control toggles the fallbacks
+to selectable text, with “显示公式文本” / “显示公式排版” tooltips. Rule and derivation
+alternatives retain their premises, conclusions and rule names. The helper is
+`root/lib/math-accessibility.typ`; its assertions can be run with:
+
+```bash
+typst compile --features html --root root root/lib/tests/math-accessibility.typ /tmp/math-accessibility.pdf
+cargo test --release --manifest-path code/plt-arith/Cargo.toml
+```
 
 ## Github Workflows
 

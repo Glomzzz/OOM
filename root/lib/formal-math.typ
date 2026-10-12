@@ -1,15 +1,25 @@
 #import "lib.typ": html, auto-filter, inline
+#import "math-accessibility.typ": accessible-math, math-text
+
+// 花体在此区分项集合与类型变量；文本替代也保留这一区别。
+#let cal(body) = math.equation(alt: "花体(" + math-text(body) + ")", math.cal(body))
 
 // ---------- 记号 ----------
-// 推导规则：rule(名字, 前提.., 结论)
+// 推理规则：rule(名字, 前提.., 结论)
 #let rule(name, ..args) = {
   let ps = args.pos()
   let c = ps.pop()
   let top = if ps.len() == 0 { $space$ } else { ps.join(h(1.6em)) }
-  $ frac(#top, #c) #h(0.3em) #text(size: 0.8em, baseline: 0.45em, smallcaps(name)) $
+  let body = $ frac(#top, #c) #h(0.3em) #text(size: 0.8em, baseline: 0.45em, smallcaps(name)) $
+  let premises = if ps.len() == 0 { "无" } else { ps.map(math-text).join("；") }
+  math.equation(
+    block: body.block,
+    alt: name + "：前提 " + premises + "；结论 " + math-text(c),
+    body.body,
+  )
 }
 #let dmath(eq, scale: 150%) = context {
-  if target() == "html" { auto-filter(inline(scale: scale, eq)) } else { eq }
+  if target() == "html" { accessible-math(eq, auto-filter(inline(scale: scale, eq))) } else { eq }
 }
 #let rules(..rs) = context {
   if target() != "html" {
@@ -33,7 +43,12 @@
   let ps = args.pos()
   let c = ps.pop()
   let top = if ps.len() == 0 { $space$ } else { ps.map(math.display).join(h(2em)) }
-  $display(frac(#top, display(#c))) #h(0.3em) #text(size: 0.8em, smallcaps(name))$
+  let body = $display(frac(#top, display(#c))) #h(0.3em) #text(size: 0.8em, smallcaps(name))$
+  let premises = if ps.len() == 0 { "无" } else { ps.map(math-text).join("；") }
+  math.equation(
+    alt: name + "：前提 [" + premises + "]；结论 " + math-text(c),
+    body.body,
+  )
 }
 #let stp = sym.arrow.r.long // ⟶ 一步归约
 #let stps = $attach(stp, tr: *)$ // ⟶* 多步归约

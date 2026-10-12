@@ -11,4 +11,8 @@
 
 #show: statement-page.with("note/turning-rules-into-algorithms", entry)
 
-如果某条规则的前提里出现了一个结论里看不到、子项也算不出的类型，照着规则写函数就走不通，函数不知道该填什么。函数类型的规则就是典型例子：给 $lambda x. t$（记号见 #refer("note/evaluation-strategies-reduction-strategies-and-confluence")）定型时，参数 $x$ 的类型在项里找不到。那时规则仍然定义了一个清清楚楚的关系，但从关系到算法的那一步，需要额外的设计和额外的证明。#refer("definition/types-and-typing-judgments") 的布尔值／自然数语言足够小，避开了这个问题；但区分“规则”和“算法”、并分别证明可靠与完备的习惯，在更大的语言里同样适用。
+类型判断首先由逻辑规则规定，不能仅凭规则写成了横线上下的形式，就断言存在可判定的检查算法。把判断用作算法规范时，须说明哪些量是输入、哪些量是输出，以及输出怎样求得。
+
+例如，对没有参数类型注解的 $lambda x. t$（记号见 #refer("note/evaluation-strategies-reduction-strategies-and-confluence")），若想仅从词项推理其类型，参数 $x$ 的类型不能直接从语法中读取；照抄函数抽象规则为递归分支，就留下了“该填哪个类型”的问题。这不说明这个系统一定不可判定，而是需要类型注解、约束求解或从期望类型传入信息等额外设计。带注解的 $lambda x : T. t$ 则已经在词项中给出了参数类型。
+
+#refer("definition/types-and-typing-judgments") 的布尔值／自然数语言避开了这一问题：候选规则由语法形状确定，所需类型可由子项算出。但其算法仍要证明终止性，以及相对规则的可靠性和完备性；精确定义一个关系与给出判定它的程序，是两项不同的工作。

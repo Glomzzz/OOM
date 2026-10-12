@@ -1,0 +1,82 @@
+/* Keep the SVG appearance, but expose its static text alternative to AT. */
+.math-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: pre-wrap;
+    border: 0;
+}
+
+.math-text-toggle {
+    position: fixed;
+    top: 0.75rem;
+    right: 3.45rem; /* 2.2rem sidebar button + 0.5rem gap + 0.75rem inset */
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--hover-bar-color);
+    border-radius: var(--radius);
+    background: var(--background-color);
+    color: var(--text-color);
+    font-family: "Libertinus Serif", "Cambria Math", serif;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+#grid-wrapper[sidebar="false"] > .math-text-toggle {
+    right: 0.75rem;
+}
+
+/* Keep long breadcrumb titles clear of the two fixed controls on phones. */
+body:has(#grid-wrapper > .math-text-toggle) > .header {
+    padding-inline-end: 5.65rem;
+}
+
+@media (hover: hover) {
+    .math-text-toggle:hover {
+        background-color: var(--hover-color-link);
+    }
+}
+
+.math-text-toggle:focus-visible {
+    outline: 2px solid var(--target-color);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .math-text-toggle {
+        transition: none;
+    }
+}
+
+@media print {
+    .math-text-toggle {
+        display: none;
+    }
+}
+
+.math-text-visible .math-fallback > .math-visual {
+    display: none;
+}
+
+.math-text-visible .math-fallback > .math-text {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: pre-wrap;
+    user-select: text;
+}

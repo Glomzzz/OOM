@@ -22,6 +22,6 @@
   scale: 115%,
 )
 
-*第二步。*现在的项是 $"succ" "false"$。仍然只有 E-Succ 可能适用，它要求 $"false" stp t_1'$ 对某个 $t_1'$ 成立。但 $"false"$ 是值，由 #refer("lemma/values-do-not-reduce") 不能归约，于是 E-Succ 的前提搭不上，没有任何规则可用：$"succ" "false"$ 是范式。它又不是值（$"succ"$ 后面必须是数值），所以它受阻了。
+*第二步。*现在的项是 $"succ" "false"$。仍然只有 E-Succ 可能适用，它要求 $"false" stp t'_1$ 对某个 $t'_1$ 成立。但 $"false"$ 是值，由 #refer("lemma/values-do-not-reduce") 不能归约，于是 E-Succ 的前提搭不上，没有任何规则可用：$"succ" "false"$ 是范式。它又不是值（$"succ"$ 后面必须是数值），所以它受阻了。
 
 第一步完全合法，问题出在第二步。所以一个项“现在还能归约”并不说明它“永远不会出错”。

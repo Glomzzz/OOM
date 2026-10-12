@@ -11,4 +11,4 @@
 
 #show: statement-page.with("convention/metavariables", entry)
 
-在 #refer("definition/one-step-reduction") 与 #refer("definition/types-and-typing-judgments") 的规则里，$t_1, t_2, t_1'$ 等字母是*元变量*（metavariable）：它们是元语言里的变量，可以代换成 #refer("definition/set-of-terms") 中的任意项；$#nv$ 只能代换成 #refer("definition/values-and-numeric-values") 中的数值。同一条规则里同一个字母必须代换成同一个东西。一条规则因此代表无穷多条*实例*（instance）。
+在 #refer("definition/one-step-reduction") 与 #refer("definition/types-and-typing-judgments") 的规则里，$t_1, t_2, t'_1$ 等字母是*元变量*（metavariable）：它们属于元语言，可以代换为 #refer("definition/set-of-terms") 中的任意词项，并不是对象语言中可执行的变量。$v$ 只能代换为值，$#nv$ 只能代换为数值（#refer("definition/values-and-numeric-values")），$T$ 则只能代换为类型。同一条规则中同一个元变量的所有出现必须使用相同的代换。一条推理规则因此表示许多具体*实例*（instance），而不是一条只适用于这些字母的陈述。

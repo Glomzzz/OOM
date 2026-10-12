@@ -11,7 +11,7 @@
 
 #show: statement-page.with("theorem/type-checking-algorithm-soundness", entry)
 
-取 #cite("/how/plt/formal/rules-and-algorithms.typ")[Rust 类型检查算法 `type_of`]，类型关系采用 #refer("definition/types-and-typing-judgments")。Rust 的 `Bool`、`Nat` 分别对应 $tB$、$tN$。对任意项 $t$ 和类型 $T$：若 `type_of(t) = Some(T)`，则 $t : T$。
+取 #cite("/how/plt/formal/rules-and-algorithms.typ")[Rust 类型检查算法 `type_of`]，类型关系采用 #refer("definition/types-and-typing-judgments")。实现论证采用 #refer("note/unexamined-assumptions") 的资源与基础操作假设；Rust 的 `Bool`、`Nat` 分别对应 $tB$、$tN$。对任意项 $t$ 和类型 $T$：若 `type_of(t) = Some(T)`，则 $t : T$。
 
 #proof[
   对 $t$ 结构归纳（#refer("convention/writing-inductive-proofs")）。`type_of` 本身就是按项的形状分支的，所以每个情形对应一个分支。

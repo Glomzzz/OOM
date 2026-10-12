@@ -1,6 +1,7 @@
 // Site lib, feel free to customize your own site
 #import "html.typ" as html
 #import "@local/typsite:0.1.0" : to-str
+#import "math-accessibility.typ": accessible-math
 
 
 #let link-local-style(content) = {
@@ -30,12 +31,12 @@
   if block {
     html.div(class: "math-container")[
         #html.span(class: "math-block")[
-            #auto-filter(inline(scale: scale, body))
+            #accessible-math(body, auto-filter(inline(scale: scale, body)))
         ]
     ]
   } else {
       html.span(class: "math-inline")[
-          #auto-filter(inline(scale: scale + 70%, body))
+          #accessible-math(body, auto-filter(inline(scale: scale + 70%, body)))
       ]
   }
 }

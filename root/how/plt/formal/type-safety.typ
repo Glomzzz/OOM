@@ -4,7 +4,9 @@
 
 = 先把命题写下来
 
-“良类型的程序不会出错”这句话，#wiki("罗宾·米尔纳")[米尔纳（Milner）]在 1978 年说成 _well-typed programs cannot go wrong_。现在终于可以把它写成一个精确的命题了。“出错”在这门语言里的意思就是“受阻”（#refer("definition/normal-forms-and-stuck-terms")）。
+“良类型的程序不会出错”这句话，#wiki("罗宾·米尔纳")[米尔纳（Milner）]在 1978 年说成 _well-typed programs cannot go wrong_。要把它写成精确命题，必须先规定“出错”是什么：本文只指归约到*受阻*（stuck）状态，即非值且没有后继的词项（#refer("definition/normal-forms-and-stuck-terms")）。这不是对异常、资源耗尽或业务逻辑错误的笼统保证。
+
+要证明的*类型安全性*（type safety）表达了类型规则与执行规则之间的协调。文献常把这类保证称为*类型健全性*（type soundness）；本文在这一“不受阻”的意义下使用它。它与检查器相对类型规则的“算法可靠性”不是同一个命题。
 
 #statement("definition/type-safety")
 
@@ -23,7 +25,7 @@
 
 #statement("lemma/canonical-forms")
 
-这条引理是静态和动态之间的一座桥：左边是*类型*的信息（不运行就知道的），右边是*形状*的信息（运行时真正看到的）。进展的证明需要靠它把“条件是 $tB$ 类型的值”变成“条件确实是 $"true"$ 或 $"false"$”，才能选择 E-IfTrue 或 E-IfFalse。若随意加上 $0 : tB$ 而保持求值规则不变，$"if" 0 "then" "true" "else" "false"$ 就会被定型却受阻：静态分类不再保证运算要求的运行时形状。动态语言在运算时做的种类检查，正是在现场检查这类形状条件。
+这条引理把静态信息和动态信息连了起来。它的前提 $v : tB$ 是*类型*信息，类型检查器不运行程序就能在编译期得出；它的结论“$v$ 是 $"true"$ 或 $"false"$”是*形状*信息，说的是这个值具体长什么样，而求值规则只认形状。进展的证明正是靠它，从“条件是 $tB$ 类型的值”推出“条件确实是 $"true"$ 或 $"false"$”，才能选择 E-IfTrue 或 E-IfFalse。反过来，若随意加一条定型规则 $0 : tB$，却不改求值规则，$"if" 0 "then" "true" "else" "false"$ 就能通过类型检查，虽然没有任何求值规则能处理它，所以会受阻：类型说它是布尔值，形状却不是已有的求值规则要的 $"true"$ 或 $"false"$。动态语言在运行时做的种类检查，正是在实际运行到时才检查这类形状条件。
 
 #statement("note/static-and-dynamic-typing")
 
@@ -52,6 +54,10 @@
 下面的推论把“当前不受阻”和“下一项仍有类型”接成对*任意有限运行前缀*的保证。只证明进展而不证明保型，保证可能一步后失效；只证明保型而不证明进展，则一个起初就受阻的良类型项没有任何一步可走，保型的条件从未成立，不能排除它。这个推论保证的是本文定义的“不受阻”，不保证程序一定终止，也不保证业务逻辑正确，例如得到 $"false"$ 是否符合程序员的意图。
 
 #statement("corollary/type-safety")
+
+类型安全本身不保证终止，但 #refer("lemma/reduction-decreases-size") 已经另外证明了本文每条归约链都有限。把它与进展、保型和确定性接起来，还能得到更完整的求值结论：每个良类型项都会到达唯一的同类型值。
+
+#statement("corollary/well-typed-terms-evaluate-to-unique-values")
 
 #statement("remark/convention-and-necessity")
 

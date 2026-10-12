@@ -14,7 +14,7 @@
 采用 #refer("definition/types-and-typing-judgments") 的类型关系、#refer("definition/values-and-numeric-values") 的值定义，以及 #refer("definition/one-step-reduction") 的归约关系。若 $t : T$，则 $t$ 是值，或存在 $t'$ 使 $t stp t'$。
 
 #proof[
-  对 $t : T$ 的推导归纳（类型推导版本的 #refer("theorem/induction-on-derivations")），按最后一步的规则分情形。
+  对 $t : T$ 作规则归纳（类型推导版本的 #refer("theorem/induction-on-derivations")），按最后一步的规则分情形。
 
   - *T-True、T-False、T-Zero*：$t$ 是值。
   - *T-If*：$t = "if" t_1 "then" t_2 "else" t_3$，前提里有 $t_1 : tB$。对 $t_1$ 用 #ih：

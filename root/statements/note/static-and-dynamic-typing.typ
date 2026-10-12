@@ -20,6 +20,6 @@
 
 对这门小语言的运算，类型规则、#refer("lemma/canonical-forms") 与 #refer("theorem/preservation") 合起来保证：参数若被要求为 $tN$，求值为值时就一定是数值，所以不必再检查它是否为布尔值。这不等于真实静态类型语言可以省掉所有运行时检查；例如 Kotlin 仍会抛出数组越界异常，Rust 的数组索引也可能需要边界检查。两者的取舍是：静态检查更早排除它所覆盖的错误，但会拒绝一些实际运行不会出错的程序（#refer("note/conservative-type-systems")）；动态检查更灵活，但错误通常要等到运行到那一行才暴露。
 
-另外，“静态 / 动态”和“强 / 弱”是两个不同的维度。C 是静态类型，但允许随意强制转换指针，类型系统不可靠；Python 是动态类型，但不会把字符串当整数用。#refer("corollary/type-safety") 证明的“类型安全”，指的是这套静态类型系统对受阻错误的*可靠性*，不是由“强／弱”这一称呼作出的保证。
+静态检查发生在运行前，不等于它能排除所有运行时错误。C 使用静态类型检查，但这种检查不能排除越界访问、通过悬垂指针访问对象等未定义行为（参见 #link("https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf")[C11 草案 N1570 §6.2.4、§6.5.6]）。#refer("corollary/type-safety") 证明的“类型安全”，表达的是这套类型规则相对于操作语义的*类型健全性*，需要由具体规则及证明支撑，不靠未说明判准的“强／弱”标签。
 
 对这个话题感兴趣的可以看看帝球的#link("https://github.com/FrankHB/pl-docs/blob/master/zh-CN/typing-vs-typechecking.md#%E9%9D%99%E6%80%81%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B")[类型 vs. 类型检查]

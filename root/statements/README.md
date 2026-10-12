@@ -94,5 +94,5 @@ PDF include 同一份条目正文，查询已嵌入目标的元数据；独立 P
 
 共享接口在 [`../lib/statements.typ`](../lib/statements.typ)。
 形式化入门的十篇讲解文章仍在 [`../how/plt/formal/`](../how/plt/formal/)。
-迁移后的条目包含原有 75 个正文条目，以及序章的 8 个环境示范。
+现有条目包含 80 个正文条目，以及序章的 8 个环境示范。
 旧 `/how/plt/formal/statements/fm-*` 独立网址不再保留跳转页。

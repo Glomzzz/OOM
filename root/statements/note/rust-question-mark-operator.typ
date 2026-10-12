@@ -41,4 +41,4 @@ assert_eq!(first_char_upper("rust"), Some('R'));
 assert_eq!(first_char_upper(""), None);
 ```
 
-对照 #refer("definition/one-step-reduction") 中的同余规则：E-Succ 说“若 $t_1 stp t_1'$，则 $"succ" t_1 stp "succ" t_1'$”。`step(t1)?` 先去找 $t_1'$，找到了就拿来搭结论；找不到（前提不成立），结论就推不出来，整个函数返回 `None`。这正好是“子项不能归约，整个项也不能沿这条规则归约”。#cite("/how/plt/formal/rules-and-algorithms.typ")[类型检查器 `type_of`] 里的 `type_of(t1)?` 也是同样的意思：按照 #refer("definition/types-and-typing-judgments") 的规则，子项没有类型，就无法满足相应构造的定型前提，检查器返回 `None`。
+对照 #refer("definition/one-step-reduction") 中的同余规则：E-Succ 说“若 $t_1 stp t'_1$，则 $"succ" t_1 stp "succ" t'_1$”。`step(t1)?` 先去找 $t'_1$，找到了就拿来搭结论；找不到（前提不成立），结论就推不出来，整个函数返回 `None`。这正好是“子项不能归约，整个项也不能沿这条规则归约”。#cite("/how/plt/formal/rules-and-algorithms.typ")[类型检查器 `type_of`] 里的 `type_of(t1)?` 也是同样的意思：按照 #refer("definition/types-and-typing-judgments") 的规则，子项没有类型，就无法满足相应构造的定型前提，检查器返回 `None`。

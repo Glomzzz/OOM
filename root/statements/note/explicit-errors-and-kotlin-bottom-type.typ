@@ -42,8 +42,8 @@ fun requireNat(n: Int): Int =
 // 这里借用 Kotlin 的 Int 演示错误处理，不把机器整数当作无界自然数。
 ```
 
-`requireNat` 的 else 分支为什么能放在需要 `Int` 的位置？`fail(...)` 的类型是 `Nothing`，表示它*不会正常返回一个值*。Kotlin 的 #link("https://kotlinlang.org/spec/type-system.html#kotlin.nothing-typesystem")[类型系统规格]把 `Nothing` 定义成*底类型*（bottom type），通常写作 $bot$、读作 bottom。它是任何类型的*子类型*（subtype），即 $bot <: T$ 对任意 $T$ 成立。这里 $S <: T$ 的意思是：$S$ 类型的表达式可以放进要求 $T$ 类型的上下文。因此不返回的失败分支可以和返回 `Int` 的成功分支放在同一个 `if` 里。
+`requireNat` 的 else 分支为什么能放在需要 `Int` 的位置？`fail(...)` 的类型是 `Nothing`，表示它*不会正常返回一个值*。Kotlin 的 #link("https://kotlinlang.org/spec/type-system.html#kotlin.nothing-typesystem")[类型系统规格]把 `Nothing` 定义成*底类型*（bottom type），通常写作 $bot$、读作 bottom。它是任何类型的*子类型*（subtype），即 $bot <: T$ 对任意 $T$ 成立。这里 $S <: T$ 表示*子类型关系*（subtyping relation），即 $S$ 是 $T$ 的子类型；相关类型规则允许 $S$ 类型的表达式用在要求 $T$ 类型的位置。因此不返回的失败分支可以和返回 `Int` 的成功分支放在同一个 `if` 里。
 
-必须区分三个对象：$"wrong"$ 是对象语言里的错误*项*，`IllegalArgumentException` 是 Kotlin 的异常*对象*，$bot$ 是描述表达式不会正常产出值的*类型*。异常对象本身不是 `Nothing`；`Nothing` 没有正常的值，也不是 `null`（`Nothing?` 是另一回事）。抛异常的表达式可以具有底类型，永远循环的表达式也可以不返回，所以不能把“错误”与 $bot$ 当作同义词。
+必须区分三个对象：$"wrong"$ 是对象语言里的错误*词项*，`IllegalArgumentException` 是 Kotlin 的异常*对象*，$bot$ 是描述表达式不会正常产出值的*类型*。异常对象本身不是 `Nothing`；`Nothing` 没有正常的值，也不是 `null`（`Nothing?` 是另一回事）。抛异常的表达式可以具有底类型，永远循环的表达式也可以不返回，所以不能把“错误”与 $bot$ 当作同义词。
 
 仅仅补上运行时错误规则，不会自动得到这样的子类型系统。若把显式异常加入 #refer("definition/types-and-typing-judgments") 的定型系统，也必须写明异常如何定型，并相应重述 #refer("theorem/progress") 与 #refer("theorem/preservation")；不能直接套用未扩展语言的证明就声称“良类型程序永不抛异常”。#refer("corollary/type-safety") 采用的则是未扩展语言：不加入错误项，让类型规则排除受阻。

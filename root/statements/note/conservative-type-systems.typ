@@ -11,4 +11,8 @@
 
 #show: statement-page.with("note/conservative-type-systems", entry)
 
-按 #refer("definition/one-step-reduction") 的 E-IfTrue，$"if" "true" "then" 0 "else" "false"$ 运行一步就得到值 $0$，不会受阻；但 #refer("definition/types-and-typing-judgments") 无法给它类型，因为 T-If 要求两个分支类型相同。这不是 bug。类型系统不运行程序，只看形状，它只能做*近似*。#refer("corollary/type-safety") 只保证一个方向：良类型的程序不受阻；它没有保证“不受阻的程序都良类型”。
+按 #refer("definition/one-step-reduction") 的 E-IfTrue，$"if" "true" "then" 0 "else" "false"$ 一步就得到值 $0$，不会受阻；但 #refer("definition/types-and-typing-judgments") 无法给它类型，因为 T-If 要求两个分支类型相同。*这套类型规则*相对于“求值不会受阻”是保守的：它拒绝了一些能够正常求值的项。#refer("corollary/type-safety") 只保证良类型的项不受阻，没有保证逆方向。
+
+这里的保守性不能仅由“不运行程序”推出。这门语言的每一步都使大小严格下降（#refer("lemma/reduction-decreases-size")），而 #refer("theorem/evaluator-faithfulness") 保证 `step` 恰好实现一步关系。因此，原则上可以反复归约任意输入，到达唯一范式后检查它是否为值，精确判定求值是否受阻；也可以把这一计算放在编译期。这个数学算法不会无限等待，但采用的是求值分析，不是原来的七条类型规则；实际 Rust 执行仍采用 #refer("note/unexamined-assumptions") 的资源与基础操作假设。
+
+选择当前的语法导向类型系统，是另一种取舍：它按子项的类型组合出整项的类型，不必先求出条件的真假；两个分支具有同一类型，也让分支选择后容易证明保型。它对原类型关系是否可靠、完备，与它是否接受所有能正常求值的项，是两个不同的问题。含有一般递归的语言会遇到另外的判定限制，不能拿那些限制代替对这门有限、终止语言的分析。

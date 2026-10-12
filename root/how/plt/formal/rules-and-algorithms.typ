@@ -4,13 +4,17 @@
 
 = 规则不是程序
 
-#refer("definition/types-and-typing-judgments") 定义的是一个*关系*：哪些 $(t, T)$ 有推导。它没有告诉我们*怎么找*推导。真正写出来的类型检查器是一个*函数*：
+#refer("definition/types-and-typing-judgments") 用逻辑规则定义*类型关系*：哪些 $(t, T)$ 可以推出类型判断。它并没有直接给出搜索推导的程序，更没有仅凭符号形式就保证类型检查*可判定*（decidable）。同一个关系，还可以按给定的是词项还是类型，提出不同的问题：
+
+#statement("note/type-what-so-many")
+
+可以把判断看作*算法规范*，分析其中的信息流：这里 $t$ 是输入，$T$ 是待求的输出。对本文的语法导向规则，每种词项构造都对应一个递归分支，因此可以写出 Rust 函数 `type_of`。它接收词项、返回类型，严格说是*类型推理*（type inference）接口；我们也沿用“类型检查器”这个广义称呼。若调用者同时给出期望类型 $T$，再判断 $t : T$ 是否成立，那才是狭义的*类型检查*（type checking）。
 
 ```rust
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Type { Bool, Nat }
 
-/// 类型检查算法：返回 Some(T) 表示“t 的类型是 T”，None 表示拒绝。
+/// 类型推理接口：返回 Some(T) 表示“t 的类型是 T”，None 表示拒绝。
 pub fn type_of(t: &Term) -> Option<Type> {
     use Term::*;
     match t {
@@ -36,23 +40,23 @@ pub fn type_of(t: &Term) -> Option<Type> {
 
 #statement("definition/soundness-and-completeness")
 
-可靠说算法*不乱接受*，完备说算法*不乱拒绝*。两者合起来，算法恰好*判定*了这个关系。
+*算法可靠性*（algorithm soundness）保证报告的类型判断都能由规则推出，*完备性*（completeness）保证规则认可的类型判断不会被遗漏。两者针对的是*算法与类型规则*的对应；再加上对所有输入的终止性，算法才恰好判定这个关系。下节先检查这项终止性前提。
 
 #statement("note/type-soundness-and-algorithm-soundness")
 
 = 证明
 
-先确认一个隐含前提：`type_of` 对每个输入都会返回，不会无限递归。它是结构递归（每次递归调用的参数都是 #refer("definition/immediate-and-proper-subterms") 中的直接子项），由 #refer("definition/size-and-depth") 后面那段讨论，这样的函数总会终止。
+先确认一个隐含前提：把 `type_of` 看作有限项上的数学算法时，它会终止。每次递归调用的参数都是 #refer("definition/immediate-and-proper-subterms") 中的直接子项，所以由 #refer("definition/size-and-depth") 后面关于结构递归的讨论，不会出现无限递归。对实际 Rust 实现，这个论证采用 #refer("note/unexamined-assumptions") 的资源与基础操作假设；它没有保证任意深的输入都不耗尽机器的栈或内存。
 
 首先证明可靠性，因为类型安全定理说的是“规则能推出类型的项”，不是“某个函数返回 `Some` 的项”。若检查器在 `If` 分支里忽略 else 分支，就可能接受 $"succ" ("if" "false" "then" 0 "else" "true")$；程序下一步变成受阻的 $"succ" "true"$。类型规则本身没有错，错的是算法冒称规则已接受它。下面的定理就是防止这种“假阳性”。
 
 #statement("theorem/type-checking-algorithm-soundness")
 
-可靠性还不够描述“忠实实现规则”：一个对所有输入都返回 `None` 的检查器也是可靠的，却连 $0$ 都不接受。完备性排除这种“假阴性”，保证规则认可的程序不会被实现漏掉。例如把 T-Pred 对应的代码分支误写成直接返回 `None`，不会放进坏程序，却会冤枉 $"pred" 0$ 这样的合法程序；下面这条定理能发现它。
+可靠性还不够保证“算法与规则一致”：一个对所有输入都返回 `None` 的检查器也是可靠的，却连 $0$ 都不接受。完备性排除这种“假阴性”，保证规则认可的程序不会被实现漏掉。例如把 T-Pred 对应的代码分支误写成直接返回 `None`，不会放进坏程序，却会冤枉 $"pred" 0$ 这样的合法程序；下面这条定理能发现它。
 
 #statement("theorem/type-checking-algorithm-completeness")
 
-两个证明各自只有几行，但方向不同、归纳的对象也不同：可靠性跟着*算法*走（对项归纳，因为算法按项递归），完备性跟着*推导*走（对推导归纳，因为前提给的是推导）。
+两个证明的方向不同，归纳对象也不同：可靠性跟着*算法*走，对输入词项作结构归纳；完备性跟着*类型推导*走，对规则作归纳。前者利用递归调用的结构，后者利用判断可推导时最后应用的规则。
 
 最后要把两个不同的保证接起来：算法符合类型规则，类型规则又与运行规则协调。少了第一段，错误检查器可能乱接受；少了第二段，类型系统可能认可运行时受阻的项。这个端到端结论才是使用者真正需要的“检查通过以后能相信什么”，也说明只证明某个局部函数正确不足以替整条链作保证。
 
@@ -65,6 +69,8 @@ pub fn type_of(t: &Term) -> Option<Type> {
 这一节的证明顺利，靠的是 #refer("lemma/typing-inversion") 依赖的那个性质：规则是语法导向的，而且每条规则前提里出现的类型，都能从子项算出来。T-If 里的 $T$ 由 $t_2$ 算出，然后*拿来比较* $t_3$，没有哪一步需要凭空猜一个类型。
 
 #statement("note/turning-rules-into-algorithms")
+
+更大的系统也可能显式划分信息流。*双向类型检查*（bidirectional typechecking）把通常的类型判断分成检查判断 $Gamma tack.r t ⇐ T$ 与推导判断 $Gamma tack.r t ⇒ T$：检查时 $T$ 是输入，推导时 $T$ 是输出；$Gamma$ 是共同的输入语境。这里的箭头标记类型信息的方向，不是词项的执行步骤。本文的 `type_of` 与练习中的 `check` 展示了两种接口，但尚未定义一套双向类型规则，不能只因同时有这两个函数就称它为双向类型系统。
 
 #statement("remark/syntax-semantics-proof-and-truth")
 
@@ -101,7 +107,7 @@ pub fn type_of(t: &Term) -> Option<Type> {
       }
       ```
 
-      这处遗漏本身不会破坏完备性：对原规则认可的项，条件确实为 `Bool`，修改前后的检查都会通过；对子项按推导归纳，仍得到正确的输出类型。但“好项仍被接受”不抵消“坏项也被接受”。
+      这处遗漏本身不会破坏完备性：对原规则认可的项，条件确实为 `Bool`，修改前后的检查都会通过；对子项的类型推导使用规则归纳，仍得到正确的输出类型。但“好项仍被接受”不抵消“坏项也被接受”。
     ],
   )[
     若 `type_of` 的 `If` 分支写成下面这样，其余分支不变，找出一个错误接受的项，指出漏了 T-If 的哪个前提，并修复代码。这个修改是否也必然破坏完备性？
@@ -153,7 +159,7 @@ pub fn type_of(t: &Term) -> Option<Type> {
       `type_of` 结构递归并终止，最后一次类型比较也终止，所以 `check` 终止。`check(true, Bool)` 为真，`check(true, Nat)` 为假，`check(pred 0, Nat)` 为真；没有类型的 $"succ" "true"$ 对两个期望类型都返回假。这只是原算法的接口包装，没有增加一种对象语言的判断或求值策略。
     ],
   )[
-    写出 `check(t, expected) -> bool`，使它当且仅当原规则能推出 $t : T$ 时返回真，其中 `expected` 对应 $T$。证明两个方向及终止性，给出成功、期望类型不符和项本身不良类型三个例子。
+    按 #refer("note/type-what-so-many") 的区分，把推理接口 `type_of` 包装成检查接口 `check(t, expected) -> bool`，使它当且仅当原规则能推出 $t : T$ 时返回真，其中 `expected` 对应 $T$。证明两个方向及终止性，给出成功、期望类型不符和项本身不良类型三个例子。
   ]
 
 ]
