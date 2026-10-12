@@ -69,7 +69,7 @@
     "iframe",
     attrs: (
       class: "am-embed__frame am-embed--dark",
-      src: url + "&theme=dark",
+      src: url + (if url.contains("?") { "&" } else { "?" }) + "theme=dark",
       allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
       sandbox: "allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation",
     ),
