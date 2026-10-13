@@ -101,6 +101,7 @@
   )
 }
 
+// 引用只显示条目标题，不带 taxon 或局部编号。
 // HTML 引用由 typsite 从目标页面元数据读取，不 import 目标正文，
 // 因此跨文章的前向／后向／相互引用不会导致循环 import。
 #let refer(key) = context {
@@ -111,11 +112,11 @@
     let found = query(label(key))
     if found.len() > 0 {
       let el = found.first()
-      link(el.location(), [#(el.value.taxon + ".") #el.value.title])
+      link(el.location(), el.value.title)
     } else {
       // 独立 PDF 未包含目标时，只取目标文件导出的 entry，不渲染正文。
       import slug as destination
-      [#(statement-kind(key) + ".") #destination.entry.title]
+      destination.entry.title
     }
   }
 }

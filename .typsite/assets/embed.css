@@ -184,11 +184,6 @@ article .page-root[data-taxon="Remark"] {
     margin-bottom: 0.2em;
 }
 
-.statement-ref .statement-ref-taxon {
-    color: var(--span-taxon-color);
-    font-weight: 600;
-}
-
 .embed:target,
 .page-root:target {
     outline: 2px solid var(--target-color);

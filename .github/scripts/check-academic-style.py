@@ -6,6 +6,7 @@ Checks static HTML, so taxon order and independent links cannot rely on JS.
 """
 from collections import Counter
 from dataclasses import dataclass, field
+from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
 import re
@@ -100,6 +101,16 @@ def destination(root, url):
     return root / path
 
 
+@cache
+def statement_title(page):
+    doc = Document(page.read_text(encoding="utf-8")).root
+    title = next(node for node in doc.walk() if node.tag == "h1")
+    return Element("h1", children=[
+        node for node in title.children
+        if not (isinstance(node, Element) and node.has_class("taxon"))
+    ]).text()
+
+
 def main():
     root = Path(sys.argv[1] if len(sys.argv) > 1 else "publish").resolve()
     pages = sorted(root.rglob("*.html"))
@@ -142,11 +153,11 @@ def main():
         for node in nodes:
             if node.has_class("statement-ref"):
                 link = child(node, "a")
-                prefix = child(link, "span")
-                check(prefix.text() in {name + "." for name in KINDS.values()},
-                      f"{page}: citation should contain an English kind, not a local number")
                 url = link.attrs.get("href") or ""
-                check(destination(root, url).is_file(), f"{page}: broken no-JS statement link {url}")
+                target = destination(root, url)
+                check(target.is_file(), f"{page}: broken no-JS statement link {url}")
+                check(link.text() == statement_title(target),
+                      f"{page}: citation should show only the target title, without a taxon or local number")
                 counts["references"] += 1
             if node.has_class("proof-head"):
                 check(node.text() == "Proof." or node.text().startswith("Proof ("),

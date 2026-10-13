@@ -33,8 +33,8 @@ drawer, legacy anchors and the formula-text toggle are preserved.
 
 Environment names are English (`Definition`, `Theorem`, `Lemma`, `Corollary`,
 `Example`, `Convention`, `Note`, `Remark`). Embed headers read
-`Theorem 2.1. 标题`: taxon precedes the native heading number. Citations read
-`Theorem. 标题`, without a context-dependent number. Proofs start with
+`Theorem 2.1. 标题`: taxon precedes the native heading number. Citations show
+only the title, without a taxon prefix or context-dependent number. Proofs start with
 `Proof.` and end with ∎; exercises use `Exercise`, `Hint` and `Solution`.
 The build checks English taxons, static header order, independent statement
 links, default folding, proof labels and local font files:
@@ -50,7 +50,7 @@ The entrypoint is `root/how/plt/formal/index.typ`. It embeds ten articles and
 taxon-based colours. Statements are shared site-wide under `root/statements/`,
 classified by kind with full lowercase hyphenated filenames. Each file owns
 its title, metadata, statement and proof; no separate catalogue is required.
-References show the kind and title, not a local number.
+References show only the title, not the kind or a local number.
 See [statement authoring](root/statements/README.md).
 
 MathML is used where supported. SVG equation fallbacks keep their layout and

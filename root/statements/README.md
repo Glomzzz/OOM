@@ -89,7 +89,7 @@
 `statement` 输出原生 typsite embed，编号由当前父页面的层级决定。
 标题顺序为 `taxon → heading-numbering → title`，例如 `Theorem 2.1. 进展`；未编号时显示 `Theorem. 进展`。
 环境名统一用英文，正文标题和解释仍可用中文。彩色卡片按 taxon 区分种类，不改变正文颜色。
-`refer` 只显示 `Theorem. 进展` 这样的“英文环境名. 标题”，不显示局部编号，并从目标页面读取元数据。
+`refer` 只显示 `进展` 这样的条目标题，不带 taxon 前缀或局部编号，并从目标页面读取元数据。
 HTML 引用不 import 目标正文，因此前向、后向和相互引用不会引起循环 import。
 JavaScript 只增强就地跳转：目标已嵌入则展开它，否则打开其独立页面；无 JS 时链接仍可用。
 PDF include 同一份条目正文，查询已嵌入目标的元数据；独立 PDF 未包含目标时只读取它导出的 `entry`。
