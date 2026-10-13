@@ -362,8 +362,16 @@ article .embed > details > summary > .section-description {
     content: ".";
 }
 
+/* An unnumbered heading still carries its anchor id here, and the table of
+ * contents jumps to it. display: none would leave the anchor without a box
+ * to scroll to, so keep it as a zero-size, out-of-flow element instead.
+ */
 .heading-numbering:empty {
-    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 span.taxon {
