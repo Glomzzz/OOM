@@ -36,7 +36,10 @@
     ]
   } else {
       html.span(class: "math-inline")[
-          #accessible-math(body, auto-filter(inline(scale: scale + 70%, body)))
+          // typsite maps 1em = 16px while Typst text is 11pt (≈14.67px);
+          // 16 / 14.67 ≈ 109% makes glyphs match the surrounding MathML size.
+          // fit-font: 1em follows the paragraph font instead of the root font.
+          #accessible-math(body, auto-filter(inline(fit-font: 1em, scale: scale * 109%, body)))
       ]
   }
 }
