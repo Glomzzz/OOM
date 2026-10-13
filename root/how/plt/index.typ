@@ -11,6 +11,5 @@
 
 这里会收集成体系的*PLT*(_Programming Language Theory_)文章。
 
-= #part("./prelude.typ")
 = #part("./intro.typ")
 = #part("./formal/index.typ")
