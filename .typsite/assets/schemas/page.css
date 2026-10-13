@@ -151,6 +151,16 @@ article .auto-filter:has(> .auto-sized-svg):not(.math-visual *, .formal-figure *
     max-width: 100%;
 }
 
+/* Diagrams that should shrink to the reading column instead of scrolling. */
+article .svg-fit .auto-sized-svg {
+    overflow: visible;
+}
+
+article .svg-fit .auto-sized-svg > svg {
+    max-width: 100%;
+    height: auto !important;
+}
+
 .formal-figure {
     max-width: 100%;
     margin: 1.4em 0;

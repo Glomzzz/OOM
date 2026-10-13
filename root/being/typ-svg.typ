@@ -177,8 +177,8 @@ test external link goto: #link("https://github.com/Glomzzz/typsite")[Source of t
   diagram
 }
 
-#html.align(center)[
-  #inline(block(fill: white)[#_process], scale: 150%)
+#html.div(class: "svg-fit", style: "text-align: center;")[
+  #inline(block(fill: white)[#_process])
 ]
 
 #footnote[Contains content of an article, will be used to generate the HTML page.] <pendings>
