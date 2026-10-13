@@ -1,11 +1,11 @@
 #import "lib.typ": html, auto-filter, inline
 #import "math-accessibility.typ": accessible-math, math-text
 
-// 花体在此区分项集合与类型变量；文本替代也保留这一区别。
+// 花体在此区分项集合与类型变量；文本替代也保留这一区别．
 #let cal(body) = math.equation(alt: "花体(" + math-text(body) + ")", math.cal(body))
 
 // ---------- 记号 ----------
-// 推理规则：rule(名字, 前提.., 结论)
+// 推导规则：rule(名字, 前提.., 结论)
 #let rule(name, ..args) = {
   let ps = args.pos()
   let c = ps.pop()
@@ -50,12 +50,12 @@
     body.body,
   )
 }
-#let stp = sym.arrow.r.long // ⟶ 一步归约
-#let stps = $attach(stp, tr: *)$ // ⟶* 多步归约
+#let stp = sym.arrow.r.long // ⟶ 一步规约
+#let stps = $attach(stp, tr: *)$ // ⟶* 多步规约
 #let tB = $"Bool"$
 #let tN = $"Nat"$
 #let nv = $italic("nv")$
-// 算术语言证明中的术语回链，复用全站条目引用接口。
+// 算术语言证明中的术语回链，复用全站条目引用接口．
 #let ih = {
   import "statements.typ": statement-term
   statement-term("definition/induction-hypothesis")[归纳假设]

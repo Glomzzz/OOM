@@ -1,4 +1,4 @@
-// 证明不编号；在 root/statements/ 的命题文件内使用，末尾自动加 ∎。
+// 证明不编号；在 root/statements/ 的命题文件内使用，末尾自动加 ∎．
 #import "html.typ" as html
 
 #let proof(title: none, body) = context {

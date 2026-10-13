@@ -4,7 +4,7 @@
 #show: schema.with("page")
 
 #title[寻径]
-#metacontent("description")[生命不熄，控制终将失灵。]
+#metacontent("description")[生命不熄，控制终将失灵．]
 #metacontent("show-metadata")[false]
 #date[2026-08-14]
 #author[Glomzzz]
@@ -18,3 +18,5 @@
 = #part("./plt/index.typ")
 
 = #part("./style.typ")
+
+= #part("./terms.typ")

@@ -1,5 +1,5 @@
-// SVG 数学保留外观，另给读屏与复制提供线性文本。
-// 这不是通用的 LaTeX 导出器；优先采用作者给 equation 设置的 alt。
+// SVG 数学保留外观，另给读屏与复制提供线性文本．
+// 这不是通用的 LaTeX 导出器；优先采用作者给 equation 设置的 alt．
 #import "html.typ" as html
 
 #let math-text(value) = {
@@ -19,7 +19,7 @@
   if kind == math.primes { return "'" * value.count }
   if kind == math.attach {
     let result = math-text(value.base)
-    // 右上角的撇号先于下标，便于辨认 t'_(1) 与 t_(1)。
+    // 右上角的撇号先于下标，便于辨认 t'_(1) 与 t_(1)．
     let tr = value.at("tr", default: none)
     let primed = type(tr) == content and tr.func() == math.primes
     if primed { result += math-text(tr) }
@@ -46,7 +46,7 @@
   }
   if value.has("child") { return math-text(value.child) }
   if value.has("body") { return math-text(value.body) }
-  // 未知结构保留可检查的表示，不能静默丢掉它的内容。
+  // 未知结构保留可检查的表示，不能静默丢掉它的内容．
   repr(value)
 }
 

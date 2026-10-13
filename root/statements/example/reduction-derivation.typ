@@ -11,7 +11,10 @@
 
 #show: statement-page.with("example/reduction-derivation", entry)
 
-使用 #refer("definition/one-step-reduction") 的规则，推导树的每条横线都是一条规则的实例：横线上方的子推导满足前提，下方给出结论。以下三层合起来只证明整项的一步归约，不是三步运行。
+使用 #refer("definition/one-step-reduction") 的规则，
+推导树的每条横线都是一条规则的实例：
+横线上方的子推导满足前提，下方给出结论．
+以下三层合起来只证明整项的一步规约，不是三步运行．
 
 #bigmath(
   $
@@ -20,4 +23,6 @@
   scale: 115%,
 )
 
-从下往上读：要说明最下面那一步成立，用 E-Pred，它要求里面的 $"if"$ 能一步归约；这又用 E-If，它要求条件 $"iszero" 0$ 能一步归约；最后 E-IsZeroZero 是公理，无条件成立。
+从下往上读：要说明最下面那一步成立，用 E-Pred，它要求里面的 $"if"$ 能一步规约；
+这又用 E-If，它要求条件 $"iszero" 0$ 能一步规约；
+最后 E-IsZeroZero 是公理，无条件成立．

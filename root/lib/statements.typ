@@ -1,7 +1,7 @@
-// 全站共用的独立条目；文件路径就是引用键，不另存标题／正文目录表。
+// 全站共用的独立条目；文件路径就是引用键，不另存标题／正文目录表．
 //   #statement("definition/induction-hypothesis")
 //   #refer("theorem/progress")
-// 每个条目文件导出自己的 entry 元数据，并把陈述、证明放在同一份正文。
+// 每个条目文件导出自己的 entry 元数据，并把陈述、证明放在同一份正文．
 #import "lib.typ": schema, metacontent, page-title, parent, cite
 #import "proof.typ": proof
 #import "formal-html.typ" as html
@@ -34,7 +34,7 @@
   "/statements/" + key + ".typ"
 }
 
-// 字体统一由全站 page schema 加载；保留接口供文章复用。
+// 字体统一由全站 page schema 加载；保留接口供文章复用．
 #let statement-head() = []
 
 #let statement-page(key, entry, body) = context {
@@ -67,7 +67,7 @@
 }
 
 // 原生 typsite embed：只补偿 Typst 标题与导出 h2 之间的一层差异，
-// 编号仍由 typsite 生成。PDF include 同一份正文，不维护第二份打印稿。
+// 编号仍由 typsite 生成．PDF include 同一份正文，不维护第二份打印稿．
 #let site-embed(slug, open: true, sidebar: "full", heading-level: auto) = context {
   assert(slug.starts-with("/"), message: "site-embed 需要从 root 开始的绝对路径：" + slug)
   if target() == "html" {
@@ -101,9 +101,9 @@
   )
 }
 
-// 引用只显示条目标题，不带 taxon 或局部编号。
+// 引用只显示条目标题，不带 taxon 或局部编号．
 // HTML 引用由 typsite 从目标页面元数据读取，不 import 目标正文，
-// 因此跨文章的前向／后向／相互引用不会导致循环 import。
+// 因此跨文章的前向／后向／相互引用不会导致循环 import．
 #let refer(key) = context {
   let slug = statement-slug(key)
   if target() == "html" {
@@ -114,7 +114,7 @@
       let el = found.first()
       link(el.location(), el.value.title)
     } else {
-      // 独立 PDF 未包含目标时，只取目标文件导出的 entry，不渲染正文。
+      // 独立 PDF 未包含目标时，只取目标文件导出的 entry，不渲染正文．
       import slug as destination
       destination.entry.title
     }
