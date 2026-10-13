@@ -16,3 +16,5 @@
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
 = #part("./plt/index.typ")
+
+= #part("./style.typ")
