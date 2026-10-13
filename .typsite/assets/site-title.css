@@ -60,6 +60,11 @@ header:has(> :is(h1, .embed-title) > .site-title) > .metadata {
     margin-top: 1.7em; /* One blank line between the two contact rows. */
 }
 
+/* One blank line below the contact rows, matching the gap between them. */
+.site-social.site-colophon {
+    margin-top: 1.7em;
+}
+
 .profile-label {
     white-space: nowrap;
 }

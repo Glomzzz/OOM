@@ -21,3 +21,12 @@
   contact-row("Know me at", profile-links.slice(0, 3))
   contact-row("Reach me at", profile-links.slice(3))
 })
+
+// Colophon line shown under the contact rows.
+#let site-colophon() = html.p(class: "site-social site-colophon", lang: "en", {
+  [This ]
+  html.a(href: "https://github.com/Glomzzz/OOM", "site")
+  [ is built with ]
+  html.a(href: "https://github.com/Glomzzz/typsite", "Typsite")
+  [.]
+})

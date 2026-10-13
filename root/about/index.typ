@@ -1,5 +1,5 @@
 #import "/lib/lib.typ": *
-#import "/lib/profile.typ": social-links
+#import "/lib/profile.typ": social-links, site-colophon
 
 #show: schema.with("page")
 
@@ -11,3 +11,4 @@
 #parent("/index.typ")
 
 #social-links()
+#site-colophon()
