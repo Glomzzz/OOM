@@ -4,7 +4,7 @@
 #show: schema.with("page")
 
 #title[往复]
-#metacontent("description")[收录问答与讨论，留下观点的交锋，也留下交谈中尚未说尽的问题。]
+#metacontent("description")[没有定论的交流。]
 #metacontent("show-metadata")[false]
 #date[2026-05-03]
 #author[Glomzzz et al.]

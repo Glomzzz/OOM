@@ -3,10 +3,9 @@
 
 #show: schema.with("page")
 
-#title[此间]
-#metacontent("description")[写身在其中的生活。]
-#metacontent("show-metadata")[false]
-#date[XXXX-09-26]
+#title("此间")
+#metacontent("description")[渴望啃噬我们，如海啃噬陆地。]
+#metacontent("show-metadata")[false]#date[XXXX-09-26]
 #author[Glomzzz]
 #heading-numbering("none")
 #sidebar("only-embed")

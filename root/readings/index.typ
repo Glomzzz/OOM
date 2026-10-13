@@ -3,7 +3,7 @@
 #show: schema.with("page")
 
 #title[拾遗]
-#metacontent("description")[选收他人的文章与片段，注明来处，留待重读。]
+#metacontent("description")[碎片与未竟之事。]
 #metacontent("show-metadata")[false]
 #date[]
 #author[Glomzzz]
