@@ -1,3 +1,7 @@
+.am-embed {
+  margin: 2.2em 0;
+}
+
 .am-embed__frame {
   border: 0;
   width: 100%;
