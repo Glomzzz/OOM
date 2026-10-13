@@ -26,6 +26,7 @@
 #title[Second Person]
 #date[2026-03-14 09:33]
 #author[Yorushika]
+#parent("./index.typ")
 
 #let album-url = "https://music.apple.com/my/album/second-person/1876728371"
 

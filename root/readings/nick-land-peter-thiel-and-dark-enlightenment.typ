@@ -13,15 +13,16 @@
 #title[尼克·兰德、彼得·蒂尔与黑暗启蒙]
 #date[2026-04-18 21:25]
 #author[Trance-Scripts]
+#parent("./index.typ")
 
 
 // Title
-#align(center)[
-  #text(size: 18pt, weight: "bold")[尼克·兰德、彼得·蒂尔与黑暗启蒙]
-  #v(0.3em)
-  #text(
-    size: 10pt,
+#html.align(center)[
+  #html.text(size: 130%, weight: "bold", frame: html.div)[尼克·兰德、彼得·蒂尔与黑暗启蒙]
+  #html.text(
+    size: 90%,
     fill: gray,
+    frame: html.div,
   )[来源：#link("https://trance-scripts.com/2026/04/16/nick-land-peter-thiel-and-dark-enlightenment/")[Trance-Scripts]　·　2026年4月16日]
 ]
 
@@ -84,9 +85,9 @@
 我们当如何看待这样一种天意——它通过兰德、帕森斯、冯·卡门等人，将一个寻求与"神圣守护天使"沟通的神秘主义传统，纳入其"有方向的历史进程"之中？因为此处Trance-Scripts所揭示的历史，正是这种性质，不是吗？弗林与卡尔森指控这些人从事撒旦崇拜与恶魔主义。接受耶稣为救主的凯厄斯，不愿与这些东西有任何瓜葛。他暂停播客，祷告寻求指引，如何在这险途中行走。对他而言，上帝是活的，魔法也是真实的——二者是相辅相成的，而非对立的。他想象弗林与卡尔森大概不会赞同这一点。然而在他看来，他们对兰德之魔的驱鬼捉妖，显得偏执而充满恐惧，其动机犹如猎巫者寻找替罪羊。他们所渲染的恐惧弊大于利，几乎没有给圣灵进入我们生命留下任何空间。
 
 
-#align(center)[
-  #text(
-    size: 9pt,
+#html.align(center)[
+  #html.text(
+    size: 85%,
     fill: gray,
   )[原文链接：#link("https://trance-scripts.com/2026/04/16/nick-land-peter-thiel-and-dark-enlightenment/")[trance-scripts.com]]
 ]

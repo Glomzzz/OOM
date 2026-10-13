@@ -25,12 +25,13 @@
 ]
 
 #let dialogue-page(lede: none, body) = {
-  html.section(class: "dialogue-page")[
-    #if lede != none {
-      html.p(class: "dialogue-lede", lede)
-    }
-    #body
-  ]
+  // Keep native headings at the top level. Typsite replaces them with folded
+  // sections; a surrounding HTML element would cross those section boundaries
+  // and prematurely close the parent collection when this page is embedded.
+  if lede != none {
+    html.p(class: "dialogue-lede", lede)
+  }
+  body
 }
 
 #let dialogue-turn(name, tone: dialogue-palette.blue, body) = {

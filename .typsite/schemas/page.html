@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="../assets/inline-fold.css" />
         <link rel="stylesheet" href="../assets/theorem.css" />
         <link rel="stylesheet" href="../assets/embed.css" />
+        <link rel="stylesheet" href="../assets/site-title.css" />
         <script defer src="../assets/site-links.js"></script>
         <script defer src="../assets/math-accessibility.js"></script>
         <link
@@ -33,7 +34,7 @@
                 <div class="logo">
                     <a
                         href="{slug@parent}"
-                        title="{title@parent} [{slug@parent}]"
+                        title="{page-title@parent} [{slug@parent}]"
                         >« {title@parent}</a
                     >
                 </div>
@@ -74,6 +75,7 @@
                                 </div>
                             </header>
                         </summary>
+                        <p class="section-description">{description}</p>
                         <content />
                         <!-- Where to put Content-->
                     </details>

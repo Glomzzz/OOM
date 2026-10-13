@@ -3,22 +3,22 @@
 
 #show: schema.with("page")
 
-#title[存在]
+#title[此间]
+#metacontent("description")[写身在其中的生活。]
+#metacontent("show-metadata")[false]
 #date[XXXX-09-26]
 #author[Glomzzz]
 #heading-numbering("none")
 #sidebar("only-embed")
+#parent("/index.typ")
 
 
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
 = #part("./new-ssg.typ")
-= #part("./religion.typ")
 = #part("./typ-svg.typ")
-= #part("./second-person.typ")
 = #part("./typsite-thinking.typ")
 = #part("./all-about-lily-chou-chou.typ")
-= #part("./nick-land-peter-thiel-and-dark-enlightenment.typ")
 = #part("./on-sacred-mourning.typ")
 = #part("./when-it-comes-to-odyssey.typ")
 = #part("./on-mushoku-tensei.typ")

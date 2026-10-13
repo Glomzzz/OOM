@@ -1,6 +1,7 @@
 [default_metadata.content]
 # you can add any default metadata you want here
 title = "Untitled"
+description = ""
 taxon = ""
 reference-id = ""
 legacy-reference-id = ""

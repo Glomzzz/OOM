@@ -296,6 +296,26 @@ details h1 {
     font-weight: 600;
 }
 
+/* Collection introductions remain visible while their contents are folded. */
+.section-description {
+    margin: 0.55em 0 1.2em;
+    color: var(--slug-color);
+    font-family: var(--text-font-family);
+    font-size: 0.92em;
+    font-weight: 400;
+    line-height: 1.75;
+    text-wrap: pretty;
+}
+
+.section-description:empty {
+    display: none;
+}
+
+article .embed > details > summary > .section-description {
+    margin: 0.55em 0 0.15em;
+    font-size: 0.85em;
+}
+
 /* Punctuation is visual only: JS continues to read native numeric counters. */
 .heading-numbering:not(:empty) {
     font-variant-numeric: lining-nums tabular-nums;

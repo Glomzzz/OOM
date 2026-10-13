@@ -51,6 +51,14 @@
 }
 
 @font-face {
+    font-family: "Manufacturing Consent";
+    src: url("fonts/manufacturing-consent/ManufacturingConsent-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
     font-family: "Inria Sans";
     src: url("fonts/Inria Sans.ttf") format("truetype");
     font-style: normal;
