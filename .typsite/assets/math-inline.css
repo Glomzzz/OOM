@@ -1,7 +1,7 @@
 .math-inline {
     display: inline-block;
     position: relative;
-    vertical-align: middle;
+    vertical-align: baseline;
     background: var(--math-bg);
     border: 1px solid var(--math-border);
     border-radius: 4px;
@@ -13,9 +13,31 @@
 }
 
 .math-inline svg {
-    margin: 0.04em 0.12em;
+    margin: 0 0.12em;
     padding: 0;
+    vertical-align: baseline;
     shape-rendering: geometricPrecision;
+}
+
+/* The inline style on these wrappers centres the SVG, which drops the formula
+ * below the text baseline. The typst frame already ends at the baseline.
+ */
+.math-inline .auto-filter,
+.math-inline .auto-sized-svg {
+    vertical-align: baseline !important;
+}
+
+/* A scroll container reports its bottom margin edge as the baseline, so the
+ * formula sits too low. Where the first line's baseline can be exposed, use it
+ * and keep vertical room for ink that leaves the content box.
+ */
+@supports (baseline-source: first) {
+    .math-inline {
+        baseline-source: first;
+        overflow-y: hidden;
+        padding-block: 0.3em;
+        margin-block: -0.3em;
+    }
 }
 
 .math-inline > svg {
