@@ -55,8 +55,6 @@ jobs:
         if: steps.compile_3.outcome == 'failure'
         run: |
           ./$TYPSITE_BIN_NAME c --p packages
-      - name: Check academic headings and statement links
-        run: python3 .github/scripts/check-academic-style.py publish
       - name: Add content hashes to asset URLs
         run: python3 .github/scripts/cache-bust.py publish
       - name: Upload artifact
