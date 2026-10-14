@@ -42,39 +42,7 @@
   )
 }
 
-/* #show: schema.with("page", head: [
-  #html.tag(
-    "link",
-    rel: "stylesheet",
-    href: "/apple-music-theme.css",
-  )[]
-
-]) */
-
-
-#let track-embed(url) = html.elem(
-  "div",
-  attrs: (class: "am-embed"),
-)[
-  #html.elem(
-    "iframe",
-    attrs: (
-      class: "am-embed__frame am-embed--light",
-      src: url,
-      allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
-      sandbox: "allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation",
-    ),
-  )[]
-  #html.elem(
-    "iframe",
-    attrs: (
-      class: "am-embed__frame am-embed--dark",
-      src: url + (if url.contains("?") { "&" } else { "?" }) + "theme=dark",
-      allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
-      sandbox: "allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation",
-    ),
-  )[]
-]
+// Removed track-embed function - use direct links instead
 
 
 #let footnotes  = state("footnotes", ())

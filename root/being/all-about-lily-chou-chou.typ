@@ -8,14 +8,6 @@
       href: "https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&amp;display=swap",
     )[]
   ]
-  #unique[
-    #html.tag(
-      "link",
-      rel: "stylesheet",
-      href: "/apple-music-theme.css",
-    )[]
-
-  ]
 ])
 
 #title[《关于莉莉周的一切》]
@@ -36,10 +28,6 @@
 ]
 
 
-#track-embed("https://embed.music.apple.com/my/song/reverie/29773684")
-
-\
-
-#track-embed("https://embed.music.apple.com/my/song/clair-de-lune/1474685696")
+#link("https://music.apple.com/my/song/reverie/29773684")[Rêverie] and #link("https://music.apple.com/my/song/clair-de-lune/1474685696")[Clair de Lune]
 
 

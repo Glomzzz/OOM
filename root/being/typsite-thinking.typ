@@ -1,20 +1,13 @@
 #import "/lib/lib.typ": *
 
-#show: schema.with("page", head: [
-  #html.tag(
-    "link",
-    rel: "stylesheet",
-    href: "/apple-music-theme.css",
-  )[]
-
-])
+#show: schema.with("page")
 
 #title[Typsite二三想]
 #page-title[Typsite二三想]
 #date[2026-03-31 23:36]
 #author[Glomzzz]
 
-#track-embed("https://embed.music.apple.com/my/album/post-spring/1876728371?i=1876728649")
+#link("https://music.apple.com/my/album/post-spring/1876728371?i=1876728649")[Post spring]
 
 
 = 从何处开始？

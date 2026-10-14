@@ -8,13 +8,6 @@
       href: "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Cormorant+Garamond:wght@500;600;700&family=LXGW+WenKai+TC&display=swap",
     )[]
   ]
-    #unique[
-      #html.tag(
-      "link",
-      rel: "stylesheet",
-      href: "/apple-music-theme.css",
-      )[]
-    ]
 ])
 
 #heading-numbering("none")
@@ -24,7 +17,7 @@
 #date[2026-08-01 04:19]
 #author[Glomzzz]
 
-#track-embed("https://embed.music.apple.com/my/song/legend-of-the-eagle-bearer-main-theme-feat-mike-georgiades/1640097640")
+#link("https://music.apple.com/my/song/legend-of-the-eagle-bearer-main-theme-feat-mike-georgiades/1640097640")[Legend of the Eagle Bearer (Main Theme)]
 
 #details-block([(含剧透)])[
     \<\<奥德赛\>\>作为诺兰的一部改编电影，依旧有着浓厚的诺兰味儿：充满对称性的叙事与无数的前后呼应来让碎片化叙事呈现出奇幻的一致性（甚至每一个关键转场都伴随着或是音效或是动作或是比拟的连续性），最令我印象深刻的是*Odysseus*拨动弓弦这一简单的动作，弓弦被拨动时发出的清脆弦声荡气回肠，在电影的每一部分，这弦声都代表着荣耀的#link("https://zh.wikipedia.org/wiki/%E4%BC%8A%E8%96%A9%E5%9F%BA%E5%B3%B6")[伊塔刻]之王的骄傲，*Odysseus*即使在狩猎时也要拨动弓弦让猎物与之正面对抗（而非偷袭，虽然这会让猎物逃跑但这正能体现他出色的弓术），而他将弓上弦拨动并射箭这一气呵成的动作便是*Odysseus*的标志：
