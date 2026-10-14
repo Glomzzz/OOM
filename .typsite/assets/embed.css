@@ -191,7 +191,7 @@ article .page-root[data-taxon="Remark"] {
 }
 
 :is(.embed, .page-root, .heading-numbering, [data-reference-id]) {
-    scroll-margin-top: 1.5rem;
+    scroll-margin-top: calc(var(--bar-height, 0px) + 1rem);
 }
 
 .backlink {

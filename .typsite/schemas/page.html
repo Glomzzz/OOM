@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="../assets/embed.css" />
         <link rel="stylesheet" href="../assets/site-title.css" />
         <script defer src="../assets/site-links.js"></script>
+        <script defer src="../assets/bar-title.js"></script>
         <script defer src="../assets/math-accessibility.js"></script>
         <link
             rel="preconnect"
@@ -29,16 +30,18 @@
     </head>
 
     <body>
+        <!-- Fixed top bar: back button (absent on the root page) and the page title. -->
         <header class="header" parent="{has-parent}" lang="zh-CN">
-            <nav class="nav">
-                <div class="logo">
-                    <a
-                        href="{slug@parent}"
-                        title="{page-title@parent} [{slug@parent}]"
-                        >« {title@parent}</a
-                    >
-                </div>
+            <nav class="bar-back" aria-label="上级页面">
+                <a
+                    href="{slug@parent}"
+                    title="{page-title@parent} [{slug@parent}]"
+                    ><span class="bar-back-icon" aria-hidden="true"></span
+                    ><span class="bar-back-label">{title@parent}</span></a
+                >
             </nav>
+            <!-- The article's own h1 carries the same text for assistive technology; inert keeps links inside a rich title from taking focus. -->
+            <p class="bar-title" aria-hidden="true" inert><span class="bar-title-text">{title}</span></p>
         </header>
         <div id="grid-wrapper" sidebar="{sidebar}">
             <!-- Typsite 0.1.7 regenerates the outer html tag; mark the content too. -->

@@ -30,10 +30,6 @@
     text-align: center;
 }
 
-.logo .site-title {
-    font-size: 0.85em;
-}
-
 /* The About nameplate uses direct profile links instead of metadata. */
 header:has(> :is(h1, .embed-title) > .site-title) > .metadata {
     display: none;

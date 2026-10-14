@@ -4,6 +4,16 @@
     --radius: 3px;
     --article-max-width: 56rem;
     --page-gutter: clamp(0.75rem, 3vw, 2rem);
+    --bar-height: 3.6rem;
+    /* The article's text size and its page title size. The top bar sits outside
+     * the article, so it needs the same values spelled out to match them.
+     */
+    --article-font-size: clamp(1rem, calc(0.96rem + 0.2vw), 1.08rem);
+    --page-title-size: clamp(
+        calc(1.5 * var(--article-font-size)),
+        3vw,
+        calc(1.8 * var(--article-font-size))
+    );
     --text-font-family: "Libertinus Serif", "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
     --ui-font-family: "Inria Sans", "Noto Sans SC", "Noto Sans CJK SC", sans-serif;
     --code-font-family: "Iosevka", "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
@@ -55,7 +65,7 @@ body {
     box-sizing: border-box;
     width: calc(100% - 2 * var(--page-gutter));
     max-width: var(--article-max-width);
-    margin: clamp(1.25rem, 4vw, 3rem) auto 4rem;
+    margin: calc(var(--bar-height) + clamp(1rem, 3vw, 2.25rem)) auto 4rem;
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: var(--text-font-family);
@@ -70,7 +80,7 @@ body {
 #grid-wrapper > article {
     min-width: 0;
     max-width: 100%;
-    font-size: clamp(1rem, calc(0.96rem + 0.2vw), 1.08rem);
+    font-size: var(--article-font-size);
 }
 
 p {
@@ -399,7 +409,7 @@ header[show-metadata="true"] .metadata {
 }
 
 .top-header > h1 {
-    font-size: clamp(1.5em, 3vw, 1.8em);
+    font-size: var(--page-title-size);
 }
 
 .top-header > h1 > .taxon {
@@ -495,25 +505,194 @@ hr {
     background-color: var(--rule-color);
 }
 
-body > .header {
-    margin-bottom: 1.2rem;
-    padding-inline-end: 3rem;
+/* Top bar: a fixed strip with the title of the current page and, except on
+ * the root page, a round back button hanging to the left of the title. The
+ * title starts at the same place on every page, whether or not there is a
+ * button: at the article's left edge, or, on a narrow screen, far enough in to
+ * leave room for the button. While the article's own heading is on screen the
+ * title stays out of sight; bar-title.js slides it in as that heading scrolls
+ * under the bar.
+ */
+.header {
+    --bar-button: 2.2rem;
+    --bar-gap: 0.6rem;
+    --bar-title-start: max(
+        calc((100% - var(--article-max-width)) / 2),
+        calc(var(--page-gutter) + var(--bar-button) + var(--bar-gap))
+    );
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 8;
+    box-sizing: border-box;
+    display: flex;
+    align-items: stretch;
+    height: var(--bar-height);
+    padding-inline-start: var(--bar-title-start);
+    padding-inline-end: 3.45rem;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--rule-color);
+    font-family: var(--ui-font-family);
 }
 
-.logo {
-    font-size: 0.92rem;
-    font-weight: 400;
-    line-height: 1.6;
+/* Where the browser can blur what is behind it, the bar turns into frosted
+ * glass: the article scrolls under it, softened and tinted with the page
+ * colour so the title stays readable. There is no rule line; the glass sits on
+ * a layer that reaches a little below the bar and fades out with a mask, so
+ * the article goes from sharp to blurred without a hard edge. The layer is
+ * separate so the fade never touches the title or the buttons. Elsewhere the
+ * opaque bar above, with its rule, stays.
+ */
+@supports (backdrop-filter: blur(1px)) and (background: color-mix(in srgb, red 50%, transparent)) {
+    :root {
+        --bar-fade: 1.6rem;
+    }
+
+    .header {
+        background: none;
+        border-bottom: 0;
+    }
+
+    .header::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: calc(100% + var(--bar-fade));
+        background-color: color-mix(in srgb, var(--background-color) 38%, transparent);
+        -webkit-backdrop-filter: blur(14px) saturate(1.15);
+        backdrop-filter: blur(14px) saturate(1.15);
+        -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--bar-fade) - 0.5rem), transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 calc(100% - var(--bar-fade) - 0.5rem), transparent 100%);
+        pointer-events: none;
+    }
+
+    .header .bar-back > a {
+        background-color: color-mix(in srgb, var(--background-color) 55%, transparent);
+    }
+
+    #grid-wrapper > .toc-button,
+    #grid-wrapper > .math-text-toggle {
+        background-color: color-mix(in srgb, var(--background-color) 55%, transparent);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+    }
 }
 
-.logo > a {
+/* The back button sits at the bar's far left edge, with the same inset as the
+ * contents button on the right, so the title never moves for it. It is a
+ * round button with only a chevron.
+ */
+.bar-back {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+}
+
+.header[parent="false"] .bar-back {
+    display: none;
+}
+
+.bar-back > a {
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: var(--bar-button);
+    height: var(--bar-button);
+    border: 1px solid var(--rule-color);
+    border-radius: 50%;
     color: var(--logo-color);
     text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
-.logo > a:hover {
-    color: var(--logo-hover-color);
-    text-decoration: underline;
+.bar-back-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-inline-start: 0.2rem;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+}
+
+/* The parent's title names the link for assistive technology and shows as
+ * the tooltip; only the chevron is drawn.
+ */
+.bar-back-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (hover: hover) {
+    .bar-back > a:hover {
+        border-color: var(--hover-bar-color);
+        background-color: var(--hover-color-link);
+        color: var(--logo-hover-color);
+    }
+}
+
+.bar-back > a:focus-visible {
+    outline: 2px solid var(--target-color);
+    outline-offset: 2px;
+}
+
+/* The bar clips the title, so shifting it down by the bar's height hides it. */
+.bar-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    overflow: hidden;
+    color: var(--text-color);
+    font-family: var(--text-font-family);
+    font-size: var(--page-title-size);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.bar-title-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* A halo in the page colour keeps glyphs apart from text blurred behind. */
+    text-shadow:
+        0 0 0.18em var(--background-color),
+        0 0 0.4em var(--background-color),
+        0 0 0.8em var(--background-color);
+    transform: translateY(var(--bar-title-shift, var(--bar-height)));
+    will-change: transform;
+}
+
+/* A title may carry links or emphasis; in the bar it is only a label. These
+ * selectors are deliberately specific: the link rules further down underline
+ * .link.external and dot-underline .link.local.
+ */
+.bar-title .bar-title-text :is(a, .link, .link *) {
+    color: inherit;
+    text-decoration: none;
+    box-shadow: none;
+    border-bottom: 0;
+    background: none;
+}
+
+.bar-title .bar-title-text :is(a, strong, em, span) {
+    font: inherit;
+}
+
+/* Without scripts nothing would ever slide the title in, so just show it. */
+@media (scripting: none) {
+    .bar-title-text { transform: none; }
 }
 
 .metadata {
@@ -638,7 +817,7 @@ a.reference-link .reference-slug,
 .toc-toggle,
 .toc-button {
     position: fixed;
-    top: 0.75rem;
+    top: calc((var(--bar-height) - 2.2rem) / 2);
     right: 0.75rem;
     box-sizing: border-box;
     width: 2.2rem;
@@ -688,14 +867,17 @@ a.reference-link .reference-slug,
 
 #grid-wrapper > nav {
     position: fixed;
-    top: 0;
+    top: var(--bar-height);
     right: 0;
     bottom: 0;
-    z-index: 9;
+    z-index: 7;
     box-sizing: border-box;
     width: max-content;
     max-width: 100vw;
-    padding: 3.5rem 1.25rem 1.5rem;
+    /* The bar's glass fades out over the first --bar-fade below it. */
+    padding: calc(1.25rem + var(--bar-fade, 0px)) 1.25rem 1.5rem;
+    /* Keep the shadow on the left; it must not spill onto the bar above. */
+    clip-path: inset(0 0 0 -24px);
     overflow: auto;
     background: var(--background-color);
     border-left: 1px solid var(--rule-color);
@@ -718,13 +900,8 @@ a.reference-link .reference-slug,
     overflow-wrap: normal;
 }
 
-header[parent="false"] {
-    display: none;
-}
-
 @media (max-width: 500px) {
     html { font-size: 16px; }
-    body { margin-top: 1.25rem; }
     .block { padding-inline: 0.45em 0.15em; }
     .page-root { padding: 0; }
 }
@@ -751,6 +928,7 @@ header[parent="false"] {
     html { font-size: 11pt; }
     body { width: 100%; max-width: none; margin: 0; }
     #grid-wrapper > article { font-size: 1rem; }
+    .header,
     .toc-toggle,
     .toc-button,
     #grid-wrapper > nav,
