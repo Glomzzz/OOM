@@ -4,6 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{page-title}</title>
+        <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/site-icon-32.png" />
+        <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
         <link rel="stylesheet" href="../assets/fonts.css" />
         <link rel="stylesheet" href="../assets/schemas/page.css" />
         <link rel="stylesheet" href="../assets/math-block.css" />
@@ -30,8 +33,11 @@
     </head>
 
     <body>
-        <!-- Fixed top bar: back button (absent on the root page) and the page title. -->
+        <!-- Fixed top bar: site icon, back button (absent on the root page) and the page title. -->
         <header class="header" parent="{has-parent}" lang="zh-CN">
+            <a class="bar-site" href="https://glomzzz.com/" aria-label="Glomzzz 的主页" title="Glomzzz"
+                ><img src="/site-icon-96.png" alt="" width="32" height="32"
+            /></a>
             <nav class="bar-back" aria-label="上级页面">
                 <a
                     href="{slug@parent}"

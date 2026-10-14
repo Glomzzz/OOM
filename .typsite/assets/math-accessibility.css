@@ -22,12 +22,17 @@
     width: 2.2rem;
     height: 2.2rem;
     margin: 0;
-    padding: 0;
+    /* The italic f leans right and reaches below the baseline, so its ink sits
+     * low and to the right of the box centre. Padding on those two sides moves
+     * the centred content up and left by half of it.
+     */
+    padding: 0 0.12em 0.12em 0;
     border: 1px solid var(--hover-bar-color);
-    border-radius: var(--radius);
+    border-radius: 50%;
     background: var(--background-color);
     color: var(--text-color);
-    font-family: "Libertinus Serif", "Cambria Math", serif;
+    font-family: "Libertinus Serif", serif;
+    font-style: italic;
     font-size: 1.35rem;
     line-height: 1;
     cursor: pointer;

@@ -514,11 +514,16 @@ hr {
  * under the bar.
  */
 .header {
+    --bar-inset: 0.75rem;
+    --bar-icon: 2rem;
     --bar-button: 2.2rem;
     --bar-gap: 0.6rem;
+    /* Room for the site icon and the back button, which every page reserves
+     * so the title starts in the same place with or without the button.
+     */
     --bar-title-start: max(
         calc((100% - var(--article-max-width)) / 2),
-        calc(var(--page-gutter) + var(--bar-button) + var(--bar-gap))
+        calc(var(--bar-inset) + var(--bar-icon) + var(--bar-gap) + var(--bar-button) + var(--bar-gap))
     );
     position: fixed;
     top: 0;
@@ -582,14 +587,49 @@ hr {
     }
 }
 
-/* The back button sits at the bar's far left edge, with the same inset as the
- * contents button on the right, so the title never moves for it. It is a
- * round button with only a chevron.
+/* The site icon sits at the bar's far left edge, with the same inset as the
+ * contents button on the right. It links to the author's home page. The icon
+ * has no background of its own, so it only gets a focus ring and a hover tint.
+ */
+.bar-site {
+    position: absolute;
+    top: 50%;
+    left: var(--bar-inset);
+    display: block;
+    width: var(--bar-icon);
+    height: var(--bar-icon);
+    border-radius: var(--radius);
+    transform: translateY(-50%);
+    transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.bar-site > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media (hover: hover) {
+    .bar-site:hover {
+        filter: brightness(1.1) saturate(1.1);
+        transform: translateY(-50%) scale(1.06);
+    }
+}
+
+.bar-site:focus-visible {
+    outline: 2px solid var(--target-color);
+    outline-offset: 2px;
+}
+
+/* The back button sits right after the site icon, at the bar's far left. The
+ * title's start already leaves room for both, so the title never moves for it.
+ * It is a round button with only a chevron.
  */
 .bar-back {
     position: absolute;
     top: 50%;
-    left: 0.75rem;
+    left: calc(var(--bar-inset) + var(--bar-icon) + var(--bar-gap));
     transform: translateY(-50%);
 }
 
@@ -827,6 +867,7 @@ a.reference-link .reference-slug,
 
 .toc-toggle {
     z-index: 11;
+    border-radius: 50%;
     opacity: 0;
     cursor: pointer;
 }
@@ -836,7 +877,7 @@ a.reference-link .reference-slug,
     display: grid;
     place-items: center;
     border: 1px solid var(--rule-color);
-    border-radius: var(--radius);
+    border-radius: 50%;
     background: var(--background-color);
     color: var(--text-color);
     font-family: var(--ui-font-family);

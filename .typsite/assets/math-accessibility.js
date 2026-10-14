@@ -10,7 +10,7 @@
     toggle.type = "button";
     toggle.className = "math-text-toggle";
     toggle.lang = "zh-CN";
-    toggle.textContent = "𝑓";
+    toggle.textContent = "f";
     const update = visible => {
         const action = visible ? "显示公式排版" : "显示公式文本";
         toggle.title = action;
