@@ -41,9 +41,13 @@
 
 中文译名：*代数数据类型*．
 
+== algebraic effect
+
+中文译名：*代数作用*．
+
 == algebraic effect handler
 
-中文译名：*代数效应处理器*．
+中文译名：*代数作用处理器*．
 
 == algorithm soundness
 
@@ -249,13 +253,17 @@
 
 中文译名：#statement-term("definition/tree-terminology")[*边*]（见 #refer("definition/tree-terminology")）．
 
+== effect
+
+中文译名：*作用*．
+
 == effect row
 
-中文译名：*效果行*．
+中文译名：*作用行*．
 
 == effect system
 
-中文译名：*效果系统*．
+中文译名：*作用系统*．
 
 == evaluation context
 
