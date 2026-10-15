@@ -16,15 +16,12 @@
 | `note/` | Note | 技术细节与实现说明 |
 | `remark/` | Remark | 哲学、逻辑史与相关讨论 |
 
-文件名用**完整英文名称、小写、单词之间用 `-`**，不再使用 `fm-def-ih` 等专栏前缀或缩写．
-例如：
-
-- [`definition/induction-hypothesis.typ`](definition/induction-hypothesis.typ)
-- [`theorem/structural-induction.typ`](theorem/structural-induction.typ)
-- [`theorem/progress.typ`](theorem/progress.typ)
-- [`lemma/canonical-forms.typ`](lemma/canonical-forms.typ)
-- [`corollary/type-safety.typ`](corollary/type-safety.typ)
-
+文件名用**完整英文名称、小写、单词之间用 `-`**，不再使用 `fm-def-ih` 等专栏前缀或缩写，
+例如 [`definition/induction-hypothesis.typ`](definition/induction-hypothesis.typ)、
+[`theorem/structural-induction.typ`](theorem/structural-induction.typ)、
+[`theorem/progress.typ`](theorem/progress.typ)、
+[`lemma/canonical-forms.typ`](lemma/canonical-forms.typ)
+与 [`corollary/type-safety.typ`](corollary/type-safety.typ)．
 目录与文件名合起来就是引用键．不同分类可以有同名条目，如
 `definition/type-safety` 与 `corollary/type-safety`，没有冲突．
 
@@ -55,26 +52,20 @@
 ]
 ```
 
-- `entry.title` 是显示标题的唯一来源．
-- 普通标题的浏览器标题自动生成．若标题含复杂数学或代码，可在 `entry` 中补充纯文字 `page-title`．
-- `entry.parent` 指向解释这个条目的文章，供独立页面返回；不限制谁可以嵌入它．
-- `entry.legacy-id` 仅用于兼容迁移前的 `#fm-*`／`#pl-*` 锚点，新条目可以省略．
-- 条目中的证明用 `proof`，以 `Proof.` 起头、以 ∎ 结束，与陈述一起展开．Note 与 Remark 默认折叠，其他条目默认展开．
-- 新增条目只需创建这一份文件，不必更新目录表．文件路径必须与 `statement-page` 的键一致．
+使用某套项、值、规约或类型规则时，在正文中通过 `refer` 明确指出对应定义；
+定理注明自己针对哪套规则成立，不把“这门语言”留给父文章解释．
+使用 `step`、`type_of` 等具体实现时，通过 `cite` 链接实现所在的文章，
+并说明函数的输入、输出或所用分支；`parent` 返回链接不能替代正文中的依赖说明．
+条目的显示标题直接来自 `entry.title`，证明用 `proof` 包裹（以 `Proof.` 起头、以 ∎ 结束），
+Note 与 Remark 默认折叠，其他条目默认展开；
+若标题含复杂数学或代码，可在 `entry` 中补充纯文字 `page-title`，
+`entry.legacy-id` 则仅用于兼容迁移前的 `#fm-*`／`#pl-*` 锚点．
 
-## 上下文与依赖
-
-条目应当能从独立网址开始阅读，不要求读者先找到它原来嵌入在哪篇文章里．
-
-- 使用某套项、值、归约或类型规则时，在正文中通过 `refer` 明确指出对应定义．
-  定理应注明自己针对哪套规则成立，不把“这门语言”留给父文章解释．
-- 使用 `step`、`type_of` 等具体实现时，通过 `cite` 链接实现所在的文章，
-  并说明函数的输入、输出或所用分支；`parent` 返回链接不能替代正文中的依赖说明．
-- 不使用“本文”“上文”“后文”“下一节”等指向原文章位置的说法，
-  不把“与本文无关”这类写作过程备注带进条目．
-- “下面两段代码”“上图”“第 2 条”等指代可以保留，但对象必须确实在当前条目内；
-  如果指的是其他条目或文章，应给出明确链接．
-- 新增解释不改变规则、证明前提或结论的适用范围．扩展语言的例子应明确说明修改了哪些规则．
+条目正文不使用“本文”“上文”“后文”“下一节”等指向原文章位置的说法，
+也不把“与本文无关”这类写作过程备注带进条目；
+“下面两段代码”“上图”“第 2 条”等指代的对象必须确实在当前条目内，
+若指向其他条目或文章则给出明确链接．
+新增解释不改变规则、证明前提或结论的适用范围，扩展语言的例子须说明修改了哪些规则．
 
 ## 在文章或其他条目中复用
 

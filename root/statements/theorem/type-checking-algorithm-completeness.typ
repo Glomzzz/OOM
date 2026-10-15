@@ -19,11 +19,7 @@ Rust 的 `Bool`、`Nat` 分别对应 $tB$、$tN$．
 
 #proof[
   对 $t : T$ 作规则归纳，按最后一步的规则分情形．
-
-  - *T-True、T-False、T-Zero*：直接计算 `type_of` 即得．
-  - *T-Succ*：前提 $t_1 : tN$．
-    由 #ih 得 `type_of(t1) = Some(Nat)`，于是 `Succ` 分支返回 `Some(Nat)`．
-    T-Pred、T-IsZero 同理．
-  - *T-If*：三个前提由 #ih 给出 `type_of` 在三个子项上分别返回 `Bool`、`T`、`T`．
-    代入 `If` 分支：`ta = T`，两个比较都成立，返回 `Some(T)`．
+  对公理 T-True、T-False、T-Zero，直接计算 `type_of` 即得．
+  对 T-Succ，前提 $t_1 : tN$ 由 #ih 给出 `type_of(t1) = Some(Nat)`，于是 `Succ` 分支返回 `Some(Nat)`；T-Pred、T-IsZero 同理．
+  对 T-If，三个前提由 #ih 给出 `type_of` 在三个子项上分别返回 `Bool`、`T`、`T`；代入 `If` 分支后 `ta = T`，两个比较都成立，返回 `Some(T)`．
 ]

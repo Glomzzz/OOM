@@ -16,7 +16,7 @@
 是否为值采用 #refer("definition/values-and-numeric-values")，
 是否受阻采用 #refer("definition/normal-forms-and-stuck-terms")．
 
-*第一步．*$t$ 的最外层是 $"succ"$．
+第一步，$t$ 的最外层是 $"succ"$．
 结论左边形如 $"succ" dots$ 的规则只有 E-Succ，
 它要求里面的 $"if" "true" "then" "false" "else" 0$ 能规约．
 这个 $"if"$ 的条件是 $"true"$，E-IfTrue 适用，得到 $"false"$．于是推导是：
@@ -28,11 +28,10 @@
   scale: 115%,
 )
 
-*第二步．*现在的项是 $"succ" "false"$．
+第二步，现在的项是 $"succ" "false"$．
 仍然只有 E-Succ 可能适用，它要求 $"false" stp t'_1$ 对某个 $t'_1$ 成立．
 但 $"false"$ 是值，由 #refer("lemma/values-do-not-reduce") 不能规约，
 于是 E-Succ 的前提搭不上，没有任何规则可用：$"succ" "false"$ 是正规形式．
-它又不是值（$"succ"$ 后面必须是数值），所以它受阻了．
+由于 $"succ"$ 后面必须是数值，$"succ" "false"$ 不属于值，因此受阻了．
 
-第一步完全合法，问题出在第二步．
-所以某个词项“现在还能规约”并不说明它“永远不会出错”．
+第一步完全合法，问题出在第二步：词项当前能规约，并不保证后续步步都能正常推进．

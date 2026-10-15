@@ -26,7 +26,7 @@ $
 
 两者合起来就是 $Gamma entails phi <=> Gamma tack.r phi$．
 #wiki("库尔特·哥德尔")[Kurt Gödel] 在 1929 年的博士论文中证明了经典一阶逻辑的完备性；
-这里说的是所有模型中的语义后承，不是某个预期模型中的一切真命题．
+这里针对的是所有模型中的语义后承（区别于某个特定预期模型中的全部真命题）．
 定义与定理可参见
 #link("https://leanprover-community.github.io/logic_and_proof/semantics_of_first_order_logic.html#soundness-and-completeness")[_Logic and Proof_ §10.5]．
 
@@ -35,15 +35,15 @@ $
 *一致、可有效公理化且具有足够初等算术能力*的理论，不能决定其语言中的每个句子，
 即存在某个句子，它与它的否定都不能在该理论中证明．
 若说“真而不可证”，这里的“真”指标准自然数模型，“不可证”则相对于指定理论；
-这不是绝对不可证明，也不表示一阶逻辑漏掉了在所有模型中成立的结论．
+这并不代表绝对不可证明，一阶逻辑也并未漏掉在所有模型中成立的结论．
 原始 Gödel 版本与 Rosser 版本的前提不同，参见
 #link("https://plato.stanford.edu/entries/goedel-incompleteness/")[SEP: Gödel's Incompleteness Theorems]．
 还要区分*完备性*与*可判定性*：
 语义后承都有证明，不等于存在对每个输入都能停机并回答成立与否的算法．
 
 #refer("definition/soundness-and-completeness") 描述的类型检查算法与类型规则之间的关系，
-只在“两个方向的对应”上与此平行：`type_of` 是机械的求解过程，类型规则是规格．
-这里比较的是算法与规则，不是比较证明与模型中的真．
+只在“两个方向的对应”上与此平行：`type_of` 是机械的求解过程，类型规则是规格，
+比较的双方是算法与规则（一阶逻辑完备性比较的则是形式证明与模型中的真）．
 #refer("theorem/type-checking-algorithm-soundness")
 与 #refer("theorem/type-checking-algorithm-completeness") 分别证明两个方向，
 再加上算法的终止性，才得到判定过程．

@@ -19,10 +19,9 @@
 #proof[
   对 $t stps t'$ 的步数归纳
   （#refer("definition/multi-step-reduction") 的两条规则）．
-
-  - *零步*：$t' = t$，于是 $t' : T$．
-  - *至少一步*：$t stp t_1$ 且 $t_1 stps t'$．
-    由 #refer("theorem/preservation") 得 $t_1 : T$；对 $t_1$ 用 #ih 即可．
+  零步时 $t' = t$，直接有 $t' : T$；
+  至少一步时 $t stp t_1$ 且 $t_1 stps t'$，
+  由 #refer("theorem/preservation") 得 $t_1 : T$，再对 $t_1$ 用 #ih 即可．
 
   归纳给出的其实是更强的结论：$t' : T$．
   最后对 $t'$ 用 #refer("theorem/progress")：它是值或还能规约，总之不受阻．

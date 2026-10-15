@@ -2,8 +2,8 @@
 #import "/lib/formal-math.typ": *
 
 #let entry = (
-  title: [为什么要“对 $T$ 一般化”],
-  page-title: "Note. 为什么要“对 T 一般化”",
+  title: [保型证明中对 $T$ 的一般化],
+  page-title: "Note. 保型证明中对 T 的一般化",
   date: "2026-10-10",
   author: "Glomzzz",
   parent: "/how/plt/formal/type-safety.typ",

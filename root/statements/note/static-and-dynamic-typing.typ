@@ -12,21 +12,17 @@
 #show: statement-page.with("note/static-and-dynamic-typing", entry)
 
 “静态”指不运行程序就能知道的性质，“动态”指运行时才能观察到的性质．
-按类型检查发生在什么时候，程序语言大致分成两类：
-
-- *静态类型语言*：在运行之前检查类型（即*静态类型检查*），通常在编译阶段完成；
-  未通过检查的程序会遭拒绝．
-  Rust、Haskell、OCaml、Java、C 都属于这一类．
-  #refer("definition/types-and-typing-judgments") 的类型系统也是如此：
-  $t : T$ 只看项的形状，不执行 #refer("definition/one-step-reduction") 的 $stp$ 规约．
-- *动态类型语言*：程序先运行，每次真正做运算时再检查参与运算的值是不是合适的种类，
-  不合适就抛出错误．Python、JavaScript、Ruby 属于这一类．
+按类型检查发生的时机，程序语言通常分为*静态类型语言*与*动态类型语言*．
+静态类型语言在运行前（通常是编译阶段）完成*静态类型检查*，未通过检查的程序会遭拒绝；
+Rust、Haskell、OCaml、Java、C 都属此类，
+#refer("definition/types-and-typing-judgments") 的类型系统也是如此，$t : T$ 只看项的形状，不执行 #refer("definition/one-step-reduction") 的 $stp$ 规约．
+动态类型语言则让程序先运行，每次真正做运算时再检查参与运算的值是否符合要求的种类，不合要求就抛出错误；Python、JavaScript、Ruby 属于这一类．
 
 用 #refer("definition/set-of-terms") 的布尔值与自然数语言作类比，
-一种动态检查的设计是不预先构造 $t : T$ 的推导，
-而是在 $stp$ 里给不合适的运行时操作补上报错规则
+动态检查的设计可以省去预先构造 $t : T$ 的推导，
+直接在 $stp$ 里给不合适的运行时操作补上报错规则
 （#refer("note/explicit-errors-and-kotlin-bottom-type")），
-把受阻换成可预期的异常．
+把受阻换成可预期的异常；
 另一种设计可以采用转换规则
 （#refer("example/javascript-coercion-and-equality-triangle")）．
 真实语言往往同时有这两类处理；

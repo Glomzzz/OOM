@@ -18,23 +18,12 @@
 #proof[
   对 $t stp t'$ 作规则归纳（#refer("theorem/induction-on-derivations")），
   按最后一步的规则分情形．
-
-  - *E-IfTrue、E-IfFalse*：
-    整项的大小是 $1 + op("size")(t_1) + op("size")(t_2) + op("size")(t_3)$，
-    结果只是选中的一个分支，严格更小．
-  - *E-PredZero、E-IsZeroZero*：
-    $op("size")("pred" 0) = op("size")("iszero" 0) = 2$，
-    结果 $0$ 或 $"true"$ 的大小为 $1$．
-  - *E-PredSucc*：
-    $op("size")("pred" ("succ" #nv)) = op("size")(#nv) + 2$，结果是 $#nv$．
-  - *E-IsZeroSucc*：
-    $op("size")("iszero" ("succ" #nv)) = op("size")(#nv) + 2 >= 3$，
-    结果 $"false"$ 的大小为 $1$．
-  - *E-Succ、E-Pred、E-IsZero*：
-    前提 $t_1 stp t'_1$，由 #ih 得 $op("size")(t'_1) < op("size")(t_1)$．
-    两边都只多包一层同一个一元节点，严格不等式仍成立．
-  - *E-If*：前提 $t_1 stp t'_1$，由 #ih 条件部分变小，
-    另两个分支与根节点不变，整项严格变小．
+  对 E-IfTrue 与 E-IfFalse，整项的大小是 $1 + op("size")(t_1) + op("size")(t_2) + op("size")(t_3)$，结果只留下选中的一个分支，严格更小．
+  对 E-PredZero 与 E-IsZeroZero，$op("size")("pred" 0) = op("size")("iszero" 0) = 2$，结果 $0$ 或 $"true"$ 的大小为 $1$．
+  对 E-PredSucc，$op("size")("pred" ("succ" #nv)) = op("size")(#nv) + 2$，结果是 $#nv$．
+  对 E-IsZeroSucc，$op("size")("iszero" ("succ" #nv)) = op("size")(#nv) + 2 >= 3$，结果 $"false"$ 的大小为 $1$．
+  对 E-Succ、E-Pred、E-IsZero，前提为 $t_1 stp t'_1$，由 #ih 得 $op("size")(t'_1) < op("size")(t_1)$；两边都只多包一层同一个一元节点，严格不等式仍成立．
+  对 E-If，前提为 $t_1 stp t'_1$，由 #ih 条件部分变小，另两个分支与根节点不变，整项严格变小．
 
   对步数：设 $t = t_0 stp t_1 stp dots.c stp t_n$．
   每一步大小至少减 $1$，所以 $op("size")(t_n) <= op("size")(t) - n$．

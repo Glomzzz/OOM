@@ -2,7 +2,7 @@
 #import "/lib/formal-math.typ": *
 
 #let entry = (
-  title: [不是所有规则都能直接照抄成算法],
+  title: [从规则到算法的条件],
   date: "2026-10-10",
   author: "Glomzzz",
   parent: "/how/plt/formal/rules-and-algorithms.typ",
@@ -19,7 +19,7 @@
 （记号见 #refer("note/evaluation-strategies-reduction-strategies-and-confluence")），
 若想仅从词项推理其类型，参数 $x$ 的类型不能直接从语法中读取；
 把函数抽象规则直接照抄为递归分支，就留下了“该填哪个类型”的问题．
-这不说明这个系统一定不可判定，而是需要类型标注、约束求解或从期望类型传入信息等额外设计．
+那个系统未必不可判定，只是需要补充类型标注、约束求解或从期望类型传入信息等额外设计；
 带标注的 $lambda x : T. t$ 则已经在词项中给出了参数类型．
 
 #refer("definition/types-and-typing-judgments") 的布尔值与自然数语言避开了这一问题：

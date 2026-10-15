@@ -14,10 +14,10 @@
 在 #refer("definition/one-step-reduction")
 与 #refer("definition/types-and-typing-judgments") 的规则里，
 $t_1, t_2, t'_1$ 等字母是*元变量*：
-它们属于元语言，可以代换为 #refer("definition/set-of-terms") 中的任意词项，
-并不是对象语言中可执行的变量．
+它们属于元语言，可以代换为 #refer("definition/set-of-terms") 中的任意词项；
+对象语言自身没有变量．
 $v$ 只能代换为值，$#nv$ 只能代换为数值
 （#refer("definition/values-and-numeric-values")），
 $T$ 则只能代换为类型．
 同一条规则中同一个元变量的所有出现必须使用相同的代换．
-一条推导规则因此表示许多具体*实例*，而不是只适用于这些字母的陈述．
+因此，一条推导规则概括了许多具体*实例*．

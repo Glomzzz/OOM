@@ -21,16 +21,9 @@
   （类型推导版本的 #refer("theorem/induction-on-derivations")），
   按最后一步的规则分情形．
 
-  - *T-True、T-False、T-Zero*：$t$ 是值．
-  - *T-If*：$t = "if" t_1 "then" t_2 "else" t_3$，前提里有 $t_1 : tB$．对 $t_1$ 用 #ih：
-    - 若 $t_1$ 能规约，用 E-If，$t$ 也能规约；
-    - 若 $t_1$ 是值，由 #refer("lemma/canonical-forms") 第 1 条，
-      它是 $"true"$ 或 $"false"$，分别用 E-IfTrue、E-IfFalse．
-  - *T-Succ*：前提 $t_1 : tN$．若 $t_1$ 能规约，用 E-Succ．
-    若 $t_1$ 是值，由 #refer("lemma/canonical-forms") 第 2 条它是数值 $#nv$，
-    于是 $t = "succ" #nv$ 本身也是数值，因而是值．
-  - *T-Pred*：前提 $t_1 : tN$．若 $t_1$ 能规约，用 E-Pred．
-    若 $t_1$ 是值，它是数值：是 $0$ 就用 E-PredZero；
-    否则形如 $"succ" #nv'$，用 E-PredSucc．
-  - *T-IsZero*：与 T-Pred 相同，分别用 E-IsZero、E-IsZeroZero、E-IsZeroSucc．
+  若最后一步是 T-True、T-False 或 T-Zero，则 $t$ 本身就是值．
+  若最后一步是 T-If，则 $t = "if" t_1 "then" t_2 "else" t_3$，前提里有 $t_1 : tB$；对 $t_1$ 用 #ih，若 $t_1$ 能规约，由 E-If 知 $t$ 也能规约；若 $t_1$ 是值，由 #refer("lemma/canonical-forms") 第 1 条知它是 $"true"$ 或 $"false"$，可分别用 E-IfTrue、E-IfFalse．
+  若最后一步是 T-Succ，前提为 $t_1 : tN$；若 $t_1$ 能规约，用 E-Succ；若 $t_1$ 是值，由 #refer("lemma/canonical-forms") 第 2 条知它是数值 $#nv$，于是 $t = "succ" #nv$ 本身也是数值，自然也是值．
+  若最后一步是 T-Pred，前提为 $t_1 : tN$；若 $t_1$ 能规约，用 E-Pred；若 $t_1$ 是值，则它是数值，等于 $0$ 时用 E-PredZero，形如 $"succ" #nv'$ 时用 E-PredSucc．
+  T-IsZero 的情形与 T-Pred 相同，分别用 E-IsZero、E-IsZeroZero、E-IsZeroSucc．
 ]

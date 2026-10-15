@@ -12,9 +12,9 @@
 #show: statement-page.with("remark/being-and-becoming", entry)
 
 哲学里研究“究竟什么是存在的、存在者有哪些基本形式与范畴”的分支称为
-#wiki("本体论")[本体论]（此处仅作帮助记忆的类比，并非对本体论的哲学论证）．
+#wiki("本体论")[本体论]（此处仅借来帮助记忆，不展开哲学论证）．
 这里说的“语法类似本体论”，只指对象语言的语法对象：
-#refer("definition/set-of-terms") 列出了这门算术语言里*有*哪些词项，
+#refer("definition/set-of-terms") 给出了这门算术语言里*有*哪些词项，
 而“最小”保证除此之外没有别的对象．
 
 但只有“是什么”还不够．

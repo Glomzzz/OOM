@@ -13,11 +13,9 @@
 #show: statement-page.with("note/rust-question-mark-operator", entry)
 
 `Option<T>` 是 Rust 里表示“可能有值、可能没有”的类型，
-只有两种取值：`Some(x)` 和 `None`．
-在返回 `Option` 的函数里，表达式 `e?` 的意思是：
-
-- 如果 `e` 是 `Some(x)`，整个 `e?` 的值就是 `x`，继续往下执行；
-- 如果 `e` 是 `None`，函数*立刻返回* `None`，后面的代码不再执行．
+只有 `Some(x)` 和 `None` 两种取值．
+在返回 `Option` 的函数里，表达式 `e?` 会在 `e` 为 `Some(x)` 时取出 `x` 继续往下执行，
+而在 `e` 为 `None` 时让整个函数*立刻返回* `None`．
 
 在 #cite("/how/plt/formal/determinism.typ")[Rust 求值器 `step`] 中，
 `Succ(t1)` 匹配后继项，`step(t1)` 返回 `Option<Term>`，表示子项是否存在一步后继．

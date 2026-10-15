@@ -11,8 +11,7 @@
 
 #show: statement-page.with("definition/object-language-and-metalanguage", entry)
 
-- *对象语言*：作为研究对象的语言．
-- *元语言*：用来谈论对象语言的语言．
+*对象语言*是作为研究对象的语言，*元语言*是用来谈论对象语言的语言．
 
 例如，#refer("definition/set-of-terms")、#refer("definition/one-step-reduction")
 与 #refer("definition/types-and-typing-judgments") 规定的布尔值与自然数语言是对象语言；

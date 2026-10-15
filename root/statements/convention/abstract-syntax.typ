@@ -12,11 +12,11 @@
 #show: statement-page.with("convention/abstract-syntax", entry)
 
 *抽象语法*把程序视为*语法树*，即节点标签表示程序构造的树
-（树的术语见 #refer("definition/tree-terminology")），而不是一串字符．
+（树的术语见 #refer("definition/tree-terminology")），隐去字符排列和括号等表面细节．
 从字符串到树的那一步叫*解析*．
-采用这条约定时，假定解析已经完成，而且已经消除了
+采用这条约定时，假定解析已经完成，且已消除了
 #refer("example/structural-ambiguity") 那样的歧义；
-解析器本身不在这条约定的研究范围内．
+解析器本身留在这条约定的研究范围之外．
 书写时为了能在一行里写下一棵树，会用括号表示分组：
 $"pred" ("succ" 0)$ 表示根标着 $"pred"$，它的唯一孩子标着 $"succ"$；
 这个孩子及其后代构成表示 $"succ" 0$ 的子树．

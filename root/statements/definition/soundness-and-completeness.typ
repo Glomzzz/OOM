@@ -17,5 +17,5 @@
 正常返回 `Some(T)` 表示算法报告类型 $T$，`None` 表示拒绝；
 Rust 的 `Bool`、`Nat` 分别对应对象语言的 $tB$、$tN$．
 
-- 算法相对规则*可靠*：若 `type_of(t) = Some(T)`，则 $t : T$．
-- 算法相对规则*完备*：若 $t : T$，则 `type_of(t) = Some(T)`．
+若 `type_of(t) = Some(T)` 蕴涵 $t : T$，则称算法相对规则*可靠*；
+若 $t : T$ 蕴涵 `type_of(t) = Some(T)`，则称算法相对规则*完备*．

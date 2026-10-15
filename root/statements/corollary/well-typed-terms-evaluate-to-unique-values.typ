@@ -28,14 +28,13 @@ $ t stps v quad "且" quad v : T. $
 
   *唯一性．*设 $t stps v$ 且 $t stps w$，其中 $v$、$w$ 都是值．
   对第一条链的长度归纳；归纳性质允许第二条链任意长．
-
-  - *零步*：$t = v$．由 #refer("lemma/values-do-not-reduce")，$t$ 没有后继，
-    因此第二条链也只能有零步，$w = t = v$．
-  - *至少一步*：第一条链形如 $t stp t_1 stps v$．
-    $t$ 能规约，故由 #refer("lemma/values-do-not-reduce") 它不是值；
-    第二条链不能有零步，必形如 $t stp t_2 stps w$．
-    由 #refer("theorem/determinism") 得 $t_1 = t_2$．
-    两条剩余链从同一项出发，第一条的长度更小，由 #ih 得 $v = w$．
+  若第一条链有零步，则 $t = v$．由 #refer("lemma/values-do-not-reduce")，$t$ 没有后继，
+  因此第二条链也只能有零步，$w = t = v$．
+  若第一条链至少有一步，它形如 $t stp t_1 stps v$．
+  $t$ 能规约，由 #refer("lemma/values-do-not-reduce") 知它不属于值；
+  第二条链不能有零步，必形如 $t stp t_2 stps w$．
+  由 #refer("theorem/determinism") 得 $t_1 = t_2$．
+  两条剩余链从同一项出发，第一条的长度更小，由 #ih 得 $v = w$．
 ]
 
 #refer("corollary/type-safety") 只排除受阻，不独自保证终止．

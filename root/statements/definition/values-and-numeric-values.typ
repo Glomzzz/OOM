@@ -11,9 +11,9 @@
 
 #show: statement-page.with("definition/values-and-numeric-values", entry)
 
-在 #refer("definition/set-of-terms") 的词项中，用以下 BNF 文法划出值．
+在 #refer("definition/set-of-terms") 的词项中，用两行 BNF 文法划出值．
 $::=$ 读作“定义为”，$|$ 读作“或者”；
-$#nv$ 是数值的元变量，不是对象语言的关键字．
+$#nv$ 是元语言中表示数值的元变量，不属于对象语言的关键字．
 
 $
     v & ::= "true" | "false" | #nv \

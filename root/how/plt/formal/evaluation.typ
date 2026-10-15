@@ -24,11 +24,9 @@
 #statement("definition/values-and-numeric-values")
 
 数值就是 $0$、$"succ" 0$、$"succ" ("succ" 0)$……，分别代表 $0, 1, 2, dots$．
-几个例子：
-
-- $"true"$、$0$、$"succ" ("succ" 0)$ 是值；
-- $"succ" "true"$ 是项，但不是值：$"succ"$ 后面必须是数值，而 $"true"$ 不是；
-- $"pred" 0$ 也不是值，值的定义里根本没有 $"pred"$．直观上，它还能再算．
+例如 $"true"$、$0$、$"succ" ("succ" 0)$ 都是值；
+$"succ" "true"$ 虽然是项，但由于 $"succ"$ 后面要求数值而 $"true"$ 不属于数值，它算不上值；
+$"pred" 0$ 也不属于值（值的定义里根本没有 $"pred"$，直观上它还能再算）．
 
 = 推导规则怎么读
 
@@ -75,27 +73,10 @@ $t stp t'$ 成立，*当且仅当*能用这十条规则的实例搭出一棵以�
 （E-Succ 的结论形状对得上，但它的前提要求 $"true"$ 能规约，而没有规则能做到），
 所以不存在任何 $t'$ 使 $"succ" "true" stp t'$．
 
-遇到没有定义的情形该怎么办？
-形式化的回答是：*不要假装它有定义*，而是把它当作明确的状态来对待．
-常见做法有三种：
-
-+ *承认它是错误状态*．
-  把“不是值、却又不能规约”的项单独命名
-  （下文 #refer("definition/normal-forms-and-stuck-terms") 的“受阻”），
-  再用类型系统证明良类型的程序永远到不了这种状态．本文采用这种做法．
-+ *显式加上错误规则*．
-  扩充语法，增加终止计算的错误项 $"wrong"$，
-  再把原来受阻的运算规定为“产生错误”，并规定错误如何向外传播．
-  Python 对 `1 + "a"` 抛出 `TypeError` 是类似的运行时处理；
-  Kotlin 的例子以及它与底类型的关系见
-  #refer("note/explicit-errors-and-kotlin-bottom-type")．
-+ *补上约定的结果*．
-  例如规定布尔值先转成数，$"true"$ 对应 $1$、$"false"$ 对应 $0$，
-  于是 $"succ" "true" stp "succ" ("succ" 0)$．
-  JavaScript 的 `true + 1 === 2` 就是这种做法．
-  它给这类运算规定了普通结果，但不代表所有程序都会正常返回；
-  隐式转换也可能掩盖本想发现的错误，
-  见 #refer("example/javascript-coercion-and-equality-triangle")．
+遇到没有定义的情形时，形式化将其直接视为明确的状态，常见处理方式有三种：
+可以直接*承认它是错误状态*，把“不属于值、却又不能规约”的项单独命名（下文 #refer("definition/normal-forms-and-stuck-terms") 的“受阻”），再用类型系统证明良类型的程序永远到不了这种状态，本文采用这种做法；
+也可以*显式加上错误规则*，扩充语法、增加终止计算的错误项 $"wrong"$，把原来受阻的运算规定为产生错误并向外传播，Python 对 `1 + "a"` 抛出 `TypeError` 属于类似的运行时处理，Kotlin 的例子以及它与底类型的关系见 #refer("note/explicit-errors-and-kotlin-bottom-type")；
+还可以*补上约定的结果*，例如规定布尔值先转成数，$"true"$ 对应 $1$、$"false"$ 对应 $0$，于是 $"succ" "true" stp "succ" ("succ" 0)$，JavaScript 的 `true + 1 === 2` 就是这种做法（这只给该类运算规定了普通结果，不代表所有程序都会正常返回，隐式转换也可能掩盖本想发现的错误，见 #refer("example/javascript-coercion-and-equality-triangle")）．
 
 #statement("note/explicit-errors-and-kotlin-bottom-type")
 
@@ -117,28 +98,21 @@ C 语言标准里的*未定义行为*是典型的反面教材：
 *规约规则*（也称*计算规则*或*收缩规则*）直接规定基本运算的结果：
 E-IfTrue、E-IfFalse、E-PredZero、E-PredSucc、E-IsZeroZero、E-IsZeroSucc．
 能直接匹配这类规则的词项，称为*可规约表达式*，简称*可规约项*．
-这里的六条基本规约规则没有关于 $stp$ 的前提；
-这个特征不是所有语言的规约规则都必须满足的．例如：
-
-- $"if" "true" "then" "succ" 0 "else" 0 stp "succ" 0$
-  （E-IfTrue，取 $t_2 = "succ" 0$，$t_3 = 0$）；
-- $"pred" ("succ" ("succ" 0)) stp "succ" 0$
-  （E-PredSucc，取 $#nv = "succ" 0$）；
-- $"iszero" ("succ" 0) stp "false"$
-  （E-IsZeroSucc，取 $#nv = 0$）．
+这里的六条基本规约规则没有关于 $stp$ 的前提（其他语言的规约规则未必都如此）．
+例如，取 $t_2 = "succ" 0$、$t_3 = 0$，由 E-IfTrue 可得 $"if" "true" "then" "succ" 0 "else" 0 stp "succ" 0$；
+取 $#nv = "succ" 0$，由 E-PredSucc 可得 $"pred" ("succ" ("succ" 0)) stp "succ" 0$；
+取 $#nv = 0$，由 E-IsZeroSucc 可得 $"iszero" ("succ" 0) stp "false"$．
 
 *结构规则*（也称*同余规则*）把子项的规约提升到*指定的求值位置*：
 E-If 允许规约条件，E-Succ、E-Pred、E-IsZero 允许规约各自的参数．#footnote[
   在证明论与相继式演算中，“结构性规则”与“收缩规则”另指弱化、收缩、交换等操作语境的规则，
-  与此处操作语义的同余规则和基本规约规则不是同一概念．
+  需与此处操作语义的同余规则和基本规约规则区分．
 ]
-前提说那个位置的子项能规约，结论说整体能在该位置转移一步．
-这不允许改写任意子项，例如不能直接在尚未选中的 $"if"$ 分支里计算．例如：
-
-- 因为 $"pred" 0 stp 0$（E-PredZero），
-  所以 $"succ" ("pred" 0) stp "succ" 0$（E-Succ）；
-- 因为 $"iszero" 0 stp "true"$（E-IsZeroZero），所以
-  $"if" ("iszero" 0) "then" 0 "else" "succ" 0 stp "if" "true" "then" 0 "else" "succ" 0$（E-If）．
+前提说那个位置的子项能规约，结论说整体能在该位置转移一步；
+未列入规则的位置（如尚未选中的 $"if"$ 分支）不能直接改写．
+例如，由 E-PredZero 知 $"pred" 0 stp 0$，再由 E-Succ 就得 $"succ" ("pred" 0) stp "succ" 0$；
+由 E-IsZeroZero 知 $"iszero" 0 stp "true"$，再由 E-If 就得
+$"if" ("iszero" 0) "then" 0 "else" "succ" 0 stp "if" "true" "then" 0 "else" "succ" 0$．
 
 这里的“同余”强调规约与特定构造相容，不表示一步规约是同余等价关系：
 $stp$ 有方向，而且只对规则许可的位置封闭．
@@ -193,18 +167,16 @@ $stp$ 有方向，而且只对规则许可的位置封闭．
 上图中 `pred` 和 `if` 节点是结构规则经过的路径，`iszero 0` 是基本规约发生的位置；
 虚线连接的分支不参与这一步．
 
-规则的细节里藏着设计决定，读的时候要留意：
-
-- E-If 只允许在*条件*里规约，没有规则允许在分支里规约．
-  因此先求条件，再选择分支，不会提前计算未选中的分支．
-  下文 #refer("note/evaluation-strategies-reduction-strategies-and-confluence")
-  会把这样的顺序规定称为求值策略，并与一般的规约策略区分．
-- 基本规约规则要求正在检查的操作数*已经是合适的值*，但不要求未选中的分支是值．
-  例如 E-PredSucc 的左边是 $"pred" ("succ" #nv)$，
-  只有 $"succ"$ 里面已经是数值时才能用；否则只能先用结构规则把里面算完．
-  这保证了“先算里面，再算外面”的顺序，
-  下面的 #refer("note/numeric-value-restriction-in-predecessor-reduction")
-  会说明为什么这一点很重要．
+规则的细节里藏着两项设计决定：
+E-If 只允许在*条件*里规约，没有规则允许在分支里规约，
+因此总是先求条件、再选择分支，不会提前计算未选中的分支
+（下文 #refer("note/evaluation-strategies-reduction-strategies-and-confluence")
+会把这样的顺序规定称为求值策略，并与一般的规约策略区分）；
+同时，基本规约规则要求正在检查的操作数*已经是合适的值*，但不要求未选中的分支是值．
+例如 E-PredSucc 的左边是 $"pred" ("succ" #nv)$，
+只有 $"succ"$ 里面已经是数值时才能用；否则只能先用结构规则把里面算完．
+这保证了“先算里面，再算外面”的顺序，
+其作用见下文 #refer("note/numeric-value-restriction-in-predecessor-reduction")．
 
 #statement("remark/meaning-as-use")
 

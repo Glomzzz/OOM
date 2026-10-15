@@ -2,8 +2,8 @@
 #import "/lib/formal-math.typ": *
 
 #let entry = (
-  title: [为什么 E-PredSucc 要求 $#nv$],
-  page-title: "Note. 为什么 E-PredSucc 要求 nv",
+  title: [E-PredSucc 的数值限制],
+  page-title: "Note. E-PredSucc 的数值限制",
   date: "2026-10-10",
   author: "Glomzzz",
   parent: "/how/plt/formal/determinism.typ",
@@ -19,16 +19,15 @@ $"pred" ("succ" #nv)$，
 
 #bigmath($ #rule("E-PredSucc'", $"pred" ("succ" t) stp t$) $, scale: 120%)
 
-毕竟“先加一再减一”就是原来的数，何必等里面算完？
+直觉上“先加一再减一”就是原来的数，似乎不必等里面算完．
 问题在于，放宽以后同一个项会有*两种*规约方式．
 取 $t = "pred" ("succ" ("pred" 0))$：
-
-- 用放宽后的规则，直接把外层的 $"pred" ("succ" dots)$ 消掉：$t stp "pred" 0$；
-- 用 E-Pred 和 E-Succ 两条同余规则往里找，在最里面用 E-PredZero：$t stp "pred" ("succ" 0)$．
+用放宽后的规则可以直接消掉外层的 $"pred" ("succ" dots)$，得 $t stp "pred" 0$；
+也可以用 E-Pred 和 E-Succ 两条同余规则往里找，在最里面用 E-PredZero，得 $t stp "pred" ("succ" 0)$．
 
 两个结果不一样，#refer("theorem/determinism") 就不再成立．
 在证明里，这表现为 E-PredSucc 那个情形写不下去：
-要排除第二个推导是 E-Pred，需要“$"succ" t$ 不能规约”，而 $t$ 不一定是值，这一点推不出来．
+要排除第二个推导是 E-Pred，需要“$"succ" t$ 不能规约”，而 $t$ 未必是值，这一点推不出来．
 
 这个例子里两条路最后都会到达 $0$，所以*这个项*的最终结果没有变，但一步关系已不再确定．
 仅凭这个例子还不能断言整个扩展语言的所有最终结果都不变，那需要另外的证明．
