@@ -247,7 +247,7 @@ Haskell 也允许非结构递归，但不能把它们一概称为共递归；
 
 #statement("lemma/depth-is-less-than-size")
 
-形式化证明大致就是这个样子：按定义的情形逐个核对，每个情形里只用定义和 #ih．
+这就是结构归纳证明的基本思路：虽然项有无穷多个，但构造它们的规则只有有限几条。我们只需按这些规则逐一讨论：基础情形直接验证，递归情形则借助对子项的#ih，一步步推出结论．
 
 #statement("remark/potential-and-actual-infinity")
 

@@ -32,17 +32,9 @@
 就必须先规定程序的结构、运行规则，以及“类型错误”和“出错”各指什么．
 下文用形式化完成这项工作，并用自然语言解释每个定义与证明．
 
-路线依次经过：自然语言与元语言、语法、小步操作语义、规则归纳与确定性、
+路线：自然语言与元语言、语法、小步操作语义、规则归纳与确定性、
 正规形式与受阻、类型判断、类型安全、检查算法与测试，各篇附带练习．
-
-术语译名以#link("https://bananaspace.org/")[香蕉空间]的条目为准，
-例如 reduction 译作“规约”，inference rule 译作“推导规则”，
-normal form 译作“正规形式”，context 译作“语境”，confluence 译作“合流性”；
-香蕉空间尚未收录的术语，参考 #cite("/how/plt/formal/summary.typ")[总结]
-中“延伸阅读”所列的两篇中文译文，
-例如 term 译作“词项”（简称“项”），type soundness 译作“类型健全性”．
-算法相对规则的 soundness 称为“可靠性”，并写明比较对象．
-全部术语的中英对照及其定义位置见 #cite("/how/terms.typ")[术语对照]．
+．
 
 #chapter("natural-and-formal.typ", open: true)
 
