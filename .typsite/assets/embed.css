@@ -172,6 +172,32 @@ article .page-root[data-taxon="Remark"] {
     vertical-align: baseline;
 }
 
+.lazy-embed-placeholder,
+.lazy-embed-tools {
+    color: var(--slug-color);
+    font-size: 0.85em;
+    font-weight: 400;
+}
+
+.lazy-embed-placeholder button,
+.lazy-embed-tools button {
+    padding: 0.15em 0.45em;
+    border: 1px solid var(--rule-color);
+    border-radius: var(--radius);
+    background: var(--background-color);
+    color: var(--link-color);
+    font: inherit;
+    cursor: pointer;
+}
+
+.lazy-embed-placeholder button {
+    margin-inline-end: 0.5em;
+}
+
+.lazy-embed-fallback {
+    text-decoration: underline;
+}
+
 .statement-anchor,
 .statement-anchor > p {
     margin: 0;
@@ -231,6 +257,7 @@ article .page-root[data-taxon="Remark"] {
 }
 
 @media print {
+    .lazy-embed-tools { display: none; }
     article .embed,
     article .page-root[data-taxon]:not([data-taxon=""]) {
         background: transparent;

@@ -19,6 +19,8 @@ jobs:
       TYPST_FONT_PATHS: "./.typsite/assets/fonts"
     steps:
       - uses: actions/checkout@v4
+      - name: Test embed optimizer
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
       - uses: typst-community/setup-typst@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -57,6 +59,8 @@ jobs:
           ./$TYPSITE_BIN_NAME c --p packages
       - name: Add content hashes to asset URLs
         run: python3 .github/scripts/cache-bust.py publish
+      - name: Split closed embeds into static fragments
+        run: python3 .github/scripts/lazy-embeds.py publish
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
