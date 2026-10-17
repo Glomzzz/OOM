@@ -53,6 +53,10 @@
 
 中文译名：#statement-term("definition/soundness-and-completeness")[*算法可靠性*]（见 #refer("definition/soundness-and-completeness")）．
 
+== asynchronous programming
+
+中文译名：*异步编程*．
+
 == axiom
 
 中文译名：*公理*．
@@ -110,6 +114,10 @@
 == call-by-value
 
 中文译名：#statement-term("note/evaluation-strategies-reduction-strategies-and-confluence")[*按值调用*]（见 #refer("note/evaluation-strategies-reduction-strategies-and-confluence")）．
+
+== cancellation safety
+
+中文译名：#statement-term("note/cancellation-safety-and-async-cleanup")[*取消安全性*]（见 #refer("note/cancellation-safety-and-async-cleanup")）．
 
 == canonical form
 
@@ -191,6 +199,10 @@
 
 中文译名：*收缩规则*．
 
+== cooperative scheduling
+
+中文译名：*协作式调度*．
+
 == corecursion
 
 中文译名：#statement-term("note/meaning-of-induction")[*共递归*]（见 #refer("note/meaning-of-induction")）．
@@ -242,6 +254,10 @@
 
 中文译名：#statement-term("theorem/determinism")[*确定性*]（见 #refer("theorem/determinism")）．
 
+== drop guarantee
+
+中文译名：#statement-term("definition/pinned-typestate")[*析构保证*]（见 #refer("definition/pinned-typestate")）．
+
 == dynamically typed
 
 中文译名：#statement-term("note/static-and-dynamic-typing")[*动态类型语言*]（见 #refer("note/static-and-dynamic-typing")）．
@@ -281,6 +297,10 @@
 
 中文译名：#statement-term("theorem/evaluator-faithfulness")[*求值器与一步规约一致*]（见 #refer("theorem/evaluator-faithfulness")）．
 
+== executor
+
+中文译名：*执行器*．
+
 == extremal clause
 
 中文译名：#statement-term("definition/set-of-terms")[*最小性子句*]（见 #refer("definition/set-of-terms")）．
@@ -314,6 +334,10 @@
 == grammar
 
 中文译名：*文法*．
+
+== green thread
+
+中文译名：#statement-term("note/green-threads-and-stack-management")[*绿色线程*]（见 #refer("note/green-threads-and-stack-management")）．
 
 
 = H
@@ -515,6 +539,18 @@
 
 中文译名：*模式匹配*．
 
+== pinned typestate
+
+中文译名：#statement-term("definition/pinned-typestate")[*固定类型状态*]（见 #refer("definition/pinned-typestate")）．
+
+== pinning
+
+中文译名：#statement-term("definition/pinned-typestate")[*地址固定*]（见 #refer("definition/pinned-typestate")）．
+
+== poll
+
+中文译名：*轮询*．
+
 == potential infinity
 
 中文译名：#statement-term("remark/potential-and-actual-infinity")[*潜无穷*]（见 #refer("remark/potential-and-actual-infinity")）．
@@ -522,6 +558,10 @@
 == predecessor
 
 中文译名：*前驱*．
+
+== preemptive scheduling
+
+中文译名：*抢占式调度*．
 
 == premise
 
@@ -559,8 +599,20 @@
 
 中文译名：#statement-term("definition/immediate-and-proper-subterms")[*真子项*]（见 #refer("definition/immediate-and-proper-subterms")）．
 
+== pull-based model
+
+中文译名：*拉取模型*．
+
+== push-based model
+
+中文译名：*推送模型*．
+
 
 = R
+
+== reactor
+
+中文译名：*反应器*．
 
 == redex
 
@@ -589,6 +641,10 @@
 == refinement type
 
 中文译名：*精化类型*．
+
+== register
+
+中文译名：#statement-term("remark/registers-of-rust-and-control-flow-effects")[*语域*]（见 #refer("remark/registers-of-rust-and-control-flow-effects")）．
 
 == reflexive transitive closure
 
@@ -621,6 +677,14 @@
 
 = S
 
+== segmented stack
+
+中文译名：#statement-term("note/green-threads-and-stack-management")[*分段栈*]（见 #refer("note/green-threads-and-stack-management")）．
+
+== self-referential struct
+
+中文译名：#statement-term("note/why-not-move-constructors-or-move-trait")[*自引用结构*]（见 #refer("note/why-not-move-constructors-or-move-trait")）．
+
 == semantic domain
 
 中文译名：*语义域*．
@@ -628,6 +692,10 @@
 == semantics
 
 中文译名：*语义*．
+
+== semi-cooperative cancellation
+
+中文译名：#statement-term("note/cancellation-safety-and-async-cleanup")[*半协作式取消*]（见 #refer("note/cancellation-safety-and-async-cleanup")）．
 
 == side condition
 
@@ -657,9 +725,29 @@
 
 中文译名：*规格*．
 
+== spurious wakeup
+
+中文译名：*伪唤醒*．
+
+== stack copying
+
+中文译名：#statement-term("note/green-threads-and-stack-management")[*栈拷贝*]（见 #refer("note/green-threads-and-stack-management")）．
+
+== stackful coroutine
+
+中文译名：*有栈协程*．
+
+== stackless coroutine
+
+中文译名：*无栈协程*．
+
 == staging
 
 中文译名：*多阶段编程*．
+
+== state machine
+
+中文译名：*状态机*．
 
 == static single assignment
 
@@ -680,6 +768,10 @@
 == structural induction
 
 中文译名：#statement-term("theorem/structural-induction")[*结构归纳法*]（见 #refer("theorem/structural-induction")）．
+
+== structural pin projection
+
+中文译名：*结构化固定投影*．
 
 == structural recursion
 
@@ -716,6 +808,10 @@
 == successor
 
 中文译名：*后继*．
+
+== suspension point
+
+中文译名：*挂起点*．
 
 == syntax
 
@@ -844,6 +940,10 @@
 
 
 = W
+
+== waker
+
+中文译名：*唤醒器*．
 
 == well-foundedness
 

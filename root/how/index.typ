@@ -17,6 +17,8 @@
 
 = #part("./plt/index.typ")
 
+= #part("./rust/index.typ")
+
 = #part("./style.typ")
 
 = #part("./terms.typ")

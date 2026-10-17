@@ -16,6 +16,8 @@
   title: none,
   description: none,
   taxon: "",
+  date: [2026-10-10],
+  author: [Glomzzz],
   parent: "/how/plt/formal/index.typ",
   body,
 ) = context {
@@ -26,9 +28,9 @@
     if title != none { metacontent("title", title) }
     if description != none { metacontent("description", description) }
     metacontent("taxon", taxon)
-    date[2026-10-10]
-    author[Glomzzz]
-    import "lib.typ": parent as set-parent
+    import "lib.typ": date as set-date, author as set-author, parent as set-parent
+    set-date(date)
+    set-author(author)
     set-parent(parent)
     heading-numbering("bullet")
     body
