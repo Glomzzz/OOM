@@ -15,6 +15,8 @@
 
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
+= #part("./daily/index.typ")
+
 = #part("./plt/index.typ")
 
 = #part("./rust/index.typ")
