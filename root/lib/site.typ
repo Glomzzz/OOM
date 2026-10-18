@@ -23,15 +23,14 @@
 #let auto-filter(content) = html.span(class: "auto-filter", style: "display: inline-block;", content)
 
 
-#let inline-math(body, block: auto, scale: 100%) = {
-  if block == auto {
-    block = body.block
-  }
-  import "lib.typ": inline
+#let inline-math(body, block: auto, scale: 100%) = context {
+  let block = if block == auto { body.block } else { block }
+  import "@local/typsite:0.1.0": inline
+  let footnotes = query(footnote).map(it => it.at("label", default: none)).filter(it => it != none)
   if block {
     html.div(class: "math-container")[
         #html.span(class: "math-block")[
-            #accessible-math(body, auto-filter(inline(scale: scale, body)))
+            #accessible-math(body, auto-filter(inline(fit-font: false, scale: scale, body, footnotes)))
         ]
     ]
   } else {
@@ -39,7 +38,7 @@
           // typsite maps 1em = 16px while Typst text is 11pt (≈14.67px);
           // 16 / 14.67 ≈ 109% makes glyphs match the surrounding MathML size.
           // fit-font: 1em follows the paragraph font instead of the root font.
-          #accessible-math(body, auto-filter(inline(fit-font: 1em, scale: scale * 109%, body)))
+          #accessible-math(body, auto-filter(inline(fit-font: 1em, scale: scale * 109%, body, footnotes)))
       ]
   }
 }

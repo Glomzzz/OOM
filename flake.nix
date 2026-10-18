@@ -1,7 +1,9 @@
 {
   description = "Typsite Env";
   inputs = {
-    typsite.url = "github:Glomzzz/typsite";
+    # Published 0.1.8 release; keep synchronized with CI's TYPSITE_TAG.
+    typsite.url = "github:Glomzzz/typsite/0.1.8-55";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
@@ -22,6 +24,7 @@
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.typst
+            pkgs.python3
             typsite.packages.${system}.default
           ];
           # Also expose the project fonts to direct `typst` invocations.

@@ -121,7 +121,7 @@
 /// - body (content): 
 ///     The content to be placed inside the HTML element.
 /// -> html.elem(tag, attrs: attrs, body)
-#let elem(tag, attrs:(), body) = html.elem(tag, attrs: attrs)[#body]
+#let elem(tag, attrs:(), body) = html.elem(tag, attrs: attrs, body)
 
 /// Wrapper of html.elem, with flattened attributes.
 ///

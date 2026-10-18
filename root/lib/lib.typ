@@ -11,6 +11,7 @@
   heading-numbering,
   sidebar,
   parent,
+  rss,
   unique
 )
 
