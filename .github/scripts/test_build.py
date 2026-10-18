@@ -16,6 +16,9 @@ class ProductionBuildTests(unittest.TestCase):
     def test_postprocessing_is_separate_and_obsolete_fragments_are_removed(self):
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory)
+            pages = project / ".github/pages"
+            pages.mkdir(parents=True)
+            (pages / "404.html").write_text("not found")
             raw = project / ".cache/site"
             raw.mkdir(parents=True)
             (raw / "index.html").write_text("raw")
@@ -38,12 +41,14 @@ class ProductionBuildTests(unittest.TestCase):
             with patch.object(module.subprocess, "run", side_effect=run):
                 module.build(project, "typsite")
             self.assertEqual((output / "index.html").read_text(), "lazy")
+            self.assertEqual((output / "404.html").read_text(), "not found")
+            self.assertFalse((raw / "404.html").exists())
             self.assertFalse((output / "_embeds/stale.html").exists())
             self.assertFalse((output / ".typsite-outputs.json").exists())
             self.assertEqual(before, {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in raw.iterdir()})
 
     def test_failure_keeps_previous_deployment(self):
-        for failed_stage in ("typsite", "cache-bust.py", "lazy-embeds.py"):
+        for failed_stage in ("typsite", "cache-bust.py", "lazy-embeds.py", "host-files"):
             with self.subTest(stage=failed_stage), tempfile.TemporaryDirectory() as directory:
                 project = Path(directory)
                 raw = project / ".cache/site"
@@ -58,7 +63,9 @@ class ProductionBuildTests(unittest.TestCase):
                         raise subprocess.CalledProcessError(1, command)
                     return subprocess.CompletedProcess(command, 0)
 
-                with patch.object(module.subprocess, "run", side_effect=run), self.assertRaises(subprocess.CalledProcessError):
+                # Missing host files fail before the existing deployment is moved.
+                expected = FileNotFoundError if failed_stage == "host-files" else subprocess.CalledProcessError
+                with patch.object(module.subprocess, "run", side_effect=run), self.assertRaises(expected):
                     module.build(project, "typsite")
                 self.assertEqual((output / "index.html").read_text(), "previous")
 

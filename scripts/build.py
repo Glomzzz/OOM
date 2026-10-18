@@ -35,6 +35,8 @@ def build(project: Path, typsite: str):
             subprocess.run([
                 sys.executable, str(project / ".github/scripts" / script), str(staging),
             ], cwd=project, check=True)
+        # Host-specific files bypass Typsite's asset filtering (notably 404.html).
+        shutil.copytree(project / ".github/pages", staging, dirs_exist_ok=True)
         backup = Path(temporary) / "previous"
         if output.exists():
             output.rename(backup)
