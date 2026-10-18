@@ -1,5 +1,13 @@
 .cache/
 publish/
+.typst-packages/
+.typst-package-cache/
+.build-tools/
+
+# Local reports and benchmark tools; keep the production build entry point.
+/docs/
+/scripts/*
+!/scripts/build.py
 
 typsite
 typst
