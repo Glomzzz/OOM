@@ -10,6 +10,24 @@ publish/
 /scripts/*
 !/scripts/build.py
 
+# Machine-specific settings, local notes, caches, and publishing drafts.
+/.vscode/
+/.zed/
+/note/
+/.ruff_cache/
+/.zhihu-publish-output/
+/.direnv/
+
+# Local credentials; sanitized examples may be shared.
+.env
+.env.*
+!.env.example
+!.env.*.example
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+!.dev.vars.*.example
+
 typsite
 typst
 
