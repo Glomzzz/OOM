@@ -1,0 +1,6 @@
+# Only content-addressed files may be cached immutably. HTML and fixed-name
+# JS/CSS keep Cloudflare Pages' default revalidation behavior.
+/_assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/_embeds/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -20,6 +20,13 @@ jobs:
       TYPST_PACKAGE_PATH: "${{ github.workspace }}/.typst-packages"
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: .github/scripts/requirements.txt
+      - name: Install asset optimization tools
+        run: python3 -m pip install -r .github/scripts/requirements.txt
       - name: Test production build helpers
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
       - uses: typst-community/setup-typst@v4

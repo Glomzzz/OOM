@@ -24,7 +24,7 @@
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.typst
-            pkgs.python3
+            (pkgs.python3.withPackages (ps: [ ps.fonttools ps.brotli ps.rcssmin ]))
             typsite.packages.${system}.default
           ];
           # Also expose the project fonts to direct `typst` invocations.

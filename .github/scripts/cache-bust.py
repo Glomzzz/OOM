@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Append a content hash to local CSS/JS URLs in the built site.
 
-GitHub Pages cannot set Cache-Control headers, and typsite emits fixed asset
-URLs such as /schemas/page.css. A browser can therefore pair a fresh HTML page
-with a stale stylesheet or script. Rewriting `/x.css` to `/x.css?v=<hash>`
-makes the URL change exactly when the file changes.
+Typsite emits fixed asset URLs such as /schemas/page.css. A browser can pair
+fresh HTML with a stale stylesheet or script. Rewriting `/x.css` to
+`/x.css?v=<hash>` changes the URL exactly when the file changes. Content-addressed
+/_assets/ filenames already provide this guarantee and are left alone.
 
 Usage: cache-bust.py [publish-dir]   (default: publish)
 """
@@ -20,6 +20,9 @@ hashes: dict[str, str] = {}
 
 
 def version(url_path: str) -> str | None:
+    # These filenames already contain their content digest.
+    if url_path.startswith("/_assets/"):
+        return None
     if url_path not in hashes:
         f = root / url_path.lstrip("/")
         hashes[url_path] = (

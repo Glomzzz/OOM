@@ -19,6 +19,7 @@ class ProductionBuildTests(unittest.TestCase):
             pages = project / ".github/pages"
             pages.mkdir(parents=True)
             (pages / "404.html").write_text("not found")
+            (pages / "_headers").write_text("/_assets/*\n  Cache-Control: public, max-age=31536000, immutable\n")
             raw = project / ".cache/site"
             raw.mkdir(parents=True)
             (raw / "index.html").write_text("raw")
@@ -30,7 +31,9 @@ class ProductionBuildTests(unittest.TestCase):
             before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in raw.iterdir()}
 
             def run(command, **kwargs):
-                if "cache-bust.py" in command[-2]:
+                if "optimize-assets.py" in command[-2]:
+                    (Path(command[-1]) / "index.html").write_text("optimized")
+                elif "cache-bust.py" in command[-2]:
                     (Path(command[-1]) / "index.html").write_text("versioned")
                 elif "lazy-embeds.py" in command[-2]:
                     (Path(command[-1]) / "index.html").write_text("lazy")
@@ -42,13 +45,15 @@ class ProductionBuildTests(unittest.TestCase):
                 module.build(project, "typsite")
             self.assertEqual((output / "index.html").read_text(), "lazy")
             self.assertEqual((output / "404.html").read_text(), "not found")
+            self.assertEqual((output / "_headers").read_bytes(), (pages / "_headers").read_bytes())
             self.assertFalse((raw / "404.html").exists())
+            self.assertFalse((raw / "_headers").exists())
             self.assertFalse((output / "_embeds/stale.html").exists())
             self.assertFalse((output / ".typsite-outputs.json").exists())
             self.assertEqual(before, {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in raw.iterdir()})
 
     def test_failure_keeps_previous_deployment(self):
-        for failed_stage in ("typsite", "cache-bust.py", "lazy-embeds.py", "host-files"):
+        for failed_stage in ("typsite", "optimize-assets.py", "cache-bust.py", "lazy-embeds.py", "host-files"):
             with self.subTest(stage=failed_stage), tempfile.TemporaryDirectory() as directory:
                 project = Path(directory)
                 raw = project / ".cache/site"

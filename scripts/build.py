@@ -31,7 +31,7 @@ def build(project: Path, typsite: str):
         shutil.copytree(cache / "site", staging, ignore=shutil.ignore_patterns(
             ".typsite.lock", ".typsite-outputs.json",
         ))
-        for script in ("cache-bust.py", "lazy-embeds.py"):
+        for script in ("optimize-assets.py", "cache-bust.py", "lazy-embeds.py"):
             subprocess.run([
                 sys.executable, str(project / ".github/scripts" / script), str(staging),
             ], cwd=project, check=True)

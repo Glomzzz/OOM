@@ -17,6 +17,7 @@ publish/
 /.ruff_cache/
 /.zhihu-publish-output/
 /.direnv/
+/.venv/
 
 # Local credentials; sanitized examples may be shared.
 .env
