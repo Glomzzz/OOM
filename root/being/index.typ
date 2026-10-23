@@ -12,9 +12,9 @@
 #sidebar("only-embed")
 #parent("/index.typ")
 
-
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
+= #part("./on-cyberpunk-edgerunners-season-two.typ")
 = #part("./new-ssg.typ")
 = #part("./typ-svg.typ")
 = #part("./typsite-thinking.typ")
