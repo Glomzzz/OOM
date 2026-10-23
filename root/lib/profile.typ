@@ -5,7 +5,7 @@
   (label: "GitHub", url: "https://github.com/Glomzzz"),
   (label: "Zhihu", url: "https://www.zhihu.com/people/glomzzz"),
   (label: "Channel", url: "https://t.me/glomzzz1"),
-  (label: "Email", url: "mailto:glom@skillw.com"),
+  (label: "Email", url: "mailto:me@glomzzz.com"),
   (label: "Telegram", url: "https://t.me/Glomzzz0"),
   (label: "QQ", url: "https://glomzzz.com/about/qq.png"),
 )
