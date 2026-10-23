@@ -14,7 +14,6 @@
 
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
-= #part("./on-cyberpunk-edgerunners-season-two.typ")
 = #part("./new-ssg.typ")
 = #part("./typ-svg.typ")
 = #part("./typsite-thinking.typ")
@@ -23,3 +22,4 @@
 = #part("./when-it-comes-to-odyssey.typ")
 = #part("./on-mushoku-tensei.typ")
 = #part("./being-of-unbeing.typ")
+= #part("./on-cyberpunk-edgerunners-season-two.typ")
