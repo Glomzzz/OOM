@@ -16,3 +16,5 @@
 #let part(slug) = embed(slug, show-metadata: true, open: false, sidebar: "only-title")
 
 = #part("./e-to-the-pi-i.typ")
+
+= #part("./closed-intervals-have-the-same-cardinality.typ")
